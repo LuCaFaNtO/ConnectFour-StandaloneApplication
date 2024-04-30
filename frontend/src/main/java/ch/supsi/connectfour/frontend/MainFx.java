@@ -28,6 +28,7 @@ public class MainFx extends Application {
     private GameController gameController;
 
     public MainFx() throws InstantiationException {
+        gameController = GameController.getInstance();
     }
 
     @Override
