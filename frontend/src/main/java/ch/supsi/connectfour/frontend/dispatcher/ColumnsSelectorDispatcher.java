@@ -1,11 +1,14 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
 import ch.supsi.connectfour.frontend.controller.GameController;
+import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
-public class ColumnsSelectorDispatcher {
+import java.util.ResourceBundle;
+
+public class ColumnsSelectorDispatcher implements UpdateLanguageInterface {
     private final GameControllerInterface gameController = GameController.getInstance();
 
     public void playerMove(ActionEvent actionEvent) {
@@ -15,4 +18,8 @@ public class ColumnsSelectorDispatcher {
         gameController.insertPiece(GridPane.getColumnIndex(node.getParent()));
     }
 
+    @Override
+    public void updateLanguage(ResourceBundle resourceBundle) {
+
+    }
 }

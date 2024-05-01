@@ -1,5 +1,5 @@
 package ch.supsi.connectfour.backend.application;
 
-public interface GridModelInterface {
+public interface GridBusinessInterface {
     void insertPiece(final int column);
 }

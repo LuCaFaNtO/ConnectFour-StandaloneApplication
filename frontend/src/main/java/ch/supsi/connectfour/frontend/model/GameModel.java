@@ -1,7 +1,6 @@
 package ch.supsi.connectfour.frontend.model;
 
-import ch.supsi.connectfour.backend.application.GridController;
-import ch.supsi.connectfour.backend.application.GridControllerInterface;
+import ch.supsi.connectfour.backend.application.*;
 import ch.supsi.connectfour.frontend.controller.GameModelInterface;
 
 public class GameModel implements GameModelInterface {

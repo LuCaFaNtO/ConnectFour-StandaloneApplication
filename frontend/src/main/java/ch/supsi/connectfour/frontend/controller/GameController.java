@@ -1,6 +1,8 @@
 package ch.supsi.connectfour.frontend.controller;
 
+import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.GameModel;
 
 public class GameController implements GameControllerInterface {

@@ -1,8 +1,8 @@
 package ch.supsi.connectfour.backend.business;
 
-import ch.supsi.connectfour.backend.application.GridModelInterface;
+import ch.supsi.connectfour.backend.application.GridBusinessInterface;
 
-public class GridModel implements GridModelInterface {
+public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
     private final Grid grid;
 
@@ -18,6 +18,5 @@ public class GridModel implements GridModelInterface {
     @Override
     public void insertPiece(final int column) {
         System.out.println(column);
-
     }
 }

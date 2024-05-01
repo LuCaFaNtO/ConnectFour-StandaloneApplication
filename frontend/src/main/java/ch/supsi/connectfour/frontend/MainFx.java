@@ -16,10 +16,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainFx extends Application {
 
     public static final String APP_TITLE = "connectfour";
+    public static ResourceBundle resourceBundle;
 
     private MenuBarDispatcher menuBarDispatcher;
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
@@ -28,7 +33,9 @@ public class MainFx extends Application {
     private GameController gameController;
 
     public MainFx() throws InstantiationException {
-        gameController = GameController.getInstance();
+        this.gameController = GameController.getInstance();
+        Locale.setDefault(Locale.US);
+        resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
     @Override
@@ -54,9 +61,11 @@ public class MainFx extends Application {
             if (fxmlUrl == null) {
                 return;
             }
-
-            FXMLLoader menuBarLoader = new FXMLLoader(fxmlUrl);
+            System.out.println();
+            FXMLLoader menuBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             menuBar = menuBarLoader.load();
+            //this.menuBarDispatcher = MenuBarDispatcher.getInstance();
+
             this.menuBarDispatcher = menuBarLoader.getController();
 
         } catch (IOException e) {
@@ -71,7 +80,7 @@ public class MainFx extends Application {
                 return;
             }
 
-            FXMLLoader columnSelectorsLoader = new FXMLLoader(fxmlUrl);
+            FXMLLoader columnSelectorsLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             columnSelectors = columnSelectorsLoader.load();
             this.columnsSelectorDispatcher = columnSelectorsLoader.getController();
 
@@ -87,7 +96,7 @@ public class MainFx extends Application {
                 return;
             }
 
-            FXMLLoader boardLoader = new FXMLLoader(fxmlUrl);
+            FXMLLoader boardLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             board = boardLoader.load();
             this.boardView = boardLoader.getController();
 
@@ -104,7 +113,7 @@ public class MainFx extends Application {
                 return;
             }
 
-            FXMLLoader infoBarLoader = new FXMLLoader(fxmlUrl);
+            FXMLLoader infoBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             infoBar = infoBarLoader.load();
             this.infoBarView = infoBarLoader.getController();
 

@@ -4,7 +4,7 @@ import ch.supsi.connectfour.backend.business.GridModel;
 
 public class GridController implements GridControllerInterface {
     private static GridController instance = null;
-    private final GridModelInterface gridModel;
+    private final GridBusinessInterface gridModel;
 
     protected GridController() {
         gridModel = GridModel.getInstance();
