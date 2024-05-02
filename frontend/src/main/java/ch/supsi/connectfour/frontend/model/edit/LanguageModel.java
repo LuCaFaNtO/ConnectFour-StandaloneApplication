@@ -18,12 +18,13 @@ public class LanguageModel implements LanguageModelInterface {
     }
 
     public static LanguageModelInterface getInstance() {
-        return instance == null? instance = new LanguageModel() : instance;
+        return instance == null ? instance = new LanguageModel() : instance;
     }
 
     @Override
-    public void setUpdaterLanguageList(UpdateLanguageInterface updaterLanguage){
-        updaterLanguageList.add(updaterLanguage);
+    public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage) {
+        if(updaterLanguage != null && !updaterLanguageList.contains(updaterLanguage))
+            updaterLanguageList.add(updaterLanguage);
     }
 
     @Override
@@ -31,6 +32,9 @@ public class LanguageModel implements LanguageModelInterface {
         ResourceBundle boundle = translationsController.changeLanguage(language);
 
         for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
-            updaterLanguage.updateLanguage(boundle);
+            updaterLanguage.updateFxmlLoaderWithNewLanguage(boundle);
+
+        for(UpdateLanguageInterface updaterLanguage : updaterLanguageList)
+            updaterLanguage.changeSceneFx();
     }
 }

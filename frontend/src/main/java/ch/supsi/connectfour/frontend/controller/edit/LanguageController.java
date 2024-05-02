@@ -12,8 +12,8 @@ public class LanguageController implements LanguageControllerInterface {
         this.languageModel = LanguageModel.getInstance();
     }
 
-    public void setUpdaterLanguageList(UpdateLanguageInterface updaterLanguage){
-        languageModel.setUpdaterLanguageList(updaterLanguage);
+    public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage){
+        languageModel.addUpdaterLanguageList(updaterLanguage);
     }
 
     public static LanguageController getInstance() {

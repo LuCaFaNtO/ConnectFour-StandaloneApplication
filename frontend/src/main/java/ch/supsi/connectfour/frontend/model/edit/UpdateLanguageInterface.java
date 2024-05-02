@@ -1,7 +1,11 @@
 package ch.supsi.connectfour.frontend.model.edit;
 
+import javafx.fxml.FXMLLoader;
+
 import java.util.ResourceBundle;
 
 public interface UpdateLanguageInterface {
-    void updateLanguage(ResourceBundle resourceBundle);
+    void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle);
+    void changeSceneFx();
+    FXMLLoader getFxmlLoaderMenuBar();
 }

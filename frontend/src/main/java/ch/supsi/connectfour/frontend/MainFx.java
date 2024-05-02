@@ -2,10 +2,8 @@ package ch.supsi.connectfour.frontend;
 
 
 import ch.supsi.connectfour.frontend.controller.GameController;
-import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
-import ch.supsi.connectfour.frontend.dispatcher.MenuBarDispatcher;
-import ch.supsi.connectfour.frontend.view.BoardView;
-import ch.supsi.connectfour.frontend.view.InfoBarView;
+import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
+import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,25 +14,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MainFx extends Application {
-
     public static final String APP_TITLE = "connectfour";
     public static ResourceBundle resourceBundle;
+    private static BorderPane mainBorderPane;
 
-    private MenuBarDispatcher menuBarDispatcher;
-    private ColumnsSelectorDispatcher columnsSelectorDispatcher;
-    private BoardView boardView;
-    private InfoBarView infoBarView;
+    private static UpdateLanguageInterface menuBarDispatcher;
+    private UpdateLanguageInterface columnsSelectorDispatcher;
+    private UpdateLanguageInterface boardView;
+    private static UpdateLanguageInterface infoBarView;
+
     private GameController gameController;
+    private LanguageController languageController;
 
     public MainFx() throws InstantiationException {
+        this.languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
-        Locale.setDefault(Locale.US);
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -64,10 +61,9 @@ public class MainFx extends Application {
             System.out.println();
             FXMLLoader menuBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             menuBar = menuBarLoader.load();
-            //this.menuBarDispatcher = MenuBarDispatcher.getInstance();
 
-            this.menuBarDispatcher = menuBarLoader.getController();
-
+            menuBarDispatcher = menuBarLoader.getController();
+            this.languageController.addUpdaterLanguageList(menuBarDispatcher);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -116,13 +112,14 @@ public class MainFx extends Application {
             FXMLLoader infoBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             infoBar = infoBarLoader.load();
             this.infoBarView = infoBarLoader.getController();
+            this.languageController.addUpdaterLanguageList(infoBarView);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // BORDER PANE
-        BorderPane mainBorderPane = new BorderPane();
+        mainBorderPane = new BorderPane();
 
         mainBorderPane.setTop(menuBar);
 
@@ -140,6 +137,23 @@ public class MainFx extends Application {
         primaryStage.setTitle(MainFx.APP_TITLE);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void updateSceneMenuBarWithNewLanguage() {
+        try {
+
+            mainBorderPane.setTop(menuBarDispatcher.getFxmlLoaderMenuBar().load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateSceneInfoBarWithNewLanguage() {
+        try {
+            mainBorderPane.setBottom(infoBarView.getFxmlLoaderMenuBar().load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

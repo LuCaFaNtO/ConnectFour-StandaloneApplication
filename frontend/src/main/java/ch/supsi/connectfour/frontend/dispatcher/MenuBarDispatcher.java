@@ -4,26 +4,21 @@ import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
 import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.LanguageControllerInterface;
-import com.sun.javafx.menu.MenuItemBase;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 
 import java.util.ResourceBundle;
 
 public class MenuBarDispatcher implements UpdateLanguageInterface {
     private final LanguageControllerInterface languageController;
 
-    @FXML
-    private MenuBar containerMenuBar;
+    private final String fxmlLocation = "/menuBar.fxml";
+
+    private FXMLLoader fxmlLoaderMenuBar = null;
 
     public MenuBarDispatcher() {
         languageController = LanguageController.getInstance();
-
-        languageController.setUpdaterLanguageList(this);
     }
 
     public void newGame(ActionEvent actionEvent) {
@@ -51,6 +46,13 @@ public class MenuBarDispatcher implements UpdateLanguageInterface {
         // delegate it to a suitable controller
     }
 
+    /*public void setLanguageController(LanguageControllerInterface languageControllerExternal) {
+        if(languageControllerExternal != null)
+            languageController = languageControllerExternal;
+        else
+            languageController = LanguageController.getInstance();
+    }*/
+
     public void changeLanguage(ActionEvent actionEvent) {
         //Cambia lingua
         // Get the source of the event
@@ -69,21 +71,17 @@ public class MenuBarDispatcher implements UpdateLanguageInterface {
     }
 
     @Override
-    public void updateLanguage(ResourceBundle resourceBundle) {
-        for (Menu menu : containerMenuBar.getMenus()) {
-            updateText(menu.getId(), resourceBundle, menu);
-            for (MenuItem menuItem : menu.getItems()) {
-                if(menuItem instanceof SeparatorMenuItem)
-                    continue;
-                updateText(menuItem.getId(), resourceBundle, menuItem);
-            }
-        }
+    public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
+        fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
     }
 
-    private void updateText(String key, ResourceBundle resourceBundle, MenuItem ob){
-        String text;
-        key = "MenuBar." + key;
-        text = resourceBundle.getString(key);
-        ob.setText(text);
+    @Override
+    public void changeSceneFx() {
+        MainFx.updateSceneMenuBarWithNewLanguage();
+    }
+
+    @Override
+    public FXMLLoader getFxmlLoaderMenuBar() {
+        return fxmlLoaderMenuBar;
     }
 }

@@ -3,6 +3,7 @@ package ch.supsi.connectfour.frontend.dispatcher;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
@@ -19,7 +20,17 @@ public class ColumnsSelectorDispatcher implements UpdateLanguageInterface {
     }
 
     @Override
-    public void updateLanguage(ResourceBundle resourceBundle) {
+    public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
 
+    }
+
+    @Override
+    public void changeSceneFx() {
+
+    }
+
+    @Override
+    public FXMLLoader getFxmlLoaderMenuBar() {
+        return null;
     }
 }

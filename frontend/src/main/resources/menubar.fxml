@@ -13,10 +13,10 @@
     </Menu>
     <Menu fx:id="Edit" mnemonicParsing="false" text="%MenuBar.Edit">
         <MenuItem fx:id="preferencesMenuItem" mnemonicParsing="false" onAction="#quit" text="%MenuBar.preferencesMenuItem"/>
-    </Menu>
-    <Menu fx:id="Languages" mnemonicParsing="false" text="%MenuBar.Languages">
-        <MenuItem fx:id="englishLanguage" mnemonicParsing="false" onAction="#changeLanguage" text="%MenuBar.englishLanguage"/>
-        <MenuItem fx:id="italianLanguage" mnemonicParsing="false" onAction="#changeLanguage" text="%MenuBar.italianLanguage"/>
+        <Menu fx:id="Languages" mnemonicParsing="false" text="%MenuBar.Languages">
+            <MenuItem fx:id="englishLanguage" mnemonicParsing="false" onAction="#changeLanguage" text="%MenuBar.englishLanguage"/>
+            <MenuItem fx:id="italianLanguage" mnemonicParsing="false" onAction="#changeLanguage" text="%MenuBar.italianLanguage"/>
+        </Menu>
     </Menu>
     <Menu fx:id="Help" mnemonicParsing="false" text="%MenuBar.Help">
         <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#showAbout" text="%MenuBar.aboutMenuItem"/>
