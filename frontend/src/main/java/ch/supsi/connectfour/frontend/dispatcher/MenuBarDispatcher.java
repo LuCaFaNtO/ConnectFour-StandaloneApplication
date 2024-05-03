@@ -33,6 +33,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
         addSupportedLanguages();
     }
 
@@ -61,13 +62,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         // delegate it to a suitable controller
     }
 
-    /*public void setLanguageController(LanguageControllerInterface languageControllerExternal) {
-        if(languageControllerExternal != null)
-            languageController = languageControllerExternal;
-        else
-            languageController = LanguageController.getInstance();
-    }*/
-
     private void addSupportedLanguages() {
         Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
 
@@ -76,6 +70,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
             menuItem.setId(languageName);
             menuItem.setMnemonicParsing(false);
             menuItem.setOnAction(this::changeLanguage);
+            menuItem.setText(fxmlLoaderMenuBar.getResources().getString("MenuBar." + languageName));
             languagesMenu.getItems().add(menuItem);
         }
     }
