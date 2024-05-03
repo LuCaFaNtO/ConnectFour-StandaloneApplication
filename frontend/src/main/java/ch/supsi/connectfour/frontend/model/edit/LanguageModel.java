@@ -7,6 +7,7 @@ import ch.supsi.connectfour.frontend.controller.edit.LanguageModelInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class LanguageModel implements LanguageModelInterface {
     private static LanguageModelInterface instance = null;
@@ -29,12 +30,17 @@ public class LanguageModel implements LanguageModelInterface {
 
     @Override
     public void changeLanguage(final String language) {
-        ResourceBundle boundle = translationsController.changeLanguage(language);
+        ResourceBundle resourceBundle = translationsController.changeLanguage(language);
 
         for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
-            updaterLanguage.updateFxmlLoaderWithNewLanguage(boundle);
+            updaterLanguage.updateFxmlLoaderWithNewLanguage(resourceBundle);
 
         for(UpdateLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.changeSceneFx();
+    }
+
+    @Override
+    public Set<String> getSupportedLanguages() {
+        return translationsController.getSupportedLanguages();
     }
 }

@@ -3,16 +3,16 @@ package ch.supsi.connectfour.backend.business.language;
 import ch.supsi.connectfour.backend.application.language.TranslationsBusinessInterface;
 import ch.supsi.connectfour.backend.dataaccess.language.TranslationsPropertiesDataAccess;
 
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TranslationsModel implements TranslationsBusinessInterface {
     private static TranslationsModel instance = null;
     private final TranslationsDataAccessInterface translationsDataAccess;
+    private final Set<String> supportedLanguageKeys;
 
     private TranslationsModel() {
         translationsDataAccess = TranslationsPropertiesDataAccess.getInstance();
+        supportedLanguageKeys = translationsDataAccess.getSupportedLanguageKeys();
     }
 
     public static TranslationsModel getInstance() {
@@ -22,6 +22,11 @@ public class TranslationsModel implements TranslationsBusinessInterface {
     @Override
     public String getTagFromKeyLanguage(String languageKey) {
         return translationsDataAccess.getTagFromKeyLanguage(languageKey);
+    }
+
+    @Override
+    public Set<String> getSupportedLanguages() {
+        return Collections.unmodifiableSet(supportedLanguageKeys);
     }
 
     @Override

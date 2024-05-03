@@ -5,6 +5,7 @@ import ch.supsi.connectfour.backend.business.language.TranslationsDataAccessInte
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TranslationsPropertiesDataAccess implements TranslationsDataAccessInterface {
     private static final String translationsResourceBundlePath = "i18n.labels";
@@ -55,5 +56,12 @@ public class TranslationsPropertiesDataAccess implements TranslationsDataAccessI
         }
 
         return bundle;
+    }
+
+    @Override
+    public Set<String> getSupportedLanguageKeys() {
+        Set<String> supportedLanguageKeys = new HashSet<>();
+        supportedLanguageKeys = languageProperties.keySet().stream().map(String::valueOf).collect(Collectors.toSet());
+        return supportedLanguageKeys;
     }
 }

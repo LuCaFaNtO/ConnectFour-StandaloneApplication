@@ -5,20 +5,35 @@ import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
 import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.LanguageControllerInterface;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
+import java.net.URL;
+import java.util.LinkedHashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class MenuBarDispatcher implements UpdateLanguageInterface {
+public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable {
     private final LanguageControllerInterface languageController;
 
     private final String fxmlLocation = "/menuBar.fxml";
+
+    @FXML
+    public Menu languagesMenu;
 
     private FXMLLoader fxmlLoaderMenuBar = null;
 
     public MenuBarDispatcher() {
         languageController = LanguageController.getInstance();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        addSupportedLanguages();
     }
 
     public void newGame(ActionEvent actionEvent) {
@@ -53,9 +68,19 @@ public class MenuBarDispatcher implements UpdateLanguageInterface {
             languageController = LanguageController.getInstance();
     }*/
 
+    private void addSupportedLanguages() {
+        Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
+
+        for(String languageName : availableLanguagesSet) {
+            MenuItem menuItem = new MenuItem(languageName);
+            menuItem.setId(languageName);
+            menuItem.setMnemonicParsing(false);
+            menuItem.setOnAction(this::changeLanguage);
+            languagesMenu.getItems().add(menuItem);
+        }
+    }
+
     public void changeLanguage(ActionEvent actionEvent) {
-        //Cambia lingua
-        // Get the source of the event
         String idLanguage = ((MenuItem) actionEvent.getSource()).getId();
         languageController.changeLanguage(idLanguage);
     }
