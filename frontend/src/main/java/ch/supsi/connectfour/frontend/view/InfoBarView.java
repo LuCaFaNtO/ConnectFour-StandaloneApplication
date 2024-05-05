@@ -24,7 +24,7 @@ public class InfoBarView implements UpdateLanguageInterface {
     }
 
     @Override
-    public FXMLLoader getFxmlLoaderMenuBar() {
+    public FXMLLoader getFxmlLoader() {
         return fxmlLoaderInfoBarView;
     }
 }

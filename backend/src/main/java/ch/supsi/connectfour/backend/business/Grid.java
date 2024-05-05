@@ -3,13 +3,40 @@ package ch.supsi.connectfour.backend.business;
 public class Grid {
     private static final int NUM_ROWS = 6;
     private static final int NUM_COLS = 7;
-    private boolean[][] grid;
+    private Cell[][] grid;
+    private Cell modifiedCell;
 
     public Grid() {
-        this.grid = new boolean[NUM_ROWS][NUM_COLS];
+        this.grid = new Cell[NUM_ROWS][NUM_COLS];
+        initializeGrid();
+        this.modifiedCell = null;
     }
 
-    public void insertMove(final int column) {
+    private void initializeGrid() {
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                grid[i][j] = new Cell(i, j);
+            }
+        }
+    }
 
+    public void insertPiece(final int row, final int column) {
+        grid[row][column].setFill(true);
+        modifiedCell = grid[row][column];
+        System.out.println("Pezzo inserito in posizione\n - colonna: " + column + "\n - row: " + row);
+    }
+
+    // returns the first free row giving the column
+    public int getRowFromColumn(final int column) {
+        for (int row = NUM_ROWS-1; row >= 0; row--) {
+            if (!grid[row][column].isFill()) {
+                return row;
+            }
+        }
+        return -1;
+    }
+
+    public Cell getModifiedCell() {
+        return modifiedCell;
     }
 }

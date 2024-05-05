@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 
 import java.util.ResourceBundle;
 
-public interface UpdateLanguageInterface {
+public interface UpdateLanguageInterface extends UpdateViewInterface {
     void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle);
-    void changeSceneFx();
-    FXMLLoader getFxmlLoaderMenuBar();
 }

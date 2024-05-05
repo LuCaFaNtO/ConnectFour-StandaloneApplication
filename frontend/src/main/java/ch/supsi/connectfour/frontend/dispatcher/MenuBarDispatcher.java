@@ -25,7 +25,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     @FXML
     public Menu languagesMenu;
 
-    private FXMLLoader fxmlLoaderMenuBar = null;
+    private FXMLLoader fxmlLoaderMenuBar;
 
     public MenuBarDispatcher() {
         languageController = LanguageController.getInstance();
@@ -101,7 +101,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     @Override
-    public FXMLLoader getFxmlLoaderMenuBar() {
+    public FXMLLoader getFxmlLoader() {
         return fxmlLoaderMenuBar;
     }
 }

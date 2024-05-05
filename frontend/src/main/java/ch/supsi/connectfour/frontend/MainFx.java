@@ -1,14 +1,15 @@
 package ch.supsi.connectfour.frontend;
 
 
+import ch.supsi.connectfour.backend.business.Cell;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
 import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.view.BoardView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class MainFx extends Application {
 
     private static UpdateLanguageInterface menuBarDispatcher;
     private UpdateLanguageInterface columnsSelectorDispatcher;
-    private UpdateLanguageInterface boardView;
+    private BoardView boardView;
     private static UpdateLanguageInterface infoBarView;
 
     private GameController gameController;
@@ -96,7 +97,7 @@ public class MainFx extends Application {
             FXMLLoader boardLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             board = boardLoader.load();
             this.boardView = boardLoader.getController();
-
+            this.gameController.addUpdaterGrid(this.boardView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -143,7 +144,7 @@ public class MainFx extends Application {
     public static void updateSceneMenuBarWithNewLanguage() {
         try {
 
-            mainBorderPane.setTop(menuBarDispatcher.getFxmlLoaderMenuBar().load());
+            mainBorderPane.setTop(menuBarDispatcher.getFxmlLoader().load());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -151,7 +152,7 @@ public class MainFx extends Application {
 
     public static void updateSceneInfoBarWithNewLanguage() {
         try {
-            mainBorderPane.setBottom(infoBarView.getFxmlLoaderMenuBar().load());
+            mainBorderPane.setBottom(infoBarView.getFxmlLoader().load());
         } catch (IOException e) {
             e.printStackTrace();
         }

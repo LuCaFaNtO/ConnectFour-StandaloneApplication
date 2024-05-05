@@ -30,7 +30,7 @@ public class ColumnsSelectorDispatcher implements UpdateLanguageInterface {
     }
 
     @Override
-    public FXMLLoader getFxmlLoaderMenuBar() {
+    public FXMLLoader getFxmlLoader() {
         return null;
     }
 }
