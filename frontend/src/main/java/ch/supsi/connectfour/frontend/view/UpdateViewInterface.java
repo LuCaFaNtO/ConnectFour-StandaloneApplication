@@ -1,4 +1,4 @@
-package ch.supsi.connectfour.frontend.model.edit;
+package ch.supsi.connectfour.frontend.view;
 
 import javafx.fxml.FXMLLoader;
 

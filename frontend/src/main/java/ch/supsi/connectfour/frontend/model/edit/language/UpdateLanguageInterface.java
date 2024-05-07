@@ -1,6 +1,6 @@
-package ch.supsi.connectfour.frontend.model.edit;
+package ch.supsi.connectfour.frontend.model.edit.language;
 
-import javafx.fxml.FXMLLoader;
+import ch.supsi.connectfour.frontend.view.UpdateViewInterface;
 
 import java.util.ResourceBundle;
 

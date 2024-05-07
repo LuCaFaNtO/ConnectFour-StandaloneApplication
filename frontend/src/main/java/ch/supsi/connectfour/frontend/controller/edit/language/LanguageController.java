@@ -1,8 +1,8 @@
-package ch.supsi.connectfour.frontend.controller.edit;
+package ch.supsi.connectfour.frontend.controller.edit.language;
 
-import ch.supsi.connectfour.frontend.dispatcher.edit.LanguageControllerInterface;
-import ch.supsi.connectfour.frontend.model.edit.LanguageModel;
-import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.LanguageModel;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 
 import java.util.Set;
 
@@ -14,12 +14,13 @@ public class LanguageController implements LanguageControllerInterface {
         this.languageModel = LanguageModel.getInstance();
     }
 
-    public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage){
-        languageModel.addUpdaterLanguageList(updaterLanguage);
-    }
-
     public static LanguageController getInstance() {
         return instance == null ? instance = new LanguageController() : instance;
+    }
+
+    @Override
+    public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage){
+        languageModel.addUpdaterLanguageList(updaterLanguage);
     }
 
     @Override

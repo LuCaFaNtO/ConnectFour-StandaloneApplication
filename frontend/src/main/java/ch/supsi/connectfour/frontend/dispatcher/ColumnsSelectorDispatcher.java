@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
 import ch.supsi.connectfour.frontend.controller.GameController;
-import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

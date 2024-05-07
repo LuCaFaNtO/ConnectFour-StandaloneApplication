@@ -1,9 +1,9 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
 import ch.supsi.connectfour.frontend.MainFx;
-import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
-import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
-import ch.supsi.connectfour.frontend.dispatcher.edit.LanguageControllerInterface;
+import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

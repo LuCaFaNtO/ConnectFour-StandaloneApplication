@@ -1,11 +1,12 @@
 package ch.supsi.connectfour.frontend;
 
 
-import ch.supsi.connectfour.backend.business.Cell;
 import ch.supsi.connectfour.frontend.controller.GameController;
-import ch.supsi.connectfour.frontend.controller.edit.LanguageController;
-import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
-import ch.supsi.connectfour.frontend.view.BoardView;
+import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
+import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,11 +26,11 @@ public class MainFx extends Application {
 
     private static UpdateLanguageInterface menuBarDispatcher;
     private UpdateLanguageInterface columnsSelectorDispatcher;
-    private BoardView boardView;
+    private UpdateGridInterface boardView;
     private static UpdateLanguageInterface infoBarView;
 
-    private GameController gameController;
-    private LanguageController languageController;
+    private GameControllerInterface gameController;
+    private LanguageControllerInterface languageController;
 
     public MainFx() throws InstantiationException {
         this.languageController = LanguageController.getInstance();
@@ -60,7 +61,6 @@ public class MainFx extends Application {
             if (fxmlUrl == null) {
                 return;
             }
-            System.out.println();
             FXMLLoader menuBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             menuBar = menuBarLoader.load();
 

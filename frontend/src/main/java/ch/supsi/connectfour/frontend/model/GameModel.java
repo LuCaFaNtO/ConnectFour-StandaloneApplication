@@ -5,13 +5,13 @@ import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
 import ch.supsi.connectfour.backend.business.Cell;
 import ch.supsi.connectfour.frontend.controller.GameModelInterface;
-import ch.supsi.connectfour.frontend.model.edit.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.view.BoardView;
+import ch.supsi.connectfour.frontend.view.UpdateViewInterface;
 
 public class GameModel implements GameModelInterface, GridObserver {
     private static GameModel gameModel = null;
     private final GridControllerInterface gridController;
-    private BoardView boardView; //TODO: rivedere
+    private UpdateGridInterface boardView; //TODO: rivedere
 
     protected GameModel() {
         gridController = GridController.getInstance();
@@ -34,7 +34,7 @@ public class GameModel implements GameModelInterface, GridObserver {
     }
 
     @Override
-    public void addUpdaterGrid(BoardView boardView) {
+    public void addUpdaterGrid(UpdateGridInterface boardView) {
         this.boardView = boardView;
     }
 
