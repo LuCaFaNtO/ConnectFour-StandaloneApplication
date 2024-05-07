@@ -3,6 +3,7 @@ package ch.supsi.connectfour.frontend;
 
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
@@ -25,7 +26,7 @@ public class MainFx extends Application {
     private static BorderPane mainBorderPane;
 
     private static UpdateLanguageInterface menuBarDispatcher;
-    private UpdateLanguageInterface columnsSelectorDispatcher;
+    private ColumnsSelectorDispatcher columnsSelectorDispatcher;
     private UpdateGridInterface boardView;
     private static UpdateLanguageInterface infoBarView;
 
@@ -81,7 +82,7 @@ public class MainFx extends Application {
             FXMLLoader columnSelectorsLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             columnSelectors = columnSelectorsLoader.load();
             this.columnsSelectorDispatcher = columnSelectorsLoader.getController();
-
+            this.gameController.addDisableColumn(this.columnsSelectorDispatcher);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

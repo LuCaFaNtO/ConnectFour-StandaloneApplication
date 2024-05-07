@@ -1,8 +1,8 @@
-package ch.supsi.connectfour.backend.business;
+package ch.supsi.connectfour.backend.business.domain;
 
 public class Grid {
-    private static final int NUM_ROWS = 6;
-    private static final int NUM_COLS = 7;
+    public static final int NUM_ROWS = 6;
+    public static final int NUM_COLS = 7;
     private Cell[][] grid;
     private Cell modifiedCell;
 
@@ -38,5 +38,9 @@ public class Grid {
 
     public Cell getModifiedCell() {
         return modifiedCell;
+    }
+
+    public boolean isColumnValid(final int col) {
+        return col < NUM_COLS && col >= 0;
     }
 }

@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.backend.business.Cell;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +46,4 @@ public class BoardView implements UpdateGridInterface, Initializable {
         Circle circle = (Circle) anchorPane.getChildren().get(0);
         circle.setFill(Paint.valueOf("yellow"));
     }
-
-
 }

@@ -1,7 +1,9 @@
 package ch.supsi.connectfour.backend.application;
 
+import ch.supsi.connectfour.backend.application.exceptions.IllegalColumnException;
 import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
-import ch.supsi.connectfour.backend.business.Cell;
+import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.GridModel;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
 
@@ -11,7 +13,8 @@ import java.util.List;
 public class GridController implements GridControllerInterface {
     private static GridController instance = null;
     private final GridBusinessInterface gridModel;
-    private List<GridObserver> observers = new ArrayList<>();
+    private List<GridObserver> gridObservers = new ArrayList<>();
+    private List<ColumnObserver> columnObservers = new ArrayList<>();
 
     protected GridController() {
         gridModel = GridModel.getInstance();
@@ -22,32 +25,59 @@ public class GridController implements GridControllerInterface {
     }
 
     @Override
-    public void insertPiece(final int column) throws InsertPieceException {
+    public void insertPiece(final int column) throws InsertPieceException, IllegalColumnException {
+
         gridModel.insertPiece(column);
-        notifyObservers();
+        notifyGridObserver();
+        checkLastRow(column);
+    }
+
+    private void checkLastRow(final int column) {
+        if(gridModel.isLastRowInserted())
+            notifyColumnObserver(column);
     }
 
     @Override
     public void registerObserver(GridObserver observer) {
-        observers.add(observer);
+        gridObservers.add(observer);
     }
 
     @Override
     public void removeObserver(GridObserver observer) {
-        observers.remove(observer);
+        gridObservers.remove(observer);
+    }
+
+    //TODO: Cercare (se possibile) di implementare una sola volta un register ed un remove
+    //      che si basano su un'ipotetica interfaccia padre Observer
+
+    @Override
+    public void registerObserver(ColumnObserver observer) {
+        columnObservers.add(observer);
     }
 
     @Override
-    public void notifyObservers() {
-        for (GridObserver observer : observers) {
+    public void removeObserver(ColumnObserver observer) {
+        columnObservers.remove(observer);
+    }
+
+    @Override
+    public void notifyGridObserver() {
+        for (GridObserver observer : gridObservers) {
             observer.onGridUpdate();
         }
+    }
+
+    @Override
+    public void notifyColumnObserver(final int column) {
+        for(ColumnObserver observer : columnObservers)
+            observer.disableColumn(column);
     }
 
     @Override
     public Cell getCell() {
         return gridModel.getCell();
     }
+
 
 
 }

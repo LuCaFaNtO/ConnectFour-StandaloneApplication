@@ -1,5 +1,6 @@
 package ch.supsi.connectfour.frontend.controller;
 
+import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.model.GameModel;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
@@ -19,6 +20,11 @@ public class GameController implements GameControllerInterface {
     @Override
     public void addUpdaterGrid(UpdateGridInterface boardView) { //TODO: sistemare gestione view
         gameModel.addUpdaterGrid(boardView);
+    }
+
+    @Override
+    public void addDisableColumn(ColumnsSelectorDispatcher columnsSelectorDispatcher) {
+        gameModel.addDisableColumn(columnsSelectorDispatcher);
     }
 
     @Override

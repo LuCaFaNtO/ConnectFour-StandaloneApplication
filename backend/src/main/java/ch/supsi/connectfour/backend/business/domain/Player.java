@@ -1,4 +1,4 @@
-package ch.supsi.connectfour.backend.business;
+package ch.supsi.connectfour.backend.business.domain;
 
 public class Player {
     private final String name;
