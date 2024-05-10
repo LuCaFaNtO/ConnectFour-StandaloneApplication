@@ -9,9 +9,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.connectfour.frontend.dispatcher.PreferencesDispatcher">
+
+<AnchorPane prefHeight="344.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.connectfour.frontend.dispatcher.PreferencesDispatcher">
    <children>
-      <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0">
+      <SplitPane dividerPositions="0.5" layoutX="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="620.0">
          <items>
             <AnchorPane id="player1Preferences" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -44,15 +45,21 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button layoutX="311.0" layoutY="343.0" mnemonicParsing="false" onAction="#savePreferences" prefHeight="36.0" prefWidth="94.0" text="save">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Button>
-      <Button layoutX="196.0" layoutY="343.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="94.0" text="exit">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Button>
+      <AnchorPane layoutY="340.0" prefHeight="70.0" prefWidth="611.0">
+         <children>
+            <Button focusTraversable="false" layoutX="322.0" layoutY="13.0" mnemonicParsing="false" onAction="#savePreferences" prefHeight="36.0" prefWidth="94.0" text="save">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="closeButton" focusTraversable="false" layoutX="192.0" layoutY="13.0" mnemonicParsing="false" onAction="#exit" prefHeight="36.0" prefWidth="94.0" text="exit">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+
+      </AnchorPane>
+
    </children>
-</Pane>
+</AnchorPane>

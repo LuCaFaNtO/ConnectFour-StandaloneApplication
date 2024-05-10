@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,15 +24,19 @@ import java.util.ResourceBundle;
 public class MainFx extends Application {
     public static final String APP_TITLE = "connectfour";
     public static ResourceBundle resourceBundle;
-    private static BorderPane mainBorderPane;
+    public static BorderPane mainBorderPane;
 
     private static UpdateLanguageInterface menuBarDispatcher;
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
-    private UpdateGridInterface boardView;
+    public static UpdateGridInterface boardView;
     private static UpdateLanguageInterface infoBarView;
 
     private GameControllerInterface gameController;
     private LanguageControllerInterface languageController;
+
+    public static Parent board;
+
+    public static BorderPane gameBoardBorderPane = new BorderPane();
 
     public MainFx() throws InstantiationException {
         this.languageController = LanguageController.getInstance();
@@ -88,7 +93,7 @@ public class MainFx extends Application {
         }
 
         // CONNECT-FOUR BOARD
-        Parent board;
+
         try {
             URL fxmlUrl = getClass().getResource("/gameboard.fxml");
             if (fxmlUrl == null) {
@@ -126,10 +131,10 @@ public class MainFx extends Application {
 
         mainBorderPane.setTop(menuBar);
 
-        BorderPane gameBoardBorderPane = new BorderPane();
+
         gameBoardBorderPane.setTop(columnSelectors);
         gameBoardBorderPane.setCenter(board);
-        mainBorderPane.setCenter(gameBoardBorderPane);
+        showGameBoard();
 
         mainBorderPane.setBottom(infoBar);
 
@@ -157,6 +162,10 @@ public class MainFx extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void showGameBoard(){
+        mainBorderPane.setCenter(gameBoardBorderPane);
     }
 
     public static void main(String[] args) {
