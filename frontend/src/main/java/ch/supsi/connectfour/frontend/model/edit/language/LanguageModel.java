@@ -24,7 +24,7 @@ public class LanguageModel implements LanguageModelInterface {
 
     @Override
     public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage) {
-        if(updaterLanguage != null && !updaterLanguageList.contains(updaterLanguage))
+        if (updaterLanguage != null && !updaterLanguageList.contains(updaterLanguage))
             updaterLanguageList.add(updaterLanguage);
     }
 
@@ -35,7 +35,7 @@ public class LanguageModel implements LanguageModelInterface {
         for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.updateFxmlLoaderWithNewLanguage(resourceBundle);
 
-        for(UpdateLanguageInterface updaterLanguage : updaterLanguageList)
+        for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.changeSceneFx();
     }
 
