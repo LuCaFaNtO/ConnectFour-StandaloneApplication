@@ -62,6 +62,20 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         // delegate it to a suitable controller
     }
 
+    public void editPreferences(ActionEvent actionEvent) {
+
+    }
+
+    public void showAbout(ActionEvent actionEvent) {
+        // decode this event
+        // delegate it to a suitable controller
+    }
+
+    public void showHelp(ActionEvent actionEvent) {
+        // decode this event
+        // delegate it to a suitable controller
+    }
+
     private void addSupportedLanguages() {
         Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
 
@@ -78,16 +92,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public void changeLanguage(ActionEvent actionEvent) {
         String idLanguage = ((MenuItem) actionEvent.getSource()).getId();
         languageController.changeLanguage(idLanguage);
-    }
-
-    public void showAbout(ActionEvent actionEvent) {
-        // decode this event
-        // delegate it to a suitable controller
-    }
-
-    public void showHelp(ActionEvent actionEvent) {
-        // decode this event
-        // delegate it to a suitable controller
     }
 
     @Override

@@ -12,7 +12,7 @@
         <MenuItem fx:id="quitMenuItem" mnemonicParsing="false" onAction="#quit" text="%MenuBar.quitMenuItem"/>
     </Menu>
     <Menu fx:id="Edit" mnemonicParsing="false" text="%MenuBar.Edit">
-        <MenuItem fx:id="preferencesMenuItem" mnemonicParsing="false" onAction="#quit" text="%MenuBar.preferencesMenuItem"/>
+        <MenuItem fx:id="preferencesMenuItem" mnemonicParsing="false" onAction="#editPreferences" text="%MenuBar.preferencesMenuItem"/>
         <Menu fx:id="languagesMenu" mnemonicParsing="false" text="%MenuBar.languagesMenu"/>
     </Menu>
     <Menu fx:id="Help" mnemonicParsing="false" text="%MenuBar.Help">
