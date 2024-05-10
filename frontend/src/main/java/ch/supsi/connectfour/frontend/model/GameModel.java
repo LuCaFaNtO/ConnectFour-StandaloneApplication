@@ -18,12 +18,8 @@ public class GameModel implements GameModelInterface, GridObserver, ColumnObserv
     protected GameModel() {
         gridController = GridController.getInstance();
 
-        //Todo:: Sistemare questo schifo
-        gridController.registerObserver((GridObserver) this);
-        gridController.registerObserver((ColumnObserver) this);//GameModel diventa un osservatore di GridController
-
-        //this.boardView = new BoardView();
-        //this.columnSelectorDispatcher = new ColumnsSelectorDispatcher();
+        gridController.registerGridObserver(this);
+        gridController.registerColumnObserver(this);
     }
 
     public static GameModel getInstance() {

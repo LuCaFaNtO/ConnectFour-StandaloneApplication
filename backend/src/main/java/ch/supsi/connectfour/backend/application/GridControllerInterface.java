@@ -8,11 +8,11 @@ import ch.supsi.connectfour.backend.business.domain.Cell;
 
 public interface GridControllerInterface {
     void insertPiece(final int column) throws InsertPieceException, IllegalColumnException;
-    void registerObserver(GridObserver observer);
+    void registerGridObserver(GridObserver observer);
     void removeObserver(GridObserver observer);
 
     //TODO: Stessa cosa sistemare interfaccia
-    void registerObserver(ColumnObserver observer);
+    void registerColumnObserver(ColumnObserver observer);
     void removeObserver(ColumnObserver observer);
 
     void notifyGridObserver();

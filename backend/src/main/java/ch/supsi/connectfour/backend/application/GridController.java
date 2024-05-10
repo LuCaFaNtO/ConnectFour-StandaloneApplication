@@ -38,7 +38,7 @@ public class GridController implements GridControllerInterface {
     }
 
     @Override
-    public void registerObserver(GridObserver observer) {
+    public void registerGridObserver(GridObserver observer) {
         gridObservers.add(observer);
     }
 
@@ -51,7 +51,7 @@ public class GridController implements GridControllerInterface {
     //      che si basano su un'ipotetica interfaccia padre Observer
 
     @Override
-    public void registerObserver(ColumnObserver observer) {
+    public void registerColumnObserver(ColumnObserver observer) {
         columnObservers.add(observer);
     }
 

@@ -58,5 +58,6 @@ public class ColumnsSelectorDispatcher implements Initializable, UpdateViewInter
 
         Button button = (Button) anchorPane.getChildren().get(0);
         button.setDisable(true);
+        button.setText("✖");
     }
 }
