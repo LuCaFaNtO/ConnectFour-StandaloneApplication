@@ -85,8 +85,17 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void showAbout(ActionEvent actionEvent) {
-        // decode this event
-        // delegate it to a suitable controller
+        FXMLLoader about = new FXMLLoader(getClass().getResource("/aboutWindow.fxml"));
+        try {
+            Parent root = about.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showHelp(ActionEvent actionEvent) {
