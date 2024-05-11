@@ -4,4 +4,5 @@ import java.util.Set;
 
 public interface PreferencesControllerInterface {
     Set<String> getSupportedColors();
+    Set<String> getSupportedSymbols();
 }

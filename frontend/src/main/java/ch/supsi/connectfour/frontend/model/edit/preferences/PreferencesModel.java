@@ -22,4 +22,9 @@ public class PreferencesModel implements PreferencesModelInterface {
     public Set<String> getSupportedColors() {
         return preferencesController.getSupportedColors();
     }
+
+    @Override
+    public Set<String> getSupportedSymbols() {
+        return preferencesController.getSupportedSymbols();
+    }
 }

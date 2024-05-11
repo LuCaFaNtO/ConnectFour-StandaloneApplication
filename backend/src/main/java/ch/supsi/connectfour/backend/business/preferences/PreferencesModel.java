@@ -12,10 +12,12 @@ public class PreferencesModel implements PreferencesBusinessInterface {
     private static PreferencesModel instance = null;
     private final PreferencesDataAccessInterface preferencesDataAccess;
     private Set<String> supportedColors;
+    private Set<String> supportedSymbols;
 
     private PreferencesModel() {
         this.preferencesDataAccess = PreferencesDataAccess.getInstance();
         this.supportedColors = preferencesDataAccess.getSupportedColorsValues();
+        this.supportedSymbols = preferencesDataAccess.getSupportedSymbols();
     }
 
     public static PreferencesModel getInstance() {
@@ -26,4 +28,11 @@ public class PreferencesModel implements PreferencesBusinessInterface {
     public Set<String> getSupportedColors() {
         return Collections.unmodifiableSet(supportedColors);
     }
+
+    @Override
+    public Set<String> getSupportedSymbols() {
+        return Collections.unmodifiableSet(supportedSymbols);
+    }
+
+
 }

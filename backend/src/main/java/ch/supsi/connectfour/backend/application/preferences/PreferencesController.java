@@ -20,4 +20,11 @@ public class PreferencesController implements PreferencesControllerInterface {
     public Set<String> getSupportedColors() {
         return preferencesModel.getSupportedColors();
     }
+
+    @Override
+    public Set<String> getSupportedSymbols() {
+        return preferencesModel.getSupportedSymbols();
+    }
+
+
 }

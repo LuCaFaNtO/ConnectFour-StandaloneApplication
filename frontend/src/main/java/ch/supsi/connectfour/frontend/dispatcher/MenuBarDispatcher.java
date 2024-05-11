@@ -3,6 +3,7 @@ package ch.supsi.connectfour.frontend.dispatcher;
 import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import javafx.event.ActionEvent;
@@ -10,9 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable {
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
+    private final PreferencesDispatcher preferencesDispatcher;
 
     private final String fxmlLocation = "/menuBar.fxml";
 
@@ -39,6 +43,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public MenuBarDispatcher() {
         aboutController = AboutController.getInstance();
         languageController = LanguageController.getInstance();
+        preferencesDispatcher = new PreferencesDispatcher();
     }
 
     @Override
@@ -72,17 +77,8 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         // delegate it to a suitable controller
     }
 
-    public void editPreferences(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/preferences.fxml"));
-        Parent preferencesDispatcher = loader.load();
-
-        AnchorPane.setTopAnchor(preferencesDispatcher, 0.0);
-        AnchorPane.setRightAnchor(preferencesDispatcher, 0.0);
-        AnchorPane.setBottomAnchor(preferencesDispatcher, 0.0);
-        AnchorPane.setLeftAnchor(preferencesDispatcher, 0.0);
-        MainFx.mainBorderPane.setCenter(preferencesDispatcher);
-
-
+    public void editPreferences(ActionEvent actionEvent) {
+        preferencesDispatcher.showPreferencesPage();
     }
 
     public void showAbout(ActionEvent actionEvent) {

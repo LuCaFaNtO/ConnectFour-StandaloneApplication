@@ -13,9 +13,12 @@ public class PreferencesDataAccess implements PreferencesDataAccessInterface {
     private static PreferencesDataAccess instance = null;
     private final Properties colorsProperties;
     private static final String supportedColorsPath = "/supported-colors.properties";
+    private final Properties symbolsProperties;
+    private static final String supportedSymbolsPath = "/supported-symbols.properties";
 
     private PreferencesDataAccess() {
         this.colorsProperties = getColorsProperties();
+        this.symbolsProperties = getSymbolsProperties();
     }
 
     public static PreferencesDataAccess getInstance() {
@@ -28,15 +31,31 @@ public class PreferencesDataAccess implements PreferencesDataAccessInterface {
             InputStream supportedLanguageTagsStream = this.getClass().getResourceAsStream(supportedColorsPath);
             colorsProperties.load(supportedLanguageTagsStream);
         } catch (IOException ignored) {
-            System.err.println("ERROR: Unable to load supported languages properties from " + supportedColorsPath);
+            System.err.println("ERROR: Unable to load supported colors properties from " + supportedColorsPath);
         }
         return colorsProperties;
     }
 
+    private Properties getSymbolsProperties() {
+        Properties symbolsProperties = new Properties();
+        try {
+            InputStream supportedSymbolTagsStream = this.getClass().getResourceAsStream(supportedSymbolsPath);
+            symbolsProperties.load(supportedSymbolTagsStream);
+        } catch (IOException ignored) {
+            System.err.println("ERROR: Unable to load supported symbols properties from " + supportedSymbolsPath);
+        }
+        return symbolsProperties;
+    }
+
     @Override
     public Set<String> getSupportedColorsValues() {
-        Set<String> supportedColorsValues = new HashSet<>();
-        supportedColorsValues = colorsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
+        Set<String> supportedColorsValues = colorsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
         return supportedColorsValues;
+    }
+
+    @Override
+    public Set<String> getSupportedSymbols() {
+        Set<String> supportedSymbols = symbolsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
+        return supportedSymbols;
     }
 }
