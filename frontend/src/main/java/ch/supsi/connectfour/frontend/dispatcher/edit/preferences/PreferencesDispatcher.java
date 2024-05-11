@@ -8,8 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
@@ -21,7 +24,10 @@ public class PreferencesDispatcher implements Initializable {
     private final PreferencesControllerInterface preferencesController;
 
     @FXML
-    public Pane colorsContainerPane;
+    public Circle circlePlayer1;
+
+    @FXML
+    private Pane colorsContainerPane1;
 
     @FXML
     Button exitButton;
@@ -44,10 +50,15 @@ public class PreferencesDispatcher implements Initializable {
 
     private void addSupportedColors() {
         List<String> supportedColors = preferencesController.getSupportedColors().stream().toList();
-        List<Rectangle> rectangles = colorsContainerPane.getChildren().stream().map(c -> (Rectangle) c).toList();
+        List<Rectangle> rectangles = colorsContainerPane1.getChildren().stream().map(c -> (Rectangle) c).toList();
         for (int i = 0; i < rectangles.size(); i++) {
             rectangles.get(i).setFill(Color.valueOf(supportedColors.get(i)));
         }
     }
 
+    public void changePreviewColor(MouseEvent mouseEvent) {
+        Rectangle rectangle = (Rectangle) mouseEvent.getSource();
+        Color color = (Color) rectangle.getFill();
+        circlePlayer1.setFill(color);
+    }
 }

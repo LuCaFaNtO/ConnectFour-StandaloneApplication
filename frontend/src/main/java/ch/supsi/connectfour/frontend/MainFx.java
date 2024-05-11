@@ -160,6 +160,7 @@ public class MainFx extends Application {
         // PRIMARY STAGE
         primaryStage.setTitle(MainFx.APP_TITLE);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
