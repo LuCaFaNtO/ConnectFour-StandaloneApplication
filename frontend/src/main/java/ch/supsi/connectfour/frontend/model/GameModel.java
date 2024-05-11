@@ -6,8 +6,11 @@ import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
 import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
 import ch.supsi.connectfour.backend.business.domain.Cell;
+import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.GameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
+
+import java.util.List;
 
 public class GameModel implements GameModelInterface, GridObserver, ColumnObserver {
     private static GameModel gameModel = null;
@@ -48,7 +51,8 @@ public class GameModel implements GameModelInterface, GridObserver, ColumnObserv
     @Override
     public void onGridUpdate() {
         Cell cell = gridController.getCell();
-        boardView.updateGrid(cell);
+        Player player = gridController.getPlayer();
+        boardView.updateGrid(cell, player);
     }
 
     @Override

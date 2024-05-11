@@ -1,12 +1,15 @@
 package ch.supsi.connectfour.frontend.view;
 
 import ch.supsi.connectfour.backend.business.domain.Cell;
+import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -36,7 +39,7 @@ public class BoardView implements UpdateGridInterface, Initializable {
     }
 
     @Override
-    public void updateGrid(Cell cell) {
+    public void updateGrid(Cell cell, Player player) {
         AnchorPane anchorPane = grid.getChildren().stream()
                 .filter(node -> GridPane.getRowIndex(node) == cell.getRow() && GridPane.getColumnIndex(node) == cell.getCol())
                 .map(node -> (AnchorPane) node)
@@ -44,6 +47,8 @@ public class BoardView implements UpdateGridInterface, Initializable {
                 .orElseThrow();
 
         Circle circle = (Circle) anchorPane.getChildren().get(0);
-        circle.setFill(Paint.valueOf("yellow"));
+        circle.setFill(Color.valueOf(player.getPiece().getColor()));
+        Label label = (Label) anchorPane.getChildren().get(1);
+        label.setText(player.getPiece().getSymbol());
     }
 }

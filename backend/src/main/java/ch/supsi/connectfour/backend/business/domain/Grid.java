@@ -23,7 +23,6 @@ public class Grid {
     public void insertPiece(final int row, final int column) {
         grid[row][column].setFill(true);
         modifiedCell = grid[row][column];
-        System.out.println("Pezzo inserito in posizione\n - colonna: " + column + "\n - row: " + row);
     }
 
     // returns the first free row giving the column

@@ -18,6 +18,9 @@ public class GridModel implements GridBusinessInterface {
     private Player player1;
     private Player player2;
 
+    //TODO: Sistemare turni
+    private boolean turn = false;
+
     protected GridModel() {
         grid = new Grid();
     }
@@ -32,8 +35,6 @@ public class GridModel implements GridBusinessInterface {
         this.lastRowInserted = grid.getRowFromColumn(column);
         if(this.lastRowInserted == -1) throw new InsertPieceException("ERROR: THE COLUMN IS FULL OF PIECES!");
         grid.insertPiece(this.lastRowInserted, column);
-        //if(row==0) throw
-        //System.out.println(column);n
     }
 
     @Override
@@ -59,6 +60,17 @@ public class GridModel implements GridBusinessInterface {
 
         player1.setPiece(newPiece1);
         player2.setPiece(newPiece2);
+    }
+
+    @Override
+    public Player getPlayer() {
+        Player currentPlayer;
+        if(turn)
+            currentPlayer = player1;
+        else
+            currentPlayer = player2;
+        turn = !turn;
+        return currentPlayer;
     }
 
     @Override

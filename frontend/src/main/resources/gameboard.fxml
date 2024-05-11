@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<GridPane fx:id="grid" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.connectfour.frontend.view.BoardView">
+<GridPane fx:id="grid" style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.connectfour.frontend.view.BoardView">
    <padding><Insets bottom="5" left="11" right="11" top="5" /></padding>
 
    <columnConstraints>
@@ -30,252 +35,462 @@
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" layoutX="28.0" layoutY="28.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" layoutX="28.0" layoutY="28.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="5.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="5.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="5.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 
       <AnchorPane GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
          <children>
             <Circle fill="#1f64ff" radius="24.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" prefHeight="48.0" prefWidth="48.0" textAlignment="CENTER">
+               <font>
+                  <Font size="22.5" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
 

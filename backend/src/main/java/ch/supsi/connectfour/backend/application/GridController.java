@@ -91,4 +91,9 @@ public class GridController implements GridControllerInterface {
     public List<Player> getPlayers() {
         return gridModel.getPlayers();
     }
+
+    @Override
+    public Player getPlayer() {
+        return gridModel.getPlayer();
+    }
 }

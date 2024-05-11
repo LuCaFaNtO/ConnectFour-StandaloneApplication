@@ -15,4 +15,5 @@ public interface GridBusinessInterface {
     void initializePlayers(List<Piece> defaultPlayerPieces);
     List<Player> getPlayers();
     void setNewPlayerPreferences(List<Piece> newPlayerPieces);
+    Player getPlayer();
 }
