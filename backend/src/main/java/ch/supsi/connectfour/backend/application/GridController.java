@@ -3,9 +3,13 @@ package ch.supsi.connectfour.backend.application;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalColumnException;
 import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
 import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
+import ch.supsi.connectfour.backend.application.preferences.PreferencesBusinessInterface;
 import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.GridModel;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
+import ch.supsi.connectfour.backend.business.domain.Piece;
+import ch.supsi.connectfour.backend.business.domain.Player;
+import ch.supsi.connectfour.backend.business.preferences.PreferencesModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +17,16 @@ import java.util.List;
 public class GridController implements GridControllerInterface {
     private static GridController instance = null;
     private final GridBusinessInterface gridModel;
+    private final PreferencesBusinessInterface preferencesModel;
     private List<GridObserver> gridObservers = new ArrayList<>();
     private List<ColumnObserver> columnObservers = new ArrayList<>();
 
     protected GridController() {
-        gridModel = GridModel.getInstance();
+        this.gridModel = GridModel.getInstance();
+        this.preferencesModel = PreferencesModel.getInstance();
+
+        List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
+        this.gridModel.initializePlayers(defaultPlayerPieces);
     }
 
     public static GridController getInstance() {
@@ -78,6 +87,8 @@ public class GridController implements GridControllerInterface {
         return gridModel.getCell();
     }
 
-
-
+    @Override
+    public List<Player> getPlayers() {
+        return gridModel.getPlayers();
+    }
 }

@@ -1,5 +1,7 @@
 package ch.supsi.connectfour.frontend.dispatcher.edit.preferences;
 
+import ch.supsi.connectfour.backend.business.domain.Piece;
+import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import javafx.collections.ObservableList;
@@ -61,11 +63,16 @@ public class PreferencesDispatcher implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setPreviewOfPlayers();
         addSupportedColors();
         addSupportedSymbols();
     }
 
     public void savePreferences(ActionEvent actionEvent) {
+        Piece newPiece1 = new Piece(circlePlayer1.getFill().toString(), symbolPlayer1.getText());
+        Piece newPiece2 = new Piece(circlePlayer2.getFill().toString(), symbolPlayer2.getText());
+
+        preferencesController.setNewPreferences(List.of(newPiece1, newPiece2));
     }
 
     public void exit(ActionEvent actionEvent) {
@@ -102,6 +109,19 @@ public class PreferencesDispatcher implements Initializable {
             Label label = (Label) anchorPanes.get(i).getChildren().get(0);
             label.setText(supportedSymbols.get(i));
         }
+    }
+
+    private void setPreviewOfPlayers() {
+        List<Player> players = preferencesController.getPlayers();
+
+        Player player1 = players.get(0);
+        Player player2 = players.get(1);
+
+        circlePlayer1.setFill(Color.valueOf(player1.getPiece().getColor()));
+        symbolPlayer1.setText(player1.getPiece().getSymbol());
+
+        circlePlayer2.setFill(Color.valueOf(player2.getPiece().getColor()));
+        symbolPlayer2.setText(player2.getPiece().getSymbol());
     }
 
     public void changePreviewColor(MouseEvent mouseEvent) {

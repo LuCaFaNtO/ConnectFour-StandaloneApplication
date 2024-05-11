@@ -5,11 +5,18 @@ import ch.supsi.connectfour.backend.application.exceptions.IllegalColumnExceptio
 import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
 import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Grid;
+import ch.supsi.connectfour.backend.business.domain.Piece;
+import ch.supsi.connectfour.backend.business.domain.Player;
+
+import java.util.Collections;
+import java.util.List;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
     private final Grid grid;
     private int lastRowInserted;
+    private Player player1;
+    private Player player2;
 
     protected GridModel() {
         grid = new Grid();
@@ -19,7 +26,6 @@ public class GridModel implements GridBusinessInterface {
         return gridModel == null ? gridModel = new GridModel() : gridModel;
     }
 
-    //TODO: return della riga (colonna già conosciuta)
     @Override
     public void insertPiece(final int column) throws InsertPieceException, IllegalColumnException {
         if(!grid.isColumnValid(column)) throw new IllegalColumnException("ERROR: THE COLUMN DOESN'T EXISTS");
@@ -33,6 +39,26 @@ public class GridModel implements GridBusinessInterface {
     @Override
     public boolean isLastRowInserted() {
         return lastRowInserted == 0;
+    }
+
+    @Override
+    public void initializePlayers(List<Piece> defaultPlayerPieces) {
+        player1 = new Player("Player1", defaultPlayerPieces.get(0));
+        player2 = new Player("Player2", defaultPlayerPieces.get(1));
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return List.of(player1, player2);
+    }
+
+    @Override
+    public void setNewPlayerPreferences(List<Piece> newPlayerPieces) {
+        Piece newPiece1 = newPlayerPieces.get(0);
+        Piece newPiece2 = newPlayerPieces.get(1);
+
+        player1.setPiece(newPiece1);
+        player2.setPiece(newPiece2);
     }
 
     @Override
