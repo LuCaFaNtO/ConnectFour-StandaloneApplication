@@ -31,6 +31,15 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.fxml</include>
+                </includes>
+            </resource>
+        </resources>
+
         <finalName>connectfour</finalName>
         <plugins>
             <plugin>

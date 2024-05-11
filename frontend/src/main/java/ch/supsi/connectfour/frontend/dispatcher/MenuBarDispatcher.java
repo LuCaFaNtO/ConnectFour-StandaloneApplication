@@ -1,6 +1,7 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
 import ch.supsi.connectfour.frontend.MainFx;
+import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
@@ -9,11 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable {
+    private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
 
     private final String fxmlLocation = "/menuBar.fxml";
@@ -37,6 +37,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     private FXMLLoader fxmlLoaderMenuBar;
 
     public MenuBarDispatcher() {
+        aboutController = AboutController.getInstance();
         languageController = LanguageController.getInstance();
     }
 
@@ -85,17 +86,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void showAbout(ActionEvent actionEvent) {
-        FXMLLoader about = new FXMLLoader(getClass().getResource("/aboutWindow.fxml"));
-        try {
-            Parent root = about.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        aboutController.showAbout();
     }
 
     public void showHelp(ActionEvent actionEvent) {

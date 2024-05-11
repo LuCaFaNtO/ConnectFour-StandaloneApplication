@@ -1,8 +1,9 @@
 package ch.supsi.connectfour.frontend;
 
-
+import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
@@ -14,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,8 +31,9 @@ public class MainFx extends Application {
     public static UpdateGridInterface boardView;
     private static UpdateLanguageInterface infoBarView;
 
-    private GameControllerInterface gameController;
-    private LanguageControllerInterface languageController;
+    private final GameControllerInterface gameController;
+    private final LanguageControllerInterface languageController;
+    private final AboutControllerInterface aboutController;
 
     public static Parent board;
 
@@ -41,6 +42,7 @@ public class MainFx extends Application {
     public MainFx() throws InstantiationException {
         this.languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
+        this.aboutController = AboutController.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -59,6 +61,21 @@ public class MainFx extends Application {
                     primaryStage.close();
                 }
         );
+
+        // ABOUT
+        try {
+            URL fxmlAboutUrl = getClass().getResource("/aboutWindow.fxml");
+            if (fxmlAboutUrl == null) {
+                return;
+            }
+            FXMLLoader aboutLoader = new FXMLLoader(fxmlAboutUrl, resourceBundle);
+            aboutLoader.load();
+            UpdateLanguageInterface aboutView = aboutLoader.getController();
+            this.aboutController.addAboutView(aboutView);
+            this.languageController.addUpdaterLanguageList(aboutView);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // MENU BAR
         MenuBar menuBar;
@@ -93,7 +110,6 @@ public class MainFx extends Application {
         }
 
         // CONNECT-FOUR BOARD
-
         try {
             URL fxmlUrl = getClass().getResource("/gameboard.fxml");
             if (fxmlUrl == null) {
@@ -149,7 +165,6 @@ public class MainFx extends Application {
 
     public static void updateSceneMenuBarWithNewLanguage() {
         try {
-
             mainBorderPane.setTop(menuBarDispatcher.getFxmlLoader().load());
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,12 +179,11 @@ public class MainFx extends Application {
         }
     }
 
-    public static void showGameBoard(){
+    public static void showGameBoard() {
         mainBorderPane.setCenter(gameBoardBorderPane);
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 }
