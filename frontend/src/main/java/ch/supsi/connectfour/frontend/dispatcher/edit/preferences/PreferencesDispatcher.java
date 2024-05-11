@@ -25,6 +25,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,21 +36,24 @@ public class PreferencesDispatcher implements Initializable {
 
     @FXML
     public Circle circlePlayer1;
-
+    @FXML
+    private Pane colorsContainerPane1;
     @FXML
     public Pane symbolContainerPane1;
-
     @FXML
     public Label symbolPlayer1;
 
     @FXML
+    public Circle circlePlayer2;
+    @FXML
+    private Pane colorsContainerPane2;
+    @FXML
+    public Pane symbolContainerPane2;
+    @FXML
+    public Label symbolPlayer2;
+
+    @FXML
     public Button closeButton;
-
-    @FXML
-    private Pane colorsContainerPane1;
-
-    @FXML
-    Button exitButton;
 
     public PreferencesDispatcher() {
         preferencesController = PreferencesController.getInstance();
@@ -70,16 +74,30 @@ public class PreferencesDispatcher implements Initializable {
     }
 
     private void addSupportedColors() {
-        List<String> supportedColors = preferencesController.getSupportedColors().stream().toList();
         List<Rectangle> rectangles = colorsContainerPane1.getChildren().stream().map(c -> (Rectangle) c).toList();
+        fillRectangles(rectangles);
+
+        rectangles = colorsContainerPane2.getChildren().stream().map(c -> (Rectangle) c).toList();
+        fillRectangles(rectangles);
+    }
+
+    private void fillRectangles(List<Rectangle> rectangles) {
+        List<String> supportedColors = preferencesController.getSupportedColors().stream().toList();
         for (int i = 0; i < rectangles.size(); i++) {
             rectangles.get(i).setFill(Color.valueOf(supportedColors.get(i)));
         }
     }
 
     private void addSupportedSymbols() {
-        List<String> supportedSymbols = preferencesController.getSupportedSymbols().stream().toList();
         List<AnchorPane> anchorPanes = symbolContainerPane1.getChildren().stream().map(c -> (AnchorPane) c).toList();
+        writeSymbols(anchorPanes);
+
+        anchorPanes = symbolContainerPane2.getChildren().stream().map(c -> (AnchorPane) c).toList();
+        writeSymbols(anchorPanes);
+    }
+
+    private void writeSymbols(List<AnchorPane> anchorPanes) {
+        List<String> supportedSymbols = preferencesController.getSupportedSymbols().stream().toList();
         for(int i = 0; i < anchorPanes.size(); i++) {
             Label label = (Label) anchorPanes.get(i).getChildren().get(0);
             label.setText(supportedSymbols.get(i));
@@ -89,13 +107,22 @@ public class PreferencesDispatcher implements Initializable {
     public void changePreviewColor(MouseEvent mouseEvent) {
         Rectangle rectangle = (Rectangle) mouseEvent.getSource();
         Color color = (Color) rectangle.getFill();
-        circlePlayer1.setFill(color);
+        String idColorsPane = rectangle.getParent().getId();
 
+        if(idColorsPane.charAt(idColorsPane.length() - 1) == '1')
+            circlePlayer1.setFill(color);
+        else
+            circlePlayer2.setFill(color);
     }
 
     public void changePreviewSymbol(MouseEvent mouseEvent) {
         Label label = (Label) mouseEvent.getSource();
-        symbolPlayer1.setText(label.getText());
+        String idSymbolPane = label.getParent().getParent().getId();
+
+        if(idSymbolPane.charAt(idSymbolPane.length() - 1) == '1')
+            symbolPlayer1.setText(label.getText());
+        else
+            symbolPlayer2.setText(label.getText());
     }
 
     public void showPreferencesPage(){
