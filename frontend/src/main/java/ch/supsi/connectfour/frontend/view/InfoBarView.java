@@ -9,12 +9,11 @@ import java.util.ResourceBundle;
 public class InfoBarView implements UpdateLanguageInterface {
     private final String fxmlLocation = "/infobar.fxml";
 
-    private FXMLLoader fxmlLoaderInfoBarView = null;
+    private FXMLLoader fxmlLoaderInfoBarView;
 
     @Override
     public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
-        fxmlLoaderInfoBarView = new FXMLLoader(getClass().getResource(fxmlLocation));
-        fxmlLoaderInfoBarView.setResources(resourceBundle);
+        fxmlLoaderInfoBarView = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     private final LanguageControllerInterface languageController;
     private final PreferencesDispatcher preferencesDispatcher;
 
-    private final String fxmlLocation = "/menuBar.fxml";
+    private final String fxmlLocation = "/menubar.fxml";
 
     @FXML
     public Menu languagesMenu;
