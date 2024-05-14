@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -162,6 +163,7 @@ public class MainFx extends Application {
         Scene scene = new Scene(mainBorderPane);
 
         // PRIMARY STAGE
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
         primaryStage.setTitle(MainFx.APP_TITLE);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
