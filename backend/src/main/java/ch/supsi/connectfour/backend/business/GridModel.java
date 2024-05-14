@@ -10,6 +10,7 @@ import ch.supsi.connectfour.backend.business.domain.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
@@ -44,12 +45,17 @@ public class GridModel implements GridBusinessInterface {
 
     @Override
     public boolean isGridFull() {
-        return false;
+        return grid.isFull();
     }
 
     @Override
     public boolean checkWin() {
         return false;
+    }
+
+    @Override
+    public Player getWinner() {
+        return turn ? player1 : player2;
     }
 
     @Override

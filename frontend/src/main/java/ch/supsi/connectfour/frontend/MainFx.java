@@ -2,6 +2,8 @@ package ch.supsi.connectfour.frontend;
 
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.GameController;
+import ch.supsi.connectfour.frontend.controller.InfoBarController;
+import ch.supsi.connectfour.frontend.controller.InfoBarControllerInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
@@ -10,6 +12,7 @@ import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.view.InfoBarView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +40,7 @@ public class MainFx extends Application {
     private final LanguageControllerInterface languageController;
     private final AboutControllerInterface aboutController;
     private final PreferencesController preferencesController;
+    private final InfoBarControllerInterface infoBarController;
 
     public static Parent board;
 
@@ -47,6 +51,7 @@ public class MainFx extends Application {
         this.gameController = GameController.getInstance();
         this.aboutController = AboutController.getInstance();
         this.preferencesController = PreferencesController.getInstance();
+        this.infoBarController = InfoBarController.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -142,7 +147,7 @@ public class MainFx extends Application {
             infoBar = infoBarLoader.load();
             this.infoBarView = infoBarLoader.getController();
             this.languageController.addUpdaterLanguageList(infoBarView);
-
+            this.infoBarController.addInfoBar((InfoBarView) infoBarView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -173,14 +178,6 @@ public class MainFx extends Application {
     public static void updateSceneMenuBarWithNewLanguage() {
         try {
             mainBorderPane.setTop(menuBarDispatcher.getFxmlLoader().load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void updateSceneInfoBarWithNewLanguage() {
-        try {
-            mainBorderPane.setBottom(infoBarView.getFxmlLoader().load());
         } catch (IOException e) {
             e.printStackTrace();
         }

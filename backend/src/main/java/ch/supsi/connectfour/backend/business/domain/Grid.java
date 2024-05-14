@@ -47,4 +47,11 @@ public class Grid {
     public Cell[][] getGrid() {
         return grid;
     }
+
+    public boolean isFull(){
+        for(int i=0; i<NUM_COLS; i++)
+            if(!grid[0][i].isFill())
+                return false;
+        return true;
+    }
 }

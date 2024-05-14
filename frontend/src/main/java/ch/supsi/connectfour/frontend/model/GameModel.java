@@ -6,6 +6,7 @@ import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
 import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
 import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
+import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.GameModelInterface;
@@ -13,17 +14,20 @@ import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 
 import java.util.List;
 
-public class GameModel implements GameModelInterface, GridObserver, ColumnObserver, FinishGameObserver {
+public class GameModel implements GameModelInterface, GridObserver, ColumnObserver {
     private static GameModel gameModel = null;
     private final GridControllerInterface gridController;
+    private final ObserverControllerInterface observerController;
     private UpdateGridInterface boardView;
     private ColumnsSelectorDispatcher columnSelectorDispatcher;
 
+
     protected GameModel() {
         gridController = GridController.getInstance();
+        observerController = ObserverController.getInstance();
 
-        gridController.registerGridObserver(this);
-        gridController.registerColumnObserver(this);
+        observerController.registerGridObserver(this);
+        observerController.registerColumnObserver(this);
     }
 
     public static GameModel getInstance() {
@@ -58,15 +62,5 @@ public class GameModel implements GameModelInterface, GridObserver, ColumnObserv
     @Override
     public void disableColumn(final int column) {
         columnSelectorDispatcher.disableColumnButton(column);
-    }
-
-    @Override
-    public void win(Player winPlayer) {
-
-    }
-
-    @Override
-    public void gridFull() {
-
     }
 }

@@ -19,4 +19,5 @@ public interface GridBusinessInterface {
     void changeTurn();
     boolean isGridFull();
     boolean checkWin();
+    Player getWinner();
 }
