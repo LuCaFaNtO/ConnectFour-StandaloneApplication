@@ -16,4 +16,7 @@ public interface GridBusinessInterface {
     List<Player> getPlayers();
     void setNewPlayerPreferences(List<Piece> newPlayerPieces);
     Cell[][] getGrid();
+    void changeTurn();
+    boolean isGridFull();
+    boolean checkWin();
 }

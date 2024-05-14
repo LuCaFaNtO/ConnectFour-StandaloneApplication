@@ -35,7 +35,21 @@ public class GridModel implements GridBusinessInterface {
         this.lastRowInserted = grid.getRowFromColumn(column);
         if (this.lastRowInserted == -1) throw new InsertPieceException("ERROR: THE COLUMN IS FULL OF PIECES!");
         grid.insertPiece(this.lastRowInserted, column, turn ? player1 : player2);
+    }
+
+    @Override
+    public void changeTurn(){
         turn = !turn;
+    }
+
+    @Override
+    public boolean isGridFull() {
+        return false;
+    }
+
+    @Override
+    public boolean checkWin() {
+        return false;
     }
 
     @Override

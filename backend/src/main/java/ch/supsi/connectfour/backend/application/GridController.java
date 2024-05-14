@@ -35,10 +35,17 @@ public class GridController implements GridControllerInterface {
 
     @Override
     public void insertPiece(final int column) throws InsertPieceException, IllegalColumnException {
-
         gridModel.insertPiece(column);
+        gridModel.changeTurn();
+
         notifyGridObserver();
         checkLastRow(column);
+
+        if(gridModel.checkWin());
+            //TODO: notify win
+
+        if(gridModel.isGridFull());
+            //TODO: notify grid is full
     }
 
     private void checkLastRow(final int column) {
