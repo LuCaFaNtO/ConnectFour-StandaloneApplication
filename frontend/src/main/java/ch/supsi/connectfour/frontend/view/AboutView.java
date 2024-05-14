@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -30,14 +31,17 @@ public class AboutView implements Initializable, UpdateLanguageInterface {
     }
 
     @Override
-    public void changeSceneFx() {}
+    public void changeSceneFx() {
+    }
 
     public void showAboutInformation() {
         try {
             Parent root = new FXMLLoader(getFxmlLoader().getLocation(), getFxmlLoader().getResources()).load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
