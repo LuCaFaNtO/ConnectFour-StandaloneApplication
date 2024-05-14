@@ -8,6 +8,7 @@ import ch.supsi.connectfour.backend.application.preferences.PreferencesControlle
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesModelInterface;
+import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 
@@ -19,7 +20,7 @@ public class PreferencesModel implements PreferencesModelInterface {
     private final PreferencesControllerInterface preferencesController;
     private final GridControllerInterface gridController;
     private final ErrorViewInterface errorView;
-   // private List<Player> players;
+    private UpdateGridInterface updateGrid;
 
     private PreferencesModel() {
         this.preferencesController = PreferencesController.getInstance();
@@ -50,8 +51,14 @@ public class PreferencesModel implements PreferencesModelInterface {
     public void setNewPreferences(List<Piece> pieces) {
         try {
             preferencesController.setNewPreferences(pieces);
+            updateGrid.updateGridWithNewPreferences(gridController.getGrid());
         } catch (IllegalPreferencesException e) {
             errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
         }
+    }
+
+    @Override
+    public void addUpdaterGrid(UpdateGridInterface updateGrid) {
+        this.updateGrid = updateGrid;
     }
 }

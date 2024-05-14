@@ -93,7 +93,7 @@ public class GridController implements GridControllerInterface {
     }
 
     @Override
-    public Player getPlayer() {
-        return gridModel.getPlayer();
+    public Cell[][] getGrid() {
+        return gridModel.getGrid();
     }
 }

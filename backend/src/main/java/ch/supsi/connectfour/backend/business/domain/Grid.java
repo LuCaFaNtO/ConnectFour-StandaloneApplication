@@ -20,8 +20,9 @@ public class Grid {
         }
     }
 
-    public void insertPiece(final int row, final int column) {
+    public void insertPiece(final int row, final int column, final Player player) {
         grid[row][column].setFill(true);
+        grid[row][column].setPlayer(player);
         modifiedCell = grid[row][column];
     }
 
@@ -41,5 +42,9 @@ public class Grid {
 
     public boolean isColumnValid(final int col) {
         return col < NUM_COLS && col >= 0;
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
     }
 }

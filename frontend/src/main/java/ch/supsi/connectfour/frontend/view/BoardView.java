@@ -39,7 +39,19 @@ public class BoardView implements UpdateGridInterface, Initializable {
     }
 
     @Override
-    public void updateGrid(Cell cell, Player player) {
+    public void updateGrid(Cell cell) {
+        updateCell(cell);
+    }
+
+    @Override
+    public void updateGridWithNewPreferences(Cell[][] grid) {
+        for (Cell[] cells : grid)
+            for (Cell cell : cells)
+                if (cell.isFill())
+                    updateCell(cell);
+    }
+
+    private void updateCell(Cell cell) {
         AnchorPane anchorPane = grid.getChildren().stream()
                 .filter(node -> GridPane.getRowIndex(node) == cell.getRow() && GridPane.getColumnIndex(node) == cell.getCol())
                 .map(node -> (AnchorPane) node)
@@ -47,8 +59,8 @@ public class BoardView implements UpdateGridInterface, Initializable {
                 .orElseThrow();
 
         Circle circle = (Circle) anchorPane.getChildren().get(0);
-        circle.setFill(Color.valueOf(player.getPiece().getColor()));
+        circle.setFill(Color.valueOf(cell.getPlayer().getPiece().getColor()));
         Label label = (Label) anchorPane.getChildren().get(1);
-        label.setText(player.getPiece().getSymbol());
+        label.setText(cell.getPlayer().getPiece().getSymbol());
     }
 }

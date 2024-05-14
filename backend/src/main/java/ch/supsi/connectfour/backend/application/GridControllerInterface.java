@@ -23,5 +23,5 @@ public interface GridControllerInterface {
     Cell getCell();
 
     List<Player> getPlayers();
-    Player getPlayer();
+    Cell[][] getGrid();
 }

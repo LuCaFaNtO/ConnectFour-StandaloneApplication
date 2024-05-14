@@ -4,11 +4,13 @@ public class Cell {
     private int row;
     private int col;
     private boolean fill;
+    private Player player;
 
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
         this.fill = false;
+        this.player = null;
     }
 
     public void setFill(boolean fill) {
@@ -25,5 +27,13 @@ public class Cell {
 
     public int getCol() {
         return col;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

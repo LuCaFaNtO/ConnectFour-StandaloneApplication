@@ -3,6 +3,7 @@ package ch.supsi.connectfour.frontend;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
@@ -34,6 +35,7 @@ public class MainFx extends Application {
     private final GameControllerInterface gameController;
     private final LanguageControllerInterface languageController;
     private final AboutControllerInterface aboutController;
+    private final PreferencesController preferencesController;
 
     public static Parent board;
 
@@ -43,6 +45,7 @@ public class MainFx extends Application {
         this.languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
         this.aboutController = AboutController.getInstance();
+        this.preferencesController = PreferencesController.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -118,8 +121,9 @@ public class MainFx extends Application {
 
             FXMLLoader boardLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             board = boardLoader.load();
-            this.boardView = boardLoader.getController();
-            this.gameController.addUpdaterGrid(this.boardView);
+            boardView = boardLoader.getController();
+            this.gameController.addUpdaterGrid(boardView);
+            this.preferencesController.addUpdaterGrid(boardView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -5,5 +5,6 @@ import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.view.UpdateViewInterface;
 
 public interface UpdateGridInterface extends UpdateViewInterface {
-    void updateGrid(Cell cell, Player player);
+    void updateGrid(Cell cell);
+    void updateGridWithNewPreferences(Cell[][] grid);
 }

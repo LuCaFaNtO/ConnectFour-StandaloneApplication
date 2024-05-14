@@ -31,10 +31,11 @@ public class GridModel implements GridBusinessInterface {
 
     @Override
     public void insertPiece(final int column) throws InsertPieceException, IllegalColumnException {
-        if(!grid.isColumnValid(column)) throw new IllegalColumnException("ERROR: THE COLUMN DOESN'T EXISTS");
+        if (!grid.isColumnValid(column)) throw new IllegalColumnException("ERROR: THE COLUMN DOESN'T EXISTS");
         this.lastRowInserted = grid.getRowFromColumn(column);
-        if(this.lastRowInserted == -1) throw new InsertPieceException("ERROR: THE COLUMN IS FULL OF PIECES!");
-        grid.insertPiece(this.lastRowInserted, column);
+        if (this.lastRowInserted == -1) throw new InsertPieceException("ERROR: THE COLUMN IS FULL OF PIECES!");
+        grid.insertPiece(this.lastRowInserted, column, turn ? player1 : player2);
+        turn = !turn;
     }
 
     @Override
@@ -63,14 +64,8 @@ public class GridModel implements GridBusinessInterface {
     }
 
     @Override
-    public Player getPlayer() {
-        Player currentPlayer;
-        if(turn)
-            currentPlayer = player1;
-        else
-            currentPlayer = player2;
-        turn = !turn;
-        return currentPlayer;
+    public Cell[][] getGrid() {
+        return grid.getGrid();
     }
 
     @Override

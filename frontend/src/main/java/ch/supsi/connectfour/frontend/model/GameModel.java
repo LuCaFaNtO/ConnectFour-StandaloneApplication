@@ -51,8 +51,7 @@ public class GameModel implements GameModelInterface, GridObserver, ColumnObserv
     @Override
     public void onGridUpdate() {
         Cell cell = gridController.getCell();
-        Player player = gridController.getPlayer();
-        boardView.updateGrid(cell, player);
+        boardView.updateGrid(cell);
     }
 
     @Override
