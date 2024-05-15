@@ -1,7 +1,9 @@
 package ch.supsi.connectfour.backend.application.preferences;
 
 import ch.supsi.connectfour.backend.application.GridBusinessInterface;
+import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalPreferencesException;
+import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.business.GridModel;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
@@ -14,10 +16,12 @@ public class PreferencesController implements PreferencesControllerInterface {
     private static PreferencesController instance;
     private final PreferencesBusinessInterface preferencesModel;
     private final GridBusinessInterface gridModel;
+    private final ObserverControllerInterface observerController;
 
     private PreferencesController() {
         this.preferencesModel = PreferencesModel.getInstance();
         this.gridModel = GridModel.getInstance();
+        this.observerController = ObserverController.getInstance();
     }
 
     public static PreferencesController getInstance() {
@@ -38,5 +42,6 @@ public class PreferencesController implements PreferencesControllerInterface {
     public void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException {
         preferencesModel.checkPiecesAreDifferent(pieces);
         gridModel.setNewPlayerPreferences(pieces);
+        observerController.notifyUpdatePreferences(gridModel.getGrid());
     }
 }

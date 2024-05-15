@@ -1,6 +1,7 @@
 package ch.supsi.connectfour.backend.application.observer;
 
 import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Player;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class ObserverController implements ObserverControllerInterface {
     private final List<GridObserver> gridObservers = new ArrayList<>();
     private final List<ColumnObserver> columnObservers = new ArrayList<>();
     private final List<FinishGameObserver> finishGameObservers = new ArrayList<>();
+    private final List<UpdatePreferencesObserver> updatePreferencesObservers = new ArrayList<>();
 
     private ObserverController() {
     }
@@ -51,6 +53,16 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
+    public void registerUpdaterPreferencesObserver(UpdatePreferencesObserver observer) {
+        updatePreferencesObservers.add(observer);
+    }
+
+    @Override
+    public void removeUpdatePreferencesObserver(UpdatePreferencesObserver observer) {
+        updatePreferencesObservers.remove(observer);
+    }
+
+    @Override
     public void notifyGridObserver() {
         for (GridObserver observer : gridObservers) {
             observer.onGridUpdate();
@@ -64,14 +76,20 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
-    public void notifyWin(String playerName) {
+    public void notifyWin(String playerName, String playerSymbol) {
         for(FinishGameObserver observer : finishGameObservers)
-            observer.win(playerName);
+            observer.win(playerName, playerSymbol);
     }
 
     @Override
     public void notifyGridFull() {
         for(FinishGameObserver observer : finishGameObservers)
             observer.gridFull();
+    }
+
+    @Override
+    public void notifyUpdatePreferences(Cell[][] grid) {
+        for(UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
+            updatePreferencesObserver.updateGridWithNewPreferences(grid);
     }
 }

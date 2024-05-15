@@ -3,6 +3,8 @@ package ch.supsi.connectfour.backend.application;
 import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
 import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
+import ch.supsi.connectfour.backend.application.observer.UpdatePreferencesObserver;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Player;
 
 public interface ObserverControllerInterface {
@@ -16,8 +18,12 @@ public interface ObserverControllerInterface {
     void registerFinishGameObserver(FinishGameObserver observer);
     void removeFinishGameObserver(FinishGameObserver observer);
 
+    void registerUpdaterPreferencesObserver(UpdatePreferencesObserver observer);
+    void removeUpdatePreferencesObserver(UpdatePreferencesObserver observer);
+
     void notifyGridObserver();
     void notifyColumnObserver(final int column);
-    void notifyWin(String playerName);
+    void notifyWin(String playerName, String playerSymbol);
     void notifyGridFull();
+    void notifyUpdatePreferences(Cell[][] grid);
 }
