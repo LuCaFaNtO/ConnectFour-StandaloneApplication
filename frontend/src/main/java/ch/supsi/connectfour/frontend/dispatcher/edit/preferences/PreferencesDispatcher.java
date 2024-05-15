@@ -2,19 +2,15 @@ package ch.supsi.connectfour.frontend.dispatcher.edit.preferences;
 
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
-import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,15 +24,15 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PreferencesDispatcher implements Initializable, UpdateLanguageInterface {
 
     private final PreferencesControllerInterface preferencesController;
     private final String fxmlLocation = "/preferences.fxml";
     private FXMLLoader preferencesFxmlloader;
+
+    Stage currentStage;
 
     @FXML
     public Circle circlePlayer1;
@@ -69,6 +65,7 @@ public class PreferencesDispatcher implements Initializable, UpdateLanguageInter
         addSupportedColors();
         addSupportedSymbols();
         preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
+        this.currentStage = null;
     }
 
     public void savePreferences(ActionEvent actionEvent) {
@@ -79,8 +76,9 @@ public class PreferencesDispatcher implements Initializable, UpdateLanguageInter
     }
 
     public void exit(ActionEvent actionEvent) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
+        if(currentStage == null)
+            currentStage = (Stage) closeButton.getScene().getWindow();
+        currentStage.close();
     }
 
     private void addSupportedColors() {
@@ -154,12 +152,12 @@ public class PreferencesDispatcher implements Initializable, UpdateLanguageInter
                 preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), preferencesFxmlloader.getResources());
             Parent preferencesDispatcher = preferencesFxmlloader.load();
             Scene scene = new Scene(preferencesDispatcher);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
+            currentStage = new Stage();
+            currentStage.initModality(Modality.APPLICATION_MODAL);
+            currentStage.setScene(scene);
+            currentStage.setResizable(false);
+            currentStage.initStyle(StageStyle.UNDECORATED);
+            currentStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
