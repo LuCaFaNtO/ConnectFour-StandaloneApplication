@@ -23,6 +23,7 @@ public class Grid {
     public void insertPiece(final int row, final int column, final Player player) {
         grid[row][column].setFill(true);
         grid[row][column].setPlayer(player);
+        System.out.println(player);
         modifiedCell = grid[row][column];
     }
 
@@ -53,5 +54,9 @@ public class Grid {
             if(!grid[0][i].isFill())
                 return false;
         return true;
+    }
+
+    public Cell getCell(final int row, final int col) {
+        return grid[row][col];
     }
 }

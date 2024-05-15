@@ -20,7 +20,7 @@ public class GridModel implements GridBusinessInterface {
     private Player player2;
 
     //TODO: Sistemare turni
-    private boolean turn = false;
+    private boolean turn = false; //false -> player1     true -> player2
 
     protected GridModel() {
         grid = new Grid();
@@ -35,11 +35,11 @@ public class GridModel implements GridBusinessInterface {
         if (!grid.isColumnValid(column)) throw new IllegalColumnException("ERROR: THE COLUMN DOESN'T EXISTS");
         this.lastRowInserted = grid.getRowFromColumn(column);
         if (this.lastRowInserted == -1) throw new InsertPieceException("ERROR: THE COLUMN IS FULL OF PIECES!");
-        grid.insertPiece(this.lastRowInserted, column, turn ? player1 : player2);
+        grid.insertPiece(this.lastRowInserted, column, getCurrentPlayer());
     }
 
     @Override
-    public void changeTurn(){
+    public void changeTurn() {
         turn = !turn;
     }
 
@@ -49,13 +49,115 @@ public class GridModel implements GridBusinessInterface {
     }
 
     @Override
-    public boolean checkWin() {
+    public boolean checkWin(int column) {
+        Player currentPlayer = getCurrentPlayer();
+        int cont;
+
+        //controllo in verticale
+        cont = 1;
+        for (int row = lastRowInserted + 1; row < Grid.NUM_ROWS - 1; row++) {
+            Player player = grid.getCell(row, column).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                System.out.println(cont);
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        for (int row = lastRowInserted - 1; row > 0; row--) {
+            Player player = grid.getCell(row, column).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+
+
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        //controllo in orizzontale
+        cont = 1;
+        for (int col = column + 1; col < Grid.NUM_COLS - 1; col++) {
+            Player player = grid.getCell(lastRowInserted, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        for (int col = column - 1; col > 0; col--) {
+            Player player = grid.getCell(lastRowInserted, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        //controllo in obliquo da sx basso a dx alto
+        cont = 1;
+        for (int col = column + 1, row = lastRowInserted - 1; col < Grid.NUM_COLS - 1 && row > 0; col++, row--) {
+            Player player = grid.getCell(row, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        for (int col = column - 1, row = lastRowInserted + 1; col > 0 && row < Grid.NUM_ROWS - 1; col--, row++) {
+            Player player = grid.getCell(row, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        //controllo in obliquo da sx alto a dx basso
+        cont = 1;
+        for (int col = column - 1, row = lastRowInserted - 1; col > 0 && row > 0; col--, row--) {
+            Player player = grid.getCell(row, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
+        for (int col = column + 1, row = lastRowInserted + 1; col < Grid.NUM_COLS - 1 && row < Grid.NUM_ROWS - 1; col++, row++) {
+            Player player = grid.getCell(row, col).getPlayer();
+            if (player != null && player.equals(currentPlayer)) {
+                cont++;
+                if (cont == 4) {
+                    return true;
+                }
+            } else {
+                break;
+            }
+        }
         return false;
     }
 
     @Override
     public Player getWinner() {
-        return turn ? player1 : player2;
+        return getCurrentPlayer();
     }
 
     @Override
@@ -91,5 +193,9 @@ public class GridModel implements GridBusinessInterface {
     @Override
     public Cell getCell() {
         return grid.getModifiedCell();
+    }
+
+    private Player getCurrentPlayer() {
+        return turn ? player1 : player2;
     }
 }

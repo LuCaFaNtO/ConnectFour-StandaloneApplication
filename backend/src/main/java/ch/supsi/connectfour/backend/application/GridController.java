@@ -39,18 +39,19 @@ public class GridController implements GridControllerInterface {
         gridModel.insertPiece(column);
 
         observerController.notifyGridObserver();
-        checkLastRow(column);
 
-        if(gridModel.checkWin())
+        checkLastRow(column); //TODO: ricontrollare questo metodo e gestirlo meglio per evitare che faccia i controlli successivi
+
+        if (gridModel.checkWin(column))
             observerController.notifyWin(gridModel.getWinner().getName());
-        else if(gridModel.isGridFull())
+        else if (gridModel.isGridFull())
             observerController.notifyGridFull();
 
         gridModel.changeTurn();
     }
 
     private void checkLastRow(final int column) {
-        if(gridModel.isLastRowInserted())
+        if (gridModel.isLastRowInserted())
             observerController.notifyColumnObserver(column);
     }
 

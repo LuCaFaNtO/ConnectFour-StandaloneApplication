@@ -18,6 +18,6 @@ public interface GridBusinessInterface {
     Cell[][] getGrid();
     void changeTurn();
     boolean isGridFull();
-    boolean checkWin();
+    boolean checkWin(int column);
     Player getWinner();
 }
