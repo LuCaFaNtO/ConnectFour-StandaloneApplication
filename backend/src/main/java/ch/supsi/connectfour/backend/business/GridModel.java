@@ -135,6 +135,11 @@ public class GridModel implements GridBusinessInterface {
     }
 
     @Override
+    public int getNumberOfGridsColumn() {
+        return Grid.NUM_COLS;
+    }
+
+    @Override
     public boolean isLastRowInserted() {
         return lastRowInserted == 0;
     }

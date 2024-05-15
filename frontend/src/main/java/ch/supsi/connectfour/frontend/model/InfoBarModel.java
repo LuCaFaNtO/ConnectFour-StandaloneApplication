@@ -29,8 +29,8 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver {
     }
 
     @Override
-    public void win(String playerName) {
-        infoBar.win(playerName);
+    public void win(String playerName, String playerSymbol) {
+        infoBar.win(playerName, playerSymbol);
     }
 
     @Override

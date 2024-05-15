@@ -20,4 +20,5 @@ public interface GridBusinessInterface {
     boolean isGridFull();
     boolean checkWin(int column);
     Player getWinner();
+    int getNumberOfGridsColumn();
 }
