@@ -2,17 +2,14 @@ package ch.supsi.connectfour.backend.application;
 
 import ch.supsi.connectfour.backend.application.exceptions.IllegalColumnException;
 import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
-import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.application.preferences.PreferencesBusinessInterface;
-import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.GridModel;
-import ch.supsi.connectfour.backend.application.observer.GridObserver;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.backend.business.preferences.PreferencesModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GridController implements GridControllerInterface {
@@ -42,9 +39,11 @@ public class GridController implements GridControllerInterface {
 
         checkLastRow(column); //TODO: ricontrollare questo metodo e gestirlo meglio per evitare che faccia i controlli successivi
 
-        if (gridModel.checkWin(column))
-            observerController.notifyWin(gridModel.getWinner().getName());
-        else if (gridModel.isGridFull())
+        if (gridModel.checkWin(column)) {
+            observerController.notifyWin(gridModel.getWinner().getPiece().getSymbol());
+            for (int i = 0; i < gridModel.getGrid()[0].length; i++)
+                observerController.notifyColumnObserver(i);
+        } else if (gridModel.isGridFull())
             observerController.notifyGridFull();
 
         gridModel.changeTurn();

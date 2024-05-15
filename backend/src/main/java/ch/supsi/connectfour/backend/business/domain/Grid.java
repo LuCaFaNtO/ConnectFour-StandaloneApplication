@@ -23,13 +23,12 @@ public class Grid {
     public void insertPiece(final int row, final int column, final Player player) {
         grid[row][column].setFill(true);
         grid[row][column].setPlayer(player);
-        System.out.println(player);
         modifiedCell = grid[row][column];
     }
 
     // returns the first free row giving the column
     public int getRowFromColumn(final int column) {
-        for (int row = NUM_ROWS-1; row >= 0; row--) {
+        for (int row = NUM_ROWS - 1; row >= 0; row--) {
             if (!grid[row][column].isFill()) {
                 return row;
             }
@@ -49,9 +48,9 @@ public class Grid {
         return grid;
     }
 
-    public boolean isFull(){
-        for(int i=0; i<NUM_COLS; i++)
-            if(!grid[0][i].isFill())
+    public boolean isFull() {
+        for (int i = 0; i < NUM_COLS; i++)
+            if (!grid[0][i].isFill())
                 return false;
         return true;
     }

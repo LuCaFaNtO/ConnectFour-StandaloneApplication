@@ -8,9 +8,7 @@ import ch.supsi.connectfour.backend.business.domain.Grid;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
@@ -55,103 +53,79 @@ public class GridModel implements GridBusinessInterface {
 
         //controllo in verticale
         cont = 1;
-        for (int row = lastRowInserted + 1; row < Grid.NUM_ROWS - 1; row++) {
+        for (int row = lastRowInserted + 1; row < Grid.NUM_ROWS; row++) {
             Player player = grid.getCell(row, column).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                System.out.println(cont);
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
-        for (int row = lastRowInserted - 1; row > 0; row--) {
-            Player player = grid.getCell(row, column).getPlayer();
-            if (player != null && player.equals(currentPlayer)) {
 
-
-                cont++;
-                if (cont == 4) {
-                    return true;
-                }
-            } else {
-                break;
-            }
-        }
-        //controllo in orizzontale
+        //controllo in orizzontale dx
         cont = 1;
-        for (int col = column + 1; col < Grid.NUM_COLS - 1; col++) {
+        for (int col = column + 1; col < Grid.NUM_COLS; col++) {
             Player player = grid.getCell(lastRowInserted, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
-        for (int col = column - 1; col > 0; col--) {
+        //controllo in orizzontale sx
+        for (int col = column - 1; col >= 0; col--) {
             Player player = grid.getCell(lastRowInserted, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
+
         //controllo in obliquo da sx basso a dx alto
         cont = 1;
-        for (int col = column + 1, row = lastRowInserted - 1; col < Grid.NUM_COLS - 1 && row > 0; col++, row--) {
+        for (int col = column + 1, row = lastRowInserted - 1; col < Grid.NUM_COLS && row >= 0; col++, row--) {
             Player player = grid.getCell(row, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
-        for (int col = column - 1, row = lastRowInserted + 1; col > 0 && row < Grid.NUM_ROWS - 1; col--, row++) {
+        for (int col = column - 1, row = lastRowInserted + 1; col >= 0 && row < Grid.NUM_ROWS; col--, row++) {
             Player player = grid.getCell(row, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
         //controllo in obliquo da sx alto a dx basso
         cont = 1;
-        for (int col = column - 1, row = lastRowInserted - 1; col > 0 && row > 0; col--, row--) {
+        for (int col = column - 1, row = lastRowInserted - 1; col >= 0 && row >= 0; col--, row--) {
             Player player = grid.getCell(row, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
-        for (int col = column + 1, row = lastRowInserted + 1; col < Grid.NUM_COLS - 1 && row < Grid.NUM_ROWS - 1; col++, row++) {
+        for (int col = column + 1, row = lastRowInserted + 1; col < Grid.NUM_COLS  && row < Grid.NUM_ROWS; col++, row++) {
             Player player = grid.getCell(row, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;
-                if (cont == 4) {
+                if (cont == 4)
                     return true;
-                }
-            } else {
+            } else
                 break;
-            }
         }
+
         return false;
     }
 
