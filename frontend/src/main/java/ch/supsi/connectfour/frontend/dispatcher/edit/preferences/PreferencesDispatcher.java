@@ -4,6 +4,7 @@ import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,10 +32,11 @@ import java.security.spec.RSAOtherPrimeInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PreferencesDispatcher implements Initializable {
+public class PreferencesDispatcher implements Initializable, UpdateLanguageInterface {
 
     private final PreferencesControllerInterface preferencesController;
     private final String fxmlLocation = "/preferences.fxml";
+    private FXMLLoader preferencesFxmlloader;
 
     @FXML
     public Circle circlePlayer1;
@@ -66,6 +68,7 @@ public class PreferencesDispatcher implements Initializable {
         setPreviewOfPlayers();
         addSupportedColors();
         addSupportedSymbols();
+        preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
     }
 
     public void savePreferences(ActionEvent actionEvent) {
@@ -147,7 +150,9 @@ public class PreferencesDispatcher implements Initializable {
 
     public void showPreferencesPage(){
         try {
-            Parent preferencesDispatcher = new FXMLLoader(getClass().getResource(fxmlLocation)).load();
+            if(preferencesFxmlloader.getRoot() != null)
+                preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), preferencesFxmlloader.getResources());
+            Parent preferencesDispatcher = preferencesFxmlloader.load();
             Scene scene = new Scene(preferencesDispatcher);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -158,5 +163,18 @@ public class PreferencesDispatcher implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
+        preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
+    }
+
+    @Override
+    public void changeSceneFx() {}
+
+    @Override
+    public FXMLLoader getFxmlLoader() {
+        return preferencesFxmlloader;
     }
 }

@@ -10,6 +10,8 @@ import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.ColumnsSelectorDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.view.InfoBarView;
@@ -35,11 +37,12 @@ public class MainFx extends Application {
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
     public static UpdateGridInterface boardView;
     private static UpdateLanguageInterface infoBarView;
+    private UpdateLanguageInterface preferencesDispatcher;
 
     private final GameControllerInterface gameController;
     private final LanguageControllerInterface languageController;
     private final AboutControllerInterface aboutController;
-    private final PreferencesController preferencesController;
+    private final PreferencesControllerInterface preferencesController;
     private final InfoBarControllerInterface infoBarController;
 
     public static Parent board;
@@ -70,6 +73,21 @@ public class MainFx extends Application {
                     primaryStage.close();
                 }
         );
+
+        //PREFERENCES DISPATCHER
+        try {
+            URL fxmlPreferencesDispatcher = getClass().getResource("/preferences.fxml");
+            if (fxmlPreferencesDispatcher == null) {
+                return;
+            }
+            FXMLLoader preferencesLoader = new FXMLLoader(fxmlPreferencesDispatcher, resourceBundle);
+            preferencesLoader.load();
+            preferencesDispatcher = preferencesLoader.getController();
+            this.preferencesController.addPreferencesView((PreferencesDispatcher) preferencesDispatcher);
+            this.languageController.addUpdaterLanguageList(preferencesDispatcher);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // ABOUT
         try {

@@ -3,6 +3,7 @@ package ch.supsi.connectfour.frontend.controller.edit.preferences;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.preferences.PreferencesModel;
 
@@ -44,5 +45,15 @@ public class PreferencesController implements PreferencesControllerInterface {
     @Override
     public void addUpdaterGrid(UpdateGridInterface updateGrid) {
         preferencesModel.addUpdaterGrid(updateGrid);
+    }
+
+    @Override
+    public void addPreferencesView(PreferencesDispatcher preferencesDispatcher) {
+        preferencesModel.addPreferencesDispatcher(preferencesDispatcher);
+    }
+
+    @Override
+    public void showPreferencesPage() {
+        preferencesModel.showPreferencesPage();
     }
 }

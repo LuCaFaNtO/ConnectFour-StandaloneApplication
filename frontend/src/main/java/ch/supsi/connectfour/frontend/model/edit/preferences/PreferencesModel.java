@@ -12,6 +12,7 @@ import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesModelInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
@@ -26,6 +27,7 @@ public class PreferencesModel implements PreferencesModelInterface, UpdatePrefer
     private final ErrorViewInterface errorView;
     private final ObserverControllerInterface observerController;
     private UpdateGridInterface updateGrid;
+    private PreferencesDispatcher preferencesDispatcher;
 
     private PreferencesModel() {
         this.preferencesController = PreferencesController.getInstance();
@@ -67,6 +69,16 @@ public class PreferencesModel implements PreferencesModelInterface, UpdatePrefer
     @Override
     public void addUpdaterGrid(UpdateGridInterface updateGrid) {
         this.updateGrid = updateGrid;
+    }
+
+    @Override
+    public void addPreferencesDispatcher(PreferencesDispatcher preferencesDispatcher) {
+        this.preferencesDispatcher = preferencesDispatcher;
+    }
+
+    @Override
+    public void showPreferencesPage() {
+        preferencesDispatcher.showPreferencesPage();
     }
 
     @Override

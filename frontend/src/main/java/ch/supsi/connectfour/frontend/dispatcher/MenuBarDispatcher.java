@@ -3,7 +3,9 @@ package ch.supsi.connectfour.frontend.dispatcher;
 import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import javafx.event.ActionEvent;
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
 public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable {
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
-    private final PreferencesDispatcher preferencesDispatcher;
+    private final PreferencesControllerInterface preferencesController;
 
     private final String fxmlLocation = "/menubar.fxml";
 
@@ -38,7 +40,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public MenuBarDispatcher() {
         aboutController = AboutController.getInstance();
         languageController = LanguageController.getInstance();
-        preferencesDispatcher = new PreferencesDispatcher();
+        preferencesController = PreferencesController.getInstance();
     }
 
     @Override
@@ -73,7 +75,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void editPreferences(ActionEvent actionEvent) {
-        preferencesDispatcher.showPreferencesPage();
+        preferencesController.showPreferencesPage();
     }
 
     public void showAbout(ActionEvent actionEvent) {

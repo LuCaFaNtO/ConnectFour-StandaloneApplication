@@ -13,4 +13,6 @@ public interface PreferencesControllerInterface {
     List<Player> getPlayers();
     void setNewPreferences(List<Piece> pieces);
     void addUpdaterGrid(UpdateGridInterface updateGrid);
+    void addPreferencesView(PreferencesDispatcher preferencesDispatcher);
+    void showPreferencesPage();
 }
