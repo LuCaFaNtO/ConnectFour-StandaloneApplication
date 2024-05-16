@@ -157,6 +157,11 @@ public class GridModel implements GridBusinessInterface {
     }
 
     @Override
+    public boolean arePlayersNull() {
+        return player1 == null && player2 == null;
+    }
+
+    @Override
     public void setNewPlayerPreferences(List<Piece> newPlayerPieces) {
         Piece newPiece1 = newPlayerPieces.get(0);
         Piece newPiece2 = newPlayerPieces.get(1);
@@ -178,5 +183,15 @@ public class GridModel implements GridBusinessInterface {
     @Override
     public Player getCurrentPlayer() {
         return turn ? player1 : player2;
+    }
+
+    @Override
+    public void initializeNewStructureForNewGame() {
+        grid.initializeNewGrid();
+    }
+
+    @Override
+    public void diceRollPerTurn() {
+        turn = new Random().nextBoolean();
     }
 }

@@ -1,5 +1,7 @@
 package ch.supsi.connectfour.frontend.model.statusGame;
 
+import ch.supsi.connectfour.backend.application.GridController;
+import ch.supsi.connectfour.backend.application.GridControllerInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 
 import java.util.ArrayList;
@@ -9,9 +11,11 @@ public class StatusGameModel implements StatusGameModelInterface {
     private static StatusGameModel instance = null;
     private StatusGame statusGame;
     private List<UpdateStatusViewInterface> updaterViewByChangeStatusList;
+    private GridControllerInterface gridController;
 
     private StatusGameModel() {
         this.updaterViewByChangeStatusList = new ArrayList<>();
+        this.gridController = GridController.getInstance();
     }
 
     public static StatusGameModel getInstance() {
@@ -58,11 +62,13 @@ public class StatusGameModel implements StatusGameModelInterface {
     private void preStartCondition() {
         for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusPreStart();
+        gridController.initializeNewStructureForNewGame();
     }
 
     private void gameStartCondition() {
         for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusGame();
+        gridController.diceRollPerTurn();
     }
 
     private void endStartCondition() {

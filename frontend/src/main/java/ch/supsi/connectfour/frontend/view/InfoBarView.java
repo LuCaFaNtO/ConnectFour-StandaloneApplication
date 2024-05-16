@@ -1,6 +1,7 @@
 package ch.supsi.connectfour.frontend.view;
 
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -9,7 +10,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InfoBarView implements Initializable, UpdateLanguageInterface {
+public class InfoBarView implements Initializable, UpdateLanguageInterface, UpdateStatusViewInterface {
     private final String fxmlLocation = "/infobar.fxml";
 
     @FXML
@@ -52,6 +53,7 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
 
     public void gridFull(){
         oldKeyUsed = "InfoBar.gridFull";
+        plusTextUsed = "";
         changeSceneFx();
     }
 
@@ -60,4 +62,17 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
         plusTextUsed = " " + playerName + " " + playerSymbol;
         changeSceneFx();
     }
+
+    @Override
+    public void updateViewStatusPreStart() {
+        oldKeyUsed = "InfoBar.infobar";
+        plusTextUsed = "";
+        changeSceneFx();
+    }
+
+    @Override
+    public void updateViewStatusGame() {}
+
+    @Override
+    public void updateViewStatusEnd() {}
 }

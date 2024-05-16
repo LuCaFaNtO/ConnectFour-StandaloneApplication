@@ -23,11 +23,11 @@ public class GridController implements GridControllerInterface {
         this.preferencesModel = PreferencesModel.getInstance();
         this.observerController = ObserverController.getInstance();
 
-        List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
+        /*List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
         this.gridModel.initializePlayers(defaultPlayerPieces);
 
         //TODO: Creare una funzione new Game che inzializza elementi di gioco e fa questo notify
-        this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
+        this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());*/
     }
 
     public static GridController getInstance() {
@@ -40,7 +40,7 @@ public class GridController implements GridControllerInterface {
 
         observerController.notifyGridObserver();
 
-        checkLastRow(column); //TODO: ricontrollare questo metodo e gestirlo meglio per evitare che faccia i controlli successivi
+        checkLastRow(column);
 
         if (gridModel.checkWin(column)) {
             observerController.notifyWin(gridModel.getWinner().getName(), gridModel.getWinner().getPiece().getSymbol());
@@ -66,11 +66,27 @@ public class GridController implements GridControllerInterface {
 
     @Override
     public List<Player> getPlayers() {
+        if(gridModel.arePlayersNull())
+            initializeNewStructureForNewGame();
         return gridModel.getPlayers();
     }
 
     @Override
     public Cell[][] getGrid() {
         return gridModel.getGrid();
+    }
+
+    @Override
+    public void initializeNewStructureForNewGame() {
+        this.gridModel.initializeNewStructureForNewGame();
+
+        List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
+        this.gridModel.initializePlayers(defaultPlayerPieces);
+    }
+
+    @Override
+    public void diceRollPerTurn() {
+        this.gridModel.diceRollPerTurn();
+        this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
     }
 }

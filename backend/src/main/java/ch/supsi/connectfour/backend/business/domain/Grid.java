@@ -8,11 +8,11 @@ public class Grid {
 
     public Grid() {
         this.grid = new Cell[NUM_ROWS][NUM_COLS];
-        initializeGrid();
+        initializeNewGrid();
         this.modifiedCell = null;
     }
 
-    private void initializeGrid() {
+    public void initializeNewGrid() {
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
                 grid[i][j] = new Cell(i, j);

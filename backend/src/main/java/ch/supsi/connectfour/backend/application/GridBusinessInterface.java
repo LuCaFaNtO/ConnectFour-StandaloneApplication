@@ -14,6 +14,7 @@ public interface GridBusinessInterface {
     boolean isLastRowInserted();
     void initializePlayers(List<Piece> defaultPlayerPieces);
     List<Player> getPlayers();
+    boolean arePlayersNull();
     void setNewPlayerPreferences(List<Piece> newPlayerPieces);
     Cell[][] getGrid();
     void changeTurn();
@@ -22,4 +23,6 @@ public interface GridBusinessInterface {
     Player getWinner();
     int getNumberOfGridsColumn();
     Player getCurrentPlayer();
+    void initializeNewStructureForNewGame();
+    void diceRollPerTurn();
 }

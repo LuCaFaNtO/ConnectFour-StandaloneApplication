@@ -185,6 +185,7 @@ public class MainFx extends Application {
             this.infoBarView = infoBarLoader.getController();
             this.languageController.addUpdaterLanguageList(infoBarView);
             this.infoBarController.addInfoBar((InfoBarView) infoBarView);
+            statusGameController.addUpdateViewByStatus((UpdateStatusViewInterface) infoBarView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

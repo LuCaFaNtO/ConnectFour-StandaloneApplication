@@ -14,4 +14,7 @@ public interface GridControllerInterface {
 
     List<Player> getPlayers();
     Cell[][] getGrid();
+
+    void initializeNewStructureForNewGame();
+    void diceRollPerTurn();
 }
