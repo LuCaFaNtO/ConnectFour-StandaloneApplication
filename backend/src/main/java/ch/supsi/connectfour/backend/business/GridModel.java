@@ -9,6 +9,7 @@ import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 
 import java.util.List;
+import java.util.Random;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
@@ -18,7 +19,7 @@ public class GridModel implements GridBusinessInterface {
     private Player player2;
 
     //TODO: Sistemare turni
-    private boolean turn = false; //false -> player1     true -> player2
+    private boolean turn = new Random().nextBoolean(); //false -> player1     true -> player2
 
     protected GridModel() {
         grid = new Grid();
@@ -174,7 +175,8 @@ public class GridModel implements GridBusinessInterface {
         return grid.getModifiedCell();
     }
 
-    private Player getCurrentPlayer() {
+    @Override
+    public Player getCurrentPlayer() {
         return turn ? player1 : player2;
     }
 }

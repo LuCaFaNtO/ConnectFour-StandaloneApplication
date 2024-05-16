@@ -3,13 +3,14 @@ package ch.supsi.connectfour.frontend.model;
 import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
+import ch.supsi.connectfour.backend.application.observer.TurnChangeObserverInterface;
 import ch.supsi.connectfour.frontend.controller.InfoBarModelInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGame;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
 import ch.supsi.connectfour.frontend.view.InfoBarView;
 
-public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver {
+public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver, TurnChangeObserverInterface {
     private static InfoBarModel instance = null;
     private InfoBarView infoBar;
     private final ObserverControllerInterface observerController;
@@ -20,6 +21,7 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver {
         this.observerController = ObserverController.getInstance();
 
         this.observerController.registerFinishGameObserver(this);
+        this.observerController.registerTurnChangeObserver(this);
     }
 
     public static InfoBarModel getInstance() {
@@ -45,5 +47,10 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver {
 
     private void setEndStatus(){
         statusGameModel.setStatusGame(StatusGame.END);
+    }
+
+    @Override
+    public void changeTurn(String playerName, String playerSymbol) {
+        infoBar.showTurn(playerName, playerSymbol);
     }
 }

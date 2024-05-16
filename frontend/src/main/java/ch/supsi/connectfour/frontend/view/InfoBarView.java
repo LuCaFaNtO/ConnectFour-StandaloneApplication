@@ -54,4 +54,10 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
         oldKeyUsed = "InfoBar.gridFull";
         changeSceneFx();
     }
+
+    public void showTurn(String playerName, String playerSymbol){
+        oldKeyUsed = "InfoBar.turn";
+        changeSceneFx();
+        infobar.setText(infobar.getText() + " " + playerName + " " + playerSymbol);
+    }
 }

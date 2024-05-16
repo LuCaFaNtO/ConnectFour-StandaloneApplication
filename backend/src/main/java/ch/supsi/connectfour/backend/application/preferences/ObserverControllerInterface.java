@@ -1,4 +1,4 @@
-package ch.supsi.connectfour.backend.application;
+package ch.supsi.connectfour.backend.application.preferences;
 
 import ch.supsi.connectfour.backend.application.observer.*;
 import ch.supsi.connectfour.backend.business.domain.Cell;

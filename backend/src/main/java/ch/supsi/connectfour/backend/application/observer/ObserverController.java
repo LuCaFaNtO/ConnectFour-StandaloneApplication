@@ -13,6 +13,7 @@ public class ObserverController implements ObserverControllerInterface {
     private final List<ColumnObserver> columnObservers = new ArrayList<>();
     private final List<FinishGameObserver> finishGameObservers = new ArrayList<>();
     private final List<UpdatePreferencesObserver> updatePreferencesObservers = new ArrayList<>();
+    private final List<TurnChangeObserverInterface> turnChangeObservers = new ArrayList<>();
 
     private ObserverController() {
     }
@@ -62,6 +63,16 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
+    public void registerTurnChangeObserver(TurnChangeObserverInterface observer) {
+        turnChangeObservers.add(observer);
+    }
+
+    @Override
+    public void removeTurnChangeObserver(TurnChangeObserverInterface observer) {
+        turnChangeObservers.remove(observer);
+    }
+
+    @Override
     public void notifyGridObserver() {
         for (GridObserver observer : gridObservers) {
             observer.onGridUpdate();
@@ -70,25 +81,31 @@ public class ObserverController implements ObserverControllerInterface {
 
     @Override
     public void notifyColumnObserver(final int column) {
-        for(ColumnObserver observer : columnObservers)
+        for (ColumnObserver observer : columnObservers)
             observer.disableColumn(column);
     }
 
     @Override
     public void notifyWin(String playerName, String playerSymbol) {
-        for(FinishGameObserver observer : finishGameObservers)
+        for (FinishGameObserver observer : finishGameObservers)
             observer.win(playerName, playerSymbol);
     }
 
     @Override
     public void notifyGridFull() {
-        for(FinishGameObserver observer : finishGameObservers)
+        for (FinishGameObserver observer : finishGameObservers)
             observer.gridFull();
     }
 
     @Override
     public void notifyUpdatePreferences(Cell[][] grid) {
-        for(UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
+        for (UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
             updatePreferencesObserver.updateGridWithNewPreferences(grid);
+    }
+
+    @Override
+    public void notifyChangeTurn(String playerName, String playerSymbol) {
+        for(TurnChangeObserverInterface turnChangeObserver : turnChangeObservers)
+            turnChangeObserver.changeTurn(playerName, playerSymbol);
     }
 }

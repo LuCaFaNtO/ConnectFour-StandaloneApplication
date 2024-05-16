@@ -25,6 +25,9 @@ public class GridController implements GridControllerInterface {
 
         List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
         this.gridModel.initializePlayers(defaultPlayerPieces);
+
+        //TODO: Creare una funzione new Game che inzializza elementi di gioco e fa questo notify
+        this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
     }
 
     public static GridController getInstance() {
@@ -45,9 +48,10 @@ public class GridController implements GridControllerInterface {
                 observerController.notifyColumnObserver(i);
         } else if (gridModel.isGridFull()){
             observerController.notifyGridFull();
+        } else{
+            gridModel.changeTurn();
+            observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
         }
-
-        gridModel.changeTurn();
     }
 
     private void checkLastRow(final int column) {

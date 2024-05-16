@@ -21,4 +21,5 @@ public interface GridBusinessInterface {
     boolean checkWin(int column);
     Player getWinner();
     int getNumberOfGridsColumn();
+    Player getCurrentPlayer();
 }
