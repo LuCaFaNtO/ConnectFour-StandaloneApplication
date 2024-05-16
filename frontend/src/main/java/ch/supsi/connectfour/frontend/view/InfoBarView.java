@@ -18,25 +18,25 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
     private FXMLLoader fxmlLoaderInfoBarView;
 
     private String oldKeyUsed;
-    private String oldTextUsed;
+    private String plusTextUsed;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fxmlLoaderInfoBarView = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
         this.oldKeyUsed = "InfoBar.infobar";
-        this.oldTextUsed = "";
+        this.plusTextUsed = "";
     }
 
     @Override
     public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
         String tempText = fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed);
-        oldTextUsed = infobar.getText().substring(tempText.length());
+        plusTextUsed = infobar.getText().substring(tempText.length());
         fxmlLoaderInfoBarView = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
     }
 
     @Override
     public void changeSceneFx() {
-        infobar.setText(fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed) + oldTextUsed);
+        infobar.setText(fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed) + plusTextUsed);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
 
     public void win(String playerName, String playerSymbol){
         oldKeyUsed = "InfoBar.win";
+        plusTextUsed = " " + playerName + " " + playerSymbol;
         changeSceneFx();
-        infobar.setText(infobar.getText() + " " + playerName + " " + playerSymbol);
     }
 
     public void gridFull(){
@@ -57,7 +57,7 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface {
 
     public void showTurn(String playerName, String playerSymbol){
         oldKeyUsed = "InfoBar.turn";
+        plusTextUsed = " " + playerName + " " + playerSymbol;
         changeSceneFx();
-        infobar.setText(infobar.getText() + " " + playerName + " " + playerSymbol);
     }
 }
