@@ -5,7 +5,6 @@ import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
 import ch.supsi.connectfour.backend.application.observer.UpdatePreferencesObserver;
 import ch.supsi.connectfour.backend.business.domain.Cell;
-import ch.supsi.connectfour.backend.business.domain.Player;
 
 public interface ObserverControllerInterface {
     void registerGridObserver(GridObserver observer);

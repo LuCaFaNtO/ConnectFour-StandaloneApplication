@@ -1,8 +1,6 @@
 package ch.supsi.connectfour.frontend.model.statusGame;
 
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
-import ch.supsi.connectfour.frontend.dispatcher.MenuBarDispatcher;
-import ch.supsi.connectfour.frontend.dispatcher.PreStartDispatcher;
 
 import java.util.ArrayList;
 import java.util.List;

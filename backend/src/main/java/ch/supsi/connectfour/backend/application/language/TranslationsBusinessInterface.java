@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.backend.application.language;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
 

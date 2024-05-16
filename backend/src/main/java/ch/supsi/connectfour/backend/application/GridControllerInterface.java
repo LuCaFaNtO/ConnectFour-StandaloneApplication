@@ -2,8 +2,6 @@ package ch.supsi.connectfour.backend.application;
 
 import ch.supsi.connectfour.backend.application.exceptions.IllegalColumnException;
 import ch.supsi.connectfour.backend.application.exceptions.InsertPieceException;
-import ch.supsi.connectfour.backend.application.observer.ColumnObserver;
-import ch.supsi.connectfour.backend.application.observer.GridObserver;
 import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Player;
 

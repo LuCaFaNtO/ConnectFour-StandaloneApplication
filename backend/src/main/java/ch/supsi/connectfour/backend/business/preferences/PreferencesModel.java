@@ -5,7 +5,9 @@ import ch.supsi.connectfour.backend.application.preferences.PreferencesBusinessI
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.dataaccess.preferences.PreferencesDataAccess;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class PreferencesModel implements PreferencesBusinessInterface {
     private static PreferencesModel instance = null;

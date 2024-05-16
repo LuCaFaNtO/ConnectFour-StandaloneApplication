@@ -2,7 +2,6 @@ package ch.supsi.connectfour.backend.application.observer;
 
 import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.business.domain.Cell;
-import ch.supsi.connectfour.backend.business.domain.Player;
 
 import java.util.ArrayList;
 import java.util.List;

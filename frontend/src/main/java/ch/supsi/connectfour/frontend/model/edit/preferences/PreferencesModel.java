@@ -16,7 +16,6 @@ import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDisp
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
-import javafx.event.ActionEvent;
 
 import java.util.List;
 import java.util.Set;
@@ -62,7 +61,7 @@ public class PreferencesModel implements PreferencesModelInterface, UpdatePrefer
     public void setNewPreferences(List<Piece> pieces) {
         try {
             preferencesController.setNewPreferences(pieces);
-            preferencesDispatcher.exit(new ActionEvent());
+            preferencesDispatcher.exit();
         } catch (IllegalPreferencesException e) {
             errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
         }

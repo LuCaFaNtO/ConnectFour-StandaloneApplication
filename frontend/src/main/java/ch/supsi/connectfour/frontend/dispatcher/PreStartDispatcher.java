@@ -3,11 +3,8 @@ package ch.supsi.connectfour.frontend.dispatcher;
 import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
-import ch.supsi.connectfour.frontend.view.InfoBarView;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -41,7 +38,7 @@ public class PreStartDispatcher implements Initializable, UpdateStatusViewInterf
         }
     }
 
-    public void startNewGame(MouseEvent mouseEvent) {
+    public void startNewGame() {
         statusGameController.setStatusToGame();
     }
 

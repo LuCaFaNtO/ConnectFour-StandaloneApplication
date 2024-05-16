@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.model.statusGame.StatusGame;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 
 public interface StatusGameControllerInterface {

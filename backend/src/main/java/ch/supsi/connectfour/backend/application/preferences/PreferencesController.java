@@ -6,7 +6,6 @@ import ch.supsi.connectfour.backend.application.exceptions.IllegalPreferencesExc
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.business.GridModel;
 import ch.supsi.connectfour.backend.business.domain.Piece;
-import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.backend.business.preferences.PreferencesModel;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.model.edit.language;
 
-import ch.supsi.connectfour.backend.application.language.TranslationsControllerInterface;
 import ch.supsi.connectfour.backend.application.language.TranslationsController;
+import ch.supsi.connectfour.backend.application.language.TranslationsControllerInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageModelInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;

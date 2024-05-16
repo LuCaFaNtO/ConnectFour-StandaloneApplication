@@ -3,7 +3,10 @@ package ch.supsi.connectfour.backend.business.language;
 import ch.supsi.connectfour.backend.application.language.TranslationsBusinessInterface;
 import ch.supsi.connectfour.backend.dataaccess.language.TranslationsPropertiesDataAccess;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public class TranslationsModel implements TranslationsBusinessInterface {
     private static TranslationsModel instance = null;

@@ -1,7 +1,6 @@
 package ch.supsi.connectfour.frontend.controller;
 
 import ch.supsi.connectfour.frontend.model.InfoBarModel;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.view.InfoBarView;
 
 public class InfoBarController implements InfoBarControllerInterface{

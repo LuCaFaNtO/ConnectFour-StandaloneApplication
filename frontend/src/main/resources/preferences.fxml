@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-
 <AnchorPane prefHeight="344.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="620.0">

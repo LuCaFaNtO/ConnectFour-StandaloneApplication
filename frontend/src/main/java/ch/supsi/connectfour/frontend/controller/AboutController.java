@@ -3,7 +3,6 @@ package ch.supsi.connectfour.frontend.controller;
 import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
 import ch.supsi.connectfour.frontend.model.AboutModel;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
-import ch.supsi.connectfour.frontend.view.UpdateViewInterface;
 
 public class AboutController implements AboutControllerInterface {
 

@@ -1,7 +1,6 @@
 package ch.supsi.connectfour.backend.business.language;
 
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 

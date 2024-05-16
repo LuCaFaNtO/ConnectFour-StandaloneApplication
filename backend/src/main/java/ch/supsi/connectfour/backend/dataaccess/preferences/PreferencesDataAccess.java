@@ -1,12 +1,9 @@
 package ch.supsi.connectfour.backend.dataaccess.preferences;
 
-import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.preferences.PreferencesDataAccessInterface;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;

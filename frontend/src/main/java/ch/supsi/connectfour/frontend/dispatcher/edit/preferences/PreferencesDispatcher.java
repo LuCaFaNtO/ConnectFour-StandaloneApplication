@@ -4,7 +4,6 @@ import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +23,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class PreferencesDispatcher implements Initializable, UpdateLanguageInterface {
 
@@ -68,14 +68,14 @@ public class PreferencesDispatcher implements Initializable, UpdateLanguageInter
         this.currentStage = null;
     }
 
-    public void savePreferences(ActionEvent actionEvent) {
+    public void savePreferences() {
         Piece newPiece1 = new Piece(circlePlayer1.getFill().toString(), symbolPlayer1.getText());
         Piece newPiece2 = new Piece(circlePlayer2.getFill().toString(), symbolPlayer2.getText());
 
         preferencesController.setNewPreferences(List.of(newPiece1, newPiece2));
     }
 
-    public void exit(ActionEvent actionEvent) {
+    public void exit() {
         if(currentStage == null)
             currentStage = (Stage) closeButton.getScene().getWindow();
         currentStage.close();

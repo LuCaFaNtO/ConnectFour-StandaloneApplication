@@ -7,7 +7,6 @@ import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesCont
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import javafx.event.ActionEvent;
@@ -19,7 +18,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -70,40 +69,40 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         menuItemList = List.of(newMenuItem, saveMenuItem, saveasMenuItem, preferencesMenuItem);
     }
 
-    public void newGame(ActionEvent actionEvent) {
+    public void newGame() {
         if(statusGameController.isInStateGame());
             //TODO:: gestire salvataggio partita in corso
         statusGameController.setStatusToPreStart();
     }
 
-    public void openGame(ActionEvent actionEvent) {
+    public void openGame() {
         // decode this event
         // delegate it to a suitable controller
     }
 
-    public void saveGame(ActionEvent actionEvent) {
+    public void saveGame() {
         // decode this event
         // delegate it to a suitable controller
     }
 
-    public void saveGameAs(ActionEvent actionEvent) {
+    public void saveGameAs() {
         // decode this event
         // delegate it to a suitable controller
     }
 
-    public void quit(ActionEvent actionEvent) {
+    public void quit() {
         MainFx.quit();
     }
 
-    public void editPreferences(ActionEvent actionEvent) {
+    public void editPreferences() {
         preferencesController.showPreferencesPage();
     }
 
-    public void showAbout(ActionEvent actionEvent) {
+    public void showAbout() {
         aboutController.showAbout();
     }
 
-    public void showHelp(ActionEvent actionEvent) {
+    public void showHelp() {
         try {
             Desktop.getDesktop().browse(new URI(fxmlLoaderMenuBar.getResources().getString("Help.link")));
         } catch (URISyntaxException | IOException e) {
