@@ -6,6 +6,7 @@ import java.util.Set;
 
 public interface LanguageModelInterface {
     void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage);
+    void removeUpdaterLanguageList(UpdateLanguageInterface updaterLanguage);
     void changeLanguage(final String language);
     Set<String> getSupportedLanguages();
 }

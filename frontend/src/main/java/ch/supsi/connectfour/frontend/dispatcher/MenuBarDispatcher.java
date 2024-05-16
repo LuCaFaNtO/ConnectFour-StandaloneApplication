@@ -4,54 +4,76 @@ import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
+import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable {
+public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable, UpdateStatusViewInterface {
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
     private final PreferencesControllerInterface preferencesController;
+    private final StatusGameControllerInterface statusGameController;
 
     private final String fxmlLocation = "/menubar.fxml";
+    private FXMLLoader fxmlLoaderMenuBar;
 
+    private static List<MenuItem> menuItemList;
+
+    @FXML
+    public MenuBar containerMenuBar;
     @FXML
     public Menu languagesMenu;
 
-    private FXMLLoader fxmlLoaderMenuBar;
+    @FXML
+    public MenuItem newMenuItem;
+    @FXML
+    public MenuItem saveMenuItem;
+    @FXML
+    public MenuItem saveasMenuItem;
+    @FXML
+    public MenuItem preferencesMenuItem;
+
 
     public MenuBarDispatcher() {
         aboutController = AboutController.getInstance();
         languageController = LanguageController.getInstance();
         preferencesController = PreferencesController.getInstance();
+        statusGameController = StatusGameController.getInstance();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
         addSupportedLanguages();
+        menuItemList = List.of(newMenuItem, saveMenuItem, saveasMenuItem, preferencesMenuItem);
     }
 
     public void newGame(ActionEvent actionEvent) {
-        // decode this event
-        // delegate it to a suitable controller
+        if(statusGameController.isInStateGame());
+            //TODO:: gestire salvataggio partita in corso
+        statusGameController.setStatusToPreStart();
     }
 
     public void openGame(ActionEvent actionEvent) {
@@ -70,8 +92,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void quit(ActionEvent actionEvent) {
-        // decode this event
-        // delegate it to a suitable controller
+        MainFx.quit();
     }
 
     public void editPreferences(ActionEvent actionEvent) {
@@ -115,11 +136,79 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
 
     @Override
     public void changeSceneFx() {
-        MainFx.updateSceneMenuBarWithNewLanguage();
+        //Metodo automatico -> Problema che il load() (nel mainFx) crea nuovo MenuBarDispatcher,
+        //Quindi i campi @FXML che cambiano il disable non sono gli stessi di quelli presentati sulla schermata
+        //MainFx.updateSceneMenuBarWithNewLanguage();
+
+        //Metodo "manuale" senza fare il load ogni volta (funzionante)
+        for(Menu menu : containerMenuBar.getMenus()){
+            setNewText(menu);
+            for(MenuItem menuItem : menu.getItems())
+                if(!(menuItem instanceof SeparatorMenuItem))
+                    setNewText(menuItem);
+
+        }
+
+    }
+
+    private void setNewText(MenuItem menuItem){
+        String text = fxmlLoaderMenuBar.getResources().getString("MenuBar." + menuItem.getId());
+        menuItem.setText(text);
     }
 
     @Override
     public FXMLLoader getFxmlLoader() {
         return fxmlLoaderMenuBar;
+    }
+
+    public void disableNewMenuItems(){
+        newMenuItem.setDisable(true);
+    }
+
+    public void enableNewMenuItems(){
+        newMenuItem.setDisable(false);
+    }
+
+    public void disableSaveMenuItems(){
+        saveMenuItem.setDisable(true);
+    }
+
+    public void enableSaveMenuItems(){
+        saveMenuItem.setDisable(false);
+    }
+
+    public void disableSaveAsMenuItems(){
+        saveasMenuItem.setDisable(true);
+    }
+
+    public void enableSaveAsMenuItems(){
+        saveasMenuItem.setDisable(false);
+    }
+
+    public void disablePreferencesMenuItems(){
+        preferencesMenuItem.setDisable(true);
+    }
+
+    public void enablePreferencesMenuItems(){
+        preferencesMenuItem.setDisable(false);
+    }
+
+    @Override
+    public void updateViewStatusPreStart() {
+        disableNewMenuItems();
+        disableSaveMenuItems();
+        disableSaveAsMenuItems();
+    }
+
+    @Override
+    public void updateViewStatusGame() {
+        menuItemList.forEach(menuItem -> menuItem.setDisable(false));
+    }
+
+    @Override
+    public void updateViewStatusEnd() {
+        disableSaveMenuItems();
+        disableSaveAsMenuItems();
+        disablePreferencesMenuItems();
     }
 }

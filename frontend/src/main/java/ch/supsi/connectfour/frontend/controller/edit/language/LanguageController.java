@@ -24,6 +24,11 @@ public class LanguageController implements LanguageControllerInterface {
     }
 
     @Override
+    public void removeUpdaterLanguageList(UpdateLanguageInterface updaterLanguage) {
+        languageModel.removeUpdaterLanguageList(updaterLanguage);
+    }
+
+    @Override
     public void changeLanguage(final String language) {
         languageModel.changeLanguage(language);
     }
