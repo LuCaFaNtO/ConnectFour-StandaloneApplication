@@ -41,6 +41,6 @@ public class PreferencesController implements PreferencesControllerInterface {
     public void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException {
         preferencesModel.checkPiecesAreDifferent(pieces);
         gridModel.setNewPlayerPreferences(pieces);
-        observerController.notifyUpdatePreferences(gridModel.getGrid());
+        observerController.notifyAllGridUpdate(gridModel.getGrid());
     }
 }

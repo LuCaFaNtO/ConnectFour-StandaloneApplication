@@ -38,7 +38,7 @@ public class GridController implements GridControllerInterface {
     public void insertPiece(final int column) throws InsertPieceException, IllegalColumnException {
         gridModel.insertPiece(column);
 
-        observerController.notifyGridObserver();
+        observerController.notifyOnGridObserver();
 
         checkLastRow(column);
 
@@ -67,7 +67,7 @@ public class GridController implements GridControllerInterface {
     @Override
     public List<Player> getPlayers() {
         if(gridModel.arePlayersNull())
-            initializeNewStructureForNewGame();
+            this.gridModel.initializePlayers(this.preferencesModel.getDefaultPieces());
         return gridModel.getPlayers();
     }
 
@@ -88,5 +88,6 @@ public class GridController implements GridControllerInterface {
     public void diceRollPerTurn() {
         this.gridModel.diceRollPerTurn();
         this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
+        this.observerController.notifyEmptyGrid(gridModel.getGrid()[0].length, gridModel.getGrid().length);
     }
 }

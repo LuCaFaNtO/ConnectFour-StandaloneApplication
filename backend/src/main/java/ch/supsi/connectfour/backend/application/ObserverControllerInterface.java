@@ -20,10 +20,11 @@ public interface ObserverControllerInterface {
     void registerTurnChangeObserver(TurnChangeObserverInterface observer);
     void removeTurnChangeObserver(TurnChangeObserverInterface observer);
 
-    void notifyGridObserver();
+    void notifyOnGridObserver();
     void notifyColumnObserver(final int column);
     void notifyWin(String playerName, String playerSymbol);
     void notifyGridFull();
-    void notifyUpdatePreferences(Cell[][] grid);
+    void notifyAllGridUpdate(Cell[][] grid);
     void notifyChangeTurn(String playerName, String playerSymbol);
+    void notifyEmptyGrid(int col, int row);
 }

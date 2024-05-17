@@ -49,6 +49,17 @@ public class BoardView implements UpdateGridInterface, Initializable {
                     updateCell(cell);
     }
 
+    @Override
+    public void updateEmptyGrid(int col, int row) {
+        for (int i = 0; i < col * row; i++) {
+            System.out.println(i);
+            Circle circle = (Circle) grid.getChildren().stream().map(node -> (AnchorPane) node).toList().get(i).getChildren().get(0);
+            circle.setFill(Color.valueOf("1f64ff"));
+            Label label = (Label) grid.getChildren().stream().map(node -> (AnchorPane) node).toList().get(i).getChildren().get(1);
+            label.setText("");
+        }
+    }
+
     private void updateCell(Cell cell) {
         AnchorPane anchorPane = grid.getChildren().stream()
                 .filter(node -> GridPane.getRowIndex(node) == cell.getRow() && GridPane.getColumnIndex(node) == cell.getCol())

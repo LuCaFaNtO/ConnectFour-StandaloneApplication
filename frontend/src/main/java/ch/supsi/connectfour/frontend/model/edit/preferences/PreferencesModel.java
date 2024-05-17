@@ -86,4 +86,9 @@ public class PreferencesModel implements PreferencesModelInterface, UpdatePrefer
     public void updateGridWithNewPreferences(Cell[][] grid) {
         updateGrid.updateGridWithNewPreferences(grid);
     }
+
+    @Override
+    public void updateEmptyGrid(int col, int row) {
+        updateGrid.updateEmptyGrid(col, row);
+    }
 }

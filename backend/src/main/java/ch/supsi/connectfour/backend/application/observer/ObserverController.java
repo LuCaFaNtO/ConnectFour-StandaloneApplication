@@ -73,7 +73,7 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
-    public void notifyGridObserver() {
+    public void notifyOnGridObserver() {
         for (GridObserver observer : gridObservers) {
             observer.onGridUpdate();
         }
@@ -98,7 +98,7 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
-    public void notifyUpdatePreferences(Cell[][] grid) {
+    public void notifyAllGridUpdate(Cell[][] grid) {
         for (UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
             updatePreferencesObserver.updateGridWithNewPreferences(grid);
     }
@@ -107,5 +107,11 @@ public class ObserverController implements ObserverControllerInterface {
     public void notifyChangeTurn(String playerName, String playerSymbol) {
         for(TurnChangeObserverInterface turnChangeObserver : turnChangeObservers)
             turnChangeObserver.changeTurn(playerName, playerSymbol);
+    }
+
+    @Override
+    public void notifyEmptyGrid(int col, int row) {
+        for (UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
+            updatePreferencesObserver.updateEmptyGrid(col, row);
     }
 }

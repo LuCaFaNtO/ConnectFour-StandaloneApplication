@@ -6,4 +6,5 @@ import ch.supsi.connectfour.frontend.view.UpdateViewInterface;
 public interface UpdateGridInterface extends UpdateViewInterface {
     void updateGrid(Cell cell);
     void updateGridWithNewPreferences(Cell[][] grid);
+    void updateEmptyGrid(int col, int row);
 }
