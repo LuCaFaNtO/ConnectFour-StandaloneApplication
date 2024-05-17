@@ -17,8 +17,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.stage.FileChooser;
 
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -81,8 +85,24 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void saveGame() {
-        // decode this event
-        // delegate it to a suitable controller
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("game.json");
+        File file = fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
+        if (file != null) {
+            saveTextToFile("Hello World", file);
+        }
+    }
+
+    private void saveTextToFile(String content, File file) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content);
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void saveGameAs() {
