@@ -80,9 +80,15 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
-    public void notifyColumnObserver(final int column) {
+    public void notifyDisableColumnObserver(final int column) {
         for (ColumnObserver observer : columnObservers)
             observer.disableColumn(column);
+    }
+
+    @Override
+    public void notifyEnableColumnObserver(int column) {
+        for (ColumnObserver observer : columnObservers)
+            observer.enableColumn(column);
     }
 
     @Override

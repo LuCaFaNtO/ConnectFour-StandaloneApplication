@@ -45,4 +45,15 @@ public class ColumnsSelectorDispatcher implements UpdateViewInterface {
         button.setDisable(true);
         button.setText("✖");
     }
+    public void enableColumnButton(final int column) {
+        AnchorPane anchorPane = gridPane.getChildren().stream()
+                .filter(node -> GridPane.getColumnIndex(node) == column)
+                .map(node -> (AnchorPane) node)
+                .findFirst()
+                .orElseThrow();
+
+        Button button = (Button) anchorPane.getChildren().get(0);
+        button.setDisable(false);
+        button.setText("▼");
+    }
 }

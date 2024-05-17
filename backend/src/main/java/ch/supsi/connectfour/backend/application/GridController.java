@@ -45,7 +45,7 @@ public class GridController implements GridControllerInterface {
         if (gridModel.checkWin(column)) {
             observerController.notifyWin(gridModel.getWinner().getName(), gridModel.getWinner().getPiece().getSymbol());
             for (int i = 0; i < gridModel.getNumberOfGridsColumn(); i++)
-                observerController.notifyColumnObserver(i);
+                observerController.notifyDisableColumnObserver(i);
         } else if (gridModel.isGridFull()){
             observerController.notifyGridFull();
         } else{
@@ -56,7 +56,7 @@ public class GridController implements GridControllerInterface {
 
     private void checkLastRow(final int column) {
         if (gridModel.isLastRowInserted())
-            observerController.notifyColumnObserver(column);
+            observerController.notifyDisableColumnObserver(column);
     }
 
     @Override
@@ -88,6 +88,12 @@ public class GridController implements GridControllerInterface {
     public void diceRollPerTurn() {
         this.gridModel.diceRollPerTurn();
         this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
-        this.observerController.notifyEmptyGrid(gridModel.getGrid()[0].length, gridModel.getGrid().length);
+        notifyEmptyGrid();
+    }
+
+    private void notifyEmptyGrid() {
+        this.observerController.notifyEmptyGrid(gridModel.getNumberOfGridsColumn(), gridModel.getGrid().length);
+        for (int i = 0; i < gridModel.getNumberOfGridsColumn(); i++)
+            this.observerController.notifyEnableColumnObserver(i);
     }
 }

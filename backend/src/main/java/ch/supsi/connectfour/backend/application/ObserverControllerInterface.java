@@ -21,7 +21,8 @@ public interface ObserverControllerInterface {
     void removeTurnChangeObserver(TurnChangeObserverInterface observer);
 
     void notifyOnGridObserver();
-    void notifyColumnObserver(final int column);
+    void notifyDisableColumnObserver(final int column);
+    void notifyEnableColumnObserver(final int column);
     void notifyWin(String playerName, String playerSymbol);
     void notifyGridFull();
     void notifyAllGridUpdate(Cell[][] grid);

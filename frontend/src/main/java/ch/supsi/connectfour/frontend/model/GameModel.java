@@ -61,4 +61,9 @@ public class GameModel implements GameModelInterface, GridObserver, ColumnObserv
     public void disableColumn(final int column) {
         columnSelectorDispatcher.disableColumnButton(column);
     }
+
+    @Override
+    public void enableColumn(int column) {
+        columnSelectorDispatcher.enableColumnButton(column);
+    }
 }
