@@ -13,10 +13,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
@@ -43,6 +47,8 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     private FXMLLoader fxmlLoaderMenuBar;
 
     private static List<MenuItem> menuItemList;
+
+    private KeyCombination ctrlS;
 
     @FXML
     public MenuBar containerMenuBar;
@@ -71,6 +77,14 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
         addSupportedLanguages();
         menuItemList = List.of(newMenuItem, saveMenuItem, saveasMenuItem, preferencesMenuItem);
+
+        ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+
+        containerMenuBar.sceneProperty()
+                .addListener((observable, oldScene, newScene) -> {
+                    if(newScene != null)
+                        disableSaveShortcut(newScene);
+                });
     }
 
     public void newGame() {
@@ -212,16 +226,28 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         preferencesMenuItem.setDisable(false);
     }
 
+    private void enableSaveShortcut(Scene scene){
+        scene.getAccelerators().put(ctrlS, this::saveGame);
+    }
+
+    private void disableSaveShortcut(Scene scene){
+        scene.getAccelerators().remove(ctrlS);
+    }
+
     @Override
     public void updateViewStatusPreStart() {
         disableNewMenuItems();
         disableSaveMenuItems();
         disableSaveAsMenuItems();
+        Scene scene = containerMenuBar.getScene();
+        if(scene != null)
+            disableSaveShortcut(containerMenuBar.getScene());
     }
 
     @Override
     public void updateViewStatusGame() {
         menuItemList.forEach(menuItem -> menuItem.setDisable(false));
+        enableSaveShortcut(containerMenuBar.getScene());
     }
 
     @Override
@@ -229,5 +255,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         disableSaveMenuItems();
         disableSaveAsMenuItems();
         disablePreferencesMenuItems();
+        disableSaveShortcut(containerMenuBar.getScene());
     }
 }
