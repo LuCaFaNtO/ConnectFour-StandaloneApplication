@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class AboutView implements Initializable, UpdateLanguageInterface {
     private final String fxmlLocation = "/aboutWindow.fxml";
     private FXMLLoader fxmlLoaderAboutView;
+
     @FXML
     public Label version;
     @FXML
