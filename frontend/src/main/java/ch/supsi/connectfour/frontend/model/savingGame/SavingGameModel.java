@@ -4,6 +4,7 @@ import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
 import ch.supsi.connectfour.backend.application.savingGame.SavingGameController;
 import ch.supsi.connectfour.backend.application.savingGame.SavingGameControllerInterface;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameModelInterface;
+import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,8 @@ public class SavingGameModel implements SavingGameModelInterface {
     private static SavingGameModel instance = null;
     private final SavingGameControllerInterface savingGameController;
     private File currentGameSavingFile;
+
+    private SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher;
 
     private SavingGameModel() {
         this.savingGameController = SavingGameController.getInstance();
@@ -40,5 +43,15 @@ public class SavingGameModel implements SavingGameModelInterface {
     @Override
     public boolean savingGameFileExists() {
         return currentGameSavingFile != null;
+    }
+
+    @Override
+    public void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher) {
+        this.saveGameChoicePopUpDispatcher = saveGameChoicePopUpDispatcher;
+    }
+
+    @Override
+    public void showSaveGamePopUp() {
+        saveGameChoicePopUpDispatcher.showSaveChoicePopUp();
     }
 }

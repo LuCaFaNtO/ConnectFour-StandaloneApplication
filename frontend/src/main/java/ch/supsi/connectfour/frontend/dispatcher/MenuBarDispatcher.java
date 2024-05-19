@@ -22,7 +22,9 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.BufferedWriter;
@@ -91,8 +93,8 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void newGame() {
-        if (statusGameController.isInStateGame()) ;
-        //saveGame();
+        if (statusGameController.isInStateGame())
+            savingGameController.showSaveGamePopUp();
         statusGameController.setStatusToPreStart();
     }
 

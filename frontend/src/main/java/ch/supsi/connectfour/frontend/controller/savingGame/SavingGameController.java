@@ -1,5 +1,6 @@
 package ch.supsi.connectfour.frontend.controller.savingGame;
 
+import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.SavingGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.savingGame.SavingGameModel;
 
@@ -30,5 +31,15 @@ public class SavingGameController implements SavingGameControllerInterface {
     @Override
     public boolean savingGameFileExists() {
         return savingGameModel.savingGameFileExists();
+    }
+
+    @Override
+    public void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher) {
+        savingGameModel.addSavingGamePopUp(saveGameChoicePopUpDispatcher);
+    }
+
+    @Override
+    public void showSaveGamePopUp() {
+        savingGameModel.showSaveGamePopUp();
     }
 }
