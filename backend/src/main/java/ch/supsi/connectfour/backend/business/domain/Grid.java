@@ -20,6 +20,10 @@ public class Grid {
         }
     }
 
+    public void setNewGrid(Cell[][] newGrid) {
+        grid = newGrid;
+    }
+
     public void insertPiece(final int row, final int column, final Player player) {
         grid[row][column].setFill(true);
         grid[row][column].setPlayer(player);

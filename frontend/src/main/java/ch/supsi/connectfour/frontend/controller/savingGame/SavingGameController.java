@@ -24,6 +24,11 @@ public class SavingGameController implements SavingGameControllerInterface {
     }
 
     @Override
+    public void loadGame() {
+        savingGameModel.loadGame();
+    }
+
+    @Override
     public void setNewSavingGameFile(File file) {
         savingGameModel.setNewSavingGameFile(file);
     }
@@ -31,6 +36,11 @@ public class SavingGameController implements SavingGameControllerInterface {
     @Override
     public boolean savingGameFileExists() {
         return savingGameModel.savingGameFileExists();
+    }
+
+    @Override
+    public boolean isAlreadySave() {
+        return savingGameModel.isAlreadySave();
     }
 
     @Override

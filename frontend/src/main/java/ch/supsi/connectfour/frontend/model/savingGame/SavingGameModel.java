@@ -1,23 +1,34 @@
 package ch.supsi.connectfour.frontend.model.savingGame;
 
+import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
+import ch.supsi.connectfour.backend.application.observer.GridObserver;
+import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.application.savingGame.SavingGameController;
 import ch.supsi.connectfour.backend.application.savingGame.SavingGameControllerInterface;
+import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
+import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SavingGameModel implements SavingGameModelInterface {
+public class SavingGameModel implements SavingGameModelInterface, GridObserver {
     private static SavingGameModel instance = null;
     private final SavingGameControllerInterface savingGameController;
+    private final ObserverControllerInterface observerController;
     private File currentGameSavingFile;
+    private boolean alreadySaved;
 
     private SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher;
 
     private SavingGameModel() {
         this.savingGameController = SavingGameController.getInstance();
+        this.observerController = ObserverController.getInstance();
+        this.alreadySaved = false;
+
+        this.observerController.registerGridObserver(this);
     }
 
     public static SavingGameModel getInstance() {
@@ -28,10 +39,23 @@ public class SavingGameModel implements SavingGameModelInterface {
     public void saveGame() {
         try {
             savingGameController.saveGame(currentGameSavingFile);
+            alreadySaved = true;
         } catch (IllegalFIleException e) {
             System.out.println("Error saving game: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("IOException");
+        }
+    }
+
+    @Override
+    public void loadGame() {
+        try {
+            savingGameController.loadGame(currentGameSavingFile);
+            alreadySaved = true;
+        } catch (IllegalFIleException e) {
+            System.out.println("Error loading game: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -46,6 +70,11 @@ public class SavingGameModel implements SavingGameModelInterface {
     }
 
     @Override
+    public boolean isAlreadySave() {
+        return alreadySaved;
+    }
+
+    @Override
     public void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher) {
         this.saveGameChoicePopUpDispatcher = saveGameChoicePopUpDispatcher;
     }
@@ -53,5 +82,10 @@ public class SavingGameModel implements SavingGameModelInterface {
     @Override
     public void showSaveGamePopUp() {
         saveGameChoicePopUpDispatcher.showSaveChoicePopUp();
+    }
+
+    @Override
+    public void onGridUpdate() {
+        this.alreadySaved = false;
     }
 }

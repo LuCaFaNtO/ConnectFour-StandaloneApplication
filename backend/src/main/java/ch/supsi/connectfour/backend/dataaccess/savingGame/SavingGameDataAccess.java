@@ -8,8 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class SavingGameDataAccess implements SavingGameDataAccessInterface {
     private static SavingGameDataAccess instance = null;
@@ -37,15 +39,6 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                 if (player != null) {
                     JSONObject playerJson = new JSONObject();
                     playerJson.put("name", player.getName());
-
-                    Piece piece = player.getPiece();
-                    if (piece != null) {
-                        JSONObject pieceJson = new JSONObject();
-                        pieceJson.put("color", piece.getColor());
-                        pieceJson.put("symbol", piece.getSymbol());
-                        playerJson.put("piece", pieceJson);
-                    }
-
                     cellJson.put("player", playerJson);
                 } else {
                     cellJson.put("player", JSONObject.NULL);
@@ -63,6 +56,53 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(gameStateJson.toString(4));
             System.out.println("Game data saved successfully to " + file.getAbsolutePath());
+        }
+    }
+
+    @Override
+    public boolean loadTurnFromFile(File file) throws IOException {
+        JSONObject gameStateJson = readJsonFromFile(file);
+        return gameStateJson.getBoolean("turn");
+    }
+
+    @Override
+    public Cell[][] loadGridFromFile(File file, List<Player> players) throws IOException {
+        JSONObject gameStateJson = readJsonFromFile(file);
+        JSONArray gridJsonArray = gameStateJson.getJSONArray("grid");
+        Cell[][] grid = new Cell[gridJsonArray.length()][gridJsonArray.getJSONArray(0).length()];
+
+        for (int i = 0; i < gridJsonArray.length(); i++) {
+            JSONArray rowJsonArray = gridJsonArray.getJSONArray(i);
+            for (int j = 0; j < rowJsonArray.length(); j++) {
+                JSONObject cellJson = rowJsonArray.getJSONObject(j);
+                int row = cellJson.getInt("row");
+                int col = cellJson.getInt("col");
+                boolean fill = cellJson.getBoolean("fill");
+                JSONObject playerJson = cellJson.optJSONObject("player");
+
+                Player player = null;
+                if (playerJson != null) {
+                    String playerName = playerJson.getString("name");
+                    player = playerName.equals("Player1") ? players.get(0) : players.get(1);
+                }
+
+                grid[i][j] = new Cell(row, col);
+                grid[i][j].setFill(fill);
+                grid[i][j].setPlayer(player);
+            }
+        }
+
+        return grid;
+    }
+
+    private JSONObject readJsonFromFile(File file) throws IOException {
+        try (FileReader fileReader = new FileReader(file)) {
+            StringBuilder stringBuilder = new StringBuilder();
+            int character;
+            while ((character = fileReader.read()) != -1) {
+                stringBuilder.append((char) character);
+            }
+            return new JSONObject(stringBuilder.toString());
         }
     }
 }

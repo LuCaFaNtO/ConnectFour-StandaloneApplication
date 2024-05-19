@@ -13,13 +13,11 @@ import java.util.Random;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
-    private final Grid grid;
     private int lastRowInserted;
+    private final Grid grid;
     private Player player1;
     private Player player2;
-
-    //TODO: Sistemare turni
-    private boolean turn = new Random().nextBoolean(); //false -> player1     true -> player2
+    private boolean turn; //false -> player1     true -> player2
 
     protected GridModel() {
         grid = new Grid();
@@ -188,6 +186,12 @@ public class GridModel implements GridBusinessInterface {
     @Override
     public void initializeNewStructureForNewGame() {
         grid.initializeNewGrid();
+    }
+
+    @Override
+    public void initializeNewStructureForNewGame(Cell[][] newGrid, boolean turn) {
+        grid.setNewGrid(newGrid);
+        this.turn = turn;
     }
 
     @Override

@@ -24,6 +24,7 @@ public interface GridBusinessInterface {
     int getNumberOfGridsColumn();
     Player getCurrentPlayer();
     void initializeNewStructureForNewGame();
+    void initializeNewStructureForNewGame(Cell[][] newGrid, boolean turn);
     void diceRollPerTurn();
     boolean getTurn();
 }

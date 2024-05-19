@@ -22,14 +22,10 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -93,14 +89,20 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void newGame() {
-        if (statusGameController.isInStateGame())
+        if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
             savingGameController.showSaveGamePopUp();
         statusGameController.setStatusToPreStart();
     }
 
     public void openGame() {
-        // decode this event
-        // delegate it to a suitable controller
+        if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
+            savingGameController.showSaveGamePopUp();
+        File openFile = getOpenFile();
+        if(openFile != null){
+            savingGameController.setNewSavingGameFile(openFile);
+            savingGameController.loadGame();
+        }
+        statusGameController.setStatusToGame();
     }
 
     public void saveGame() {
@@ -111,7 +113,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void saveGameAs() {
-        File saveGameFile = getSavingFile();
+        File saveGameFile = getSaveFile();
         if (saveGameFile != null) {
             savingGameController.setNewSavingGameFile(saveGameFile);
             savingGameController.saveGame();
@@ -138,7 +140,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         }
     }
 
-    private File getSavingFile() {
+    private File getSaveFile() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -146,6 +148,16 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         fileChooser.setInitialFileName("game.json");
         return fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
     }
+
+    private File getOpenFile() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialFileName("game.json");
+        return fileChooser.showOpenDialog(containerMenuBar.getScene().getWindow());
+    }
+
 
     private void addSupportedLanguages() {
         Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));

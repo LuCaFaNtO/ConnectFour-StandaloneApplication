@@ -3,10 +3,12 @@ package ch.supsi.connectfour.backend.business.savingGame;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
 import ch.supsi.connectfour.backend.application.savingGame.SavingGameBusinessInterface;
 import ch.supsi.connectfour.backend.business.domain.Cell;
+import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.backend.dataaccess.savingGame.SavingGameDataAccess;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class SavingGameModel implements SavingGameBusinessInterface {
     private static SavingGameModel instance = null;
@@ -28,5 +30,17 @@ public class SavingGameModel implements SavingGameBusinessInterface {
         //noinspection ResultOfMethodCallIgnored
         saveFile.createNewFile();
         savingGameDataAccess.saveGameOnFile(file, grid, turn);
+    }
+
+    @Override
+    public Cell[][] loadGridGame(File file, List<Player> players) throws IllegalFIleException, IOException {
+        if(file == null) throw new IllegalFIleException("ERROR: an error occurs during saving file");
+        return savingGameDataAccess.loadGridFromFile(file, players);
+    }
+
+    @Override
+    public boolean loadTurnGame(File file) throws IllegalFIleException, IOException {
+        if(file == null) throw new IllegalFIleException("ERROR: an error occurs during saving file");
+        return savingGameDataAccess.loadTurnFromFile(file);
     }
 }

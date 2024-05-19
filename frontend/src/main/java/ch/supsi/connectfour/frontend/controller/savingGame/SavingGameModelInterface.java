@@ -6,8 +6,10 @@ import java.io.File;
 
 public interface SavingGameModelInterface {
     void saveGame();
+    void loadGame();
     void setNewSavingGameFile(File file);
     boolean savingGameFileExists();
+    boolean isAlreadySave();
     void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher);
     void showSaveGamePopUp();
 }
