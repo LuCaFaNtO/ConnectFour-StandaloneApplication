@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SavingGameDataAccessInterface {
-    void saveGameOnFile(File file, Cell[][] grid, boolean turn) throws IOException;
+    void saveGameOnFile(File file, Cell[][] grid, boolean turnz) throws IOException;
     boolean loadTurnFromFile(File file) throws IOException;
     Cell[][] loadGridFromFile(File file, List<Player> players) throws IOException;
 }

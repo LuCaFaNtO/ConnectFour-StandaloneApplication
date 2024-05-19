@@ -27,4 +27,5 @@ public interface GridBusinessInterface {
     void initializeNewStructureForNewGame(Cell[][] newGrid, boolean turn);
     void diceRollPerTurn();
     boolean getTurn();
+    boolean isColumnFull(int column);
 }

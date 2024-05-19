@@ -203,4 +203,9 @@ public class GridModel implements GridBusinessInterface {
     public boolean getTurn() {
         return turn;
     }
+
+    @Override
+    public boolean isColumnFull(int column) {
+        return grid.isColumnFull(column);
+    }
 }

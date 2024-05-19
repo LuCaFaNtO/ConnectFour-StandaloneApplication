@@ -62,4 +62,8 @@ public class Grid {
     public Cell getCell(final int row, final int col) {
         return grid[row][col];
     }
+
+    public boolean isColumnFull(final int col) {
+        return grid[0][col].isFill();
+    }
 }

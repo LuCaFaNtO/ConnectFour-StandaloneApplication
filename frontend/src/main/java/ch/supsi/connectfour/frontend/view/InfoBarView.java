@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -75,4 +76,8 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface, Upda
 
     @Override
     public void updateViewStatusEnd() {}
+
+    public void showSaveGame(){
+        //TODO: mostrare saved game su info bar
+    }
 }

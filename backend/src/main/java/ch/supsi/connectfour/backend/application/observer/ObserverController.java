@@ -14,6 +14,7 @@ public class ObserverController implements ObserverControllerInterface {
     private final List<FinishGameObserver> finishGameObservers = new ArrayList<>();
     private final List<UpdatePreferencesObserver> updatePreferencesObservers = new ArrayList<>();
     private final List<TurnChangeObserverInterface> turnChangeObservers = new ArrayList<>();
+    private final List<SavingGameObserver> savingGameObservers = new ArrayList<>();
 
     private ObserverController() {
     }
@@ -73,6 +74,16 @@ public class ObserverController implements ObserverControllerInterface {
     }
 
     @Override
+    public void registerSavingGameObserver(SavingGameObserver observer) {
+        savingGameObservers.add(observer);
+    }
+
+    @Override
+    public void removeSavingGameObserver(SavingGameObserver observer) {
+        savingGameObservers.remove(observer);
+    }
+
+    @Override
     public void notifyOnGridObserver() {
         for (GridObserver observer : gridObservers) {
             observer.onGridUpdate();
@@ -119,5 +130,11 @@ public class ObserverController implements ObserverControllerInterface {
     public void notifyEmptyGrid(int col, int row) {
         for (UpdatePreferencesObserver updatePreferencesObserver : updatePreferencesObservers)
             updatePreferencesObserver.updateEmptyGrid(col, row);
+    }
+
+    @Override
+    public void notifySaveGame() {
+        for(SavingGameObserver savingGameObserver : savingGameObservers)
+            savingGameObserver.onGameSaved();
     }
 }

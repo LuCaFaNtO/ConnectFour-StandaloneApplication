@@ -38,6 +38,7 @@ public class SavingGameController implements SavingGameControllerInterface{
         boolean currentTurn = gridModel.getTurn();
 
         savingGameModel.saveGame(file, grid, currentTurn);
+        observerController.notifySaveGame();
     }
 
     @Override
@@ -49,5 +50,8 @@ public class SavingGameController implements SavingGameControllerInterface{
 
         gridModel.initializeNewStructureForNewGame(grid, turn);
         observerController.notifyAllGridUpdate(grid);
+        for (int i = 0; i < gridModel.getNumberOfGridsColumn(); i++)
+            if(gridModel.isColumnFull(i))
+                observerController.notifyDisableColumnObserver(i);
     }
 }
