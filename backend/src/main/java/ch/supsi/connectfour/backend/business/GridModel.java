@@ -39,7 +39,7 @@ public class GridModel implements GridBusinessInterface {
 
     @Override
     public void changeTurn() {
-        turn = !turn;
+        turn = !getTurn();
     }
 
     @Override
@@ -182,7 +182,7 @@ public class GridModel implements GridBusinessInterface {
 
     @Override
     public Player getCurrentPlayer() {
-        return turn ? player1 : player2;
+        return getTurn() ? player1 : player2;
     }
 
     @Override
@@ -193,5 +193,10 @@ public class GridModel implements GridBusinessInterface {
     @Override
     public void diceRollPerTurn() {
         turn = new Random().nextBoolean();
+    }
+
+    @Override
+    public boolean getTurn() {
+        return turn;
     }
 }

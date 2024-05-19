@@ -25,4 +25,5 @@ public interface GridBusinessInterface {
     Player getCurrentPlayer();
     void initializeNewStructureForNewGame();
     void diceRollPerTurn();
+    boolean getTurn();
 }

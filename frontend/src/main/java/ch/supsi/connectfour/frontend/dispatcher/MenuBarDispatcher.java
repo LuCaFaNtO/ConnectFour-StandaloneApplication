@@ -4,6 +4,7 @@ import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
+import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
@@ -42,6 +43,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     private final LanguageControllerInterface languageController;
     private final PreferencesControllerInterface preferencesController;
     private final StatusGameControllerInterface statusGameController;
+    private final SavingGameControllerInterface savingGameController;
 
     private final String fxmlLocation = "/menubar.fxml";
     private FXMLLoader fxmlLoaderMenuBar;
@@ -66,10 +68,11 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
 
 
     public MenuBarDispatcher() {
-        aboutController = AboutController.getInstance();
-        languageController = LanguageController.getInstance();
-        preferencesController = PreferencesController.getInstance();
-        statusGameController = StatusGameController.getInstance();
+        this.aboutController = AboutController.getInstance();
+        this.languageController = LanguageController.getInstance();
+        this.preferencesController = PreferencesController.getInstance();
+        this.statusGameController = StatusGameController.getInstance();
+        this.savingGameController = SavingGameController.getInstance();
     }
 
     @Override
@@ -82,14 +85,14 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
 
         containerMenuBar.sceneProperty()
                 .addListener((observable, oldScene, newScene) -> {
-                    if(newScene != null)
+                    if (newScene != null)
                         disableSaveShortcut(newScene);
                 });
     }
 
     public void newGame() {
-        if(statusGameController.isInStateGame());
-            //TODO:: gestire salvataggio partita in corso
+        if (statusGameController.isInStateGame()) ;
+        //saveGame();
         statusGameController.setStatusToPreStart();
     }
 
@@ -99,29 +102,18 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void saveGame() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialFileName("game.json");
-        File file = fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
-        if (file != null) {
-            saveTextToFile("Hello World", file);
-        }
-    }
-
-    private void saveTextToFile(String content, File file) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            writer.write(content);
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        if (!savingGameController.savingGameFileExists())
+            saveGameAs();
+        else
+            savingGameController.saveGame();
     }
 
     public void saveGameAs() {
-        // decode this event
-        // delegate it to a suitable controller
+        File saveGameFile = getSavingFile();
+        if (saveGameFile != null) {
+            savingGameController.setNewSavingGameFile(saveGameFile);
+            savingGameController.saveGame();
+        }
     }
 
     public void quit() {
@@ -142,6 +134,15 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private File getSavingFile() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setInitialFileName("game.json");
+        return fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
     }
 
     private void addSupportedLanguages() {
@@ -174,17 +175,17 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         //MainFx.updateSceneMenuBarWithNewLanguage();
 
         //Metodo "manuale" senza fare il load ogni volta (funzionante)
-        for(Menu menu : containerMenuBar.getMenus()){
+        for (Menu menu : containerMenuBar.getMenus()) {
             setNewText(menu);
-            for(MenuItem menuItem : menu.getItems())
-                if(!(menuItem instanceof SeparatorMenuItem))
+            for (MenuItem menuItem : menu.getItems())
+                if (!(menuItem instanceof SeparatorMenuItem))
                     setNewText(menuItem);
 
         }
 
     }
 
-    private void setNewText(MenuItem menuItem){
+    private void setNewText(MenuItem menuItem) {
         String text = fxmlLoaderMenuBar.getResources().getString("MenuBar." + menuItem.getId());
         menuItem.setText(text);
     }
@@ -194,43 +195,43 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         return fxmlLoaderMenuBar;
     }
 
-    public void disableNewMenuItems(){
+    public void disableNewMenuItems() {
         newMenuItem.setDisable(true);
     }
 
-    public void enableNewMenuItems(){
+    public void enableNewMenuItems() {
         newMenuItem.setDisable(false);
     }
 
-    public void disableSaveMenuItems(){
+    public void disableSaveMenuItems() {
         saveMenuItem.setDisable(true);
     }
 
-    public void enableSaveMenuItems(){
+    public void enableSaveMenuItems() {
         saveMenuItem.setDisable(false);
     }
 
-    public void disableSaveAsMenuItems(){
+    public void disableSaveAsMenuItems() {
         saveasMenuItem.setDisable(true);
     }
 
-    public void enableSaveAsMenuItems(){
+    public void enableSaveAsMenuItems() {
         saveasMenuItem.setDisable(false);
     }
 
-    public void disablePreferencesMenuItems(){
+    public void disablePreferencesMenuItems() {
         preferencesMenuItem.setDisable(true);
     }
 
-    public void enablePreferencesMenuItems(){
+    public void enablePreferencesMenuItems() {
         preferencesMenuItem.setDisable(false);
     }
 
-    private void enableSaveShortcut(Scene scene){
+    private void enableSaveShortcut(Scene scene) {
         scene.getAccelerators().put(ctrlS, this::saveGame);
     }
 
-    private void disableSaveShortcut(Scene scene){
+    private void disableSaveShortcut(Scene scene) {
         scene.getAccelerators().remove(ctrlS);
     }
 
@@ -240,8 +241,9 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         disableSaveMenuItems();
         disableSaveAsMenuItems();
         Scene scene = containerMenuBar.getScene();
-        if(scene != null)
+        if (scene != null)
             disableSaveShortcut(containerMenuBar.getScene());
+        savingGameController.setNewSavingGameFile(null);
     }
 
     @Override
