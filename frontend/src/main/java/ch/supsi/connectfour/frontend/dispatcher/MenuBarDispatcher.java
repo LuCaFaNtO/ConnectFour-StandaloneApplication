@@ -108,7 +108,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public void saveGame() {
         if (!savingGameController.savingGameFileExists())
             saveGameAs();
-        else
+        else if(!savingGameController.isAlreadySave())
             savingGameController.saveGame();
     }
 
