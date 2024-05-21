@@ -32,7 +32,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainFx extends Application {
-    public static final String APP_TITLE = "connectfour";
+    public static final String APP_TITLE = "Connect4";
     public static ResourceBundle resourceBundle;
     public static BorderPane mainBorderPane;
     public static Parent board;

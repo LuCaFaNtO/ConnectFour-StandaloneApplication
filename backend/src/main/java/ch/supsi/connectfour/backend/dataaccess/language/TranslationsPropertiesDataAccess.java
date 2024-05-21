@@ -9,11 +9,8 @@ import java.util.stream.Collectors;
 
 public class TranslationsPropertiesDataAccess implements TranslationsDataAccessInterface {
     private static final String translationsResourceBundlePath = "i18n.labels";
-
     private static final String supportedLanguagesPath = "/supported-languages.properties";
-
     private static TranslationsPropertiesDataAccess instance = null;
-
     private final Properties languageProperties;
 
     private TranslationsPropertiesDataAccess() {

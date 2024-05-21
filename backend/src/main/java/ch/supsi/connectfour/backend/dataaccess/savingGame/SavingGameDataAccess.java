@@ -55,7 +55,6 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
         // Write the JSON object to the specified file
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(gameStateJson.toString(4));
-            System.out.println("Game data saved successfully to " + file.getAbsolutePath());
         }
     }
 

@@ -121,6 +121,8 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     }
 
     public void quit() {
+        if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
+            savingGameController.showSaveGamePopUp();
         MainFx.quit();
     }
 
