@@ -17,7 +17,7 @@ public class ColumnsSelectorDispatcher implements UpdateViewInterface {
 
     private final GameControllerInterface gameController = GameController.getInstance();
 
-    public void playerMove(ActionEvent actionEvent) {
+    public void insertPiece(ActionEvent actionEvent) {
         // get the column number corresponding to this event
         // then delegate the work to the GameController
         Node node = (Node) actionEvent.getSource();
