@@ -1,6 +1,8 @@
 package ch.supsi.connectfour.frontend.view;
 
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class ErrorView implements ErrorViewInterface{
     private static ErrorView instance = null;
@@ -14,10 +16,11 @@ public class ErrorView implements ErrorViewInterface{
     @Override
     public void showPopUpError(String exceptionName,String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(exceptionName);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
+        alert.setTitle("Connect4 - " + exceptionName);
+        alert.setHeaderText("Connect4 Preferences ERROR!");
         alert.setContentText(error);
-
-        // Show the Alert
-        alert.show();
+        alert.showAndWait();
     }
 }
