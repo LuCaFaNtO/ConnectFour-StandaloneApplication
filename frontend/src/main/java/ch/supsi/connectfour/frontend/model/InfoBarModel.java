@@ -23,6 +23,7 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver, 
 
         this.observerController.registerFinishGameObserver(this);
         this.observerController.registerTurnChangeObserver(this);
+        this.observerController.registerSavingGameObserver(this);
     }
 
     public static InfoBarModel getInstance() {

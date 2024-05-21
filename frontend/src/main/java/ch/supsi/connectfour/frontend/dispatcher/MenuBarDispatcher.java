@@ -98,11 +98,11 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
             savingGameController.showSaveGamePopUp();
         File openFile = getOpenFile();
-        if(openFile != null){
+        if (openFile != null) {
             savingGameController.setNewSavingGameFile(openFile);
             savingGameController.loadGame();
+            statusGameController.setStatusToGame();
         }
-        statusGameController.setStatusToGame();
     }
 
     public void saveGame() {

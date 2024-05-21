@@ -78,6 +78,7 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface, Upda
     public void updateViewStatusEnd() {}
 
     public void showSaveGame(){
-        //TODO: mostrare saved game su info bar
+        plusTextUsed += " - " + fxmlLoaderInfoBarView.getResources().getString("InfoBar.save");
+        changeSceneFx();
     }
 }

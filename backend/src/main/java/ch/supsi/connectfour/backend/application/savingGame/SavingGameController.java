@@ -49,6 +49,7 @@ public class SavingGameController implements SavingGameControllerInterface{
         boolean turn = savingGameModel.loadTurnGame(file);
 
         gridModel.initializeNewStructureForNewGame(grid, turn);
+        observerController.notifyEmptyGrid(gridModel.getNumberOfGridsColumn(), gridModel.getGrid().length);
         observerController.notifyAllGridUpdate(grid);
         for (int i = 0; i < gridModel.getNumberOfGridsColumn(); i++)
             if(gridModel.isColumnFull(i))
