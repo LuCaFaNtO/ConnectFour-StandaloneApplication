@@ -82,12 +82,12 @@ public class GridController implements GridControllerInterface {
 
         List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
         this.gridModel.initializePlayers(defaultPlayerPieces);
+        this.gridModel.diceRollPerTurn();
         notifyEmptyGrid();
     }
 
     @Override
     public void diceRollPerTurn() {
-        this.gridModel.diceRollPerTurn();
         this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
     }
 
