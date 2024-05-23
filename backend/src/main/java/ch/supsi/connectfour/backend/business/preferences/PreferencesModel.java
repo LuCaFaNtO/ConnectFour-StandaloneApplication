@@ -5,22 +5,21 @@ import ch.supsi.connectfour.backend.application.preferences.PreferencesBusinessI
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.dataaccess.preferences.PreferencesDataAccess;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PreferencesModel implements PreferencesBusinessInterface {
     private static PreferencesModel instance = null;
     private final PreferencesDataAccessInterface preferencesDataAccess;
     private final Set<String> supportedColors;
     private final Set<String> supportedSymbols;
+    private List<Piece> currentPreferencesPieces;
 
     private PreferencesModel() {
         this.preferencesDataAccess = PreferencesDataAccess.getInstance();
 
         this.supportedColors = preferencesDataAccess.getSupportedColorsValues();
         this.supportedSymbols = preferencesDataAccess.getSupportedSymbols();
-
+        this.currentPreferencesPieces = getDefaultPieces();
     }
 
     public static PreferencesModel getInstance() {
@@ -37,12 +36,22 @@ public class PreferencesModel implements PreferencesBusinessInterface {
         return Collections.unmodifiableSet(supportedSymbols);
     }
 
-    @Override
-    public List<Piece> getDefaultPieces() {
+
+    private List<Piece> getDefaultPieces() {
         Piece pieceDefault1 = new Piece(supportedColors.stream().toList().get(0), supportedSymbols.stream().toList().get(0));
         Piece pieceDefault2 = new Piece(supportedColors.stream().toList().get(1), supportedSymbols.stream().toList().get(1));
 
         return List.of(pieceDefault1, pieceDefault2);
+    }
+
+    @Override
+    public List<Piece> getCurrentPieces() {
+        return currentPreferencesPieces;
+    }
+
+    @Override
+    public void setCurrentPieces(List<Piece> currentPieces) {
+        this.currentPreferencesPieces = currentPieces;
     }
 
     @Override

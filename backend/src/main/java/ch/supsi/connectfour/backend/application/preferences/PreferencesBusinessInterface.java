@@ -9,6 +9,7 @@ import java.util.Set;
 public interface PreferencesBusinessInterface {
     Set<String> getSupportedColors();
     Set<String> getSupportedSymbols();
-    List<Piece> getDefaultPieces();
+    List<Piece> getCurrentPieces();
+    void setCurrentPieces(List<Piece> currentPieces);
     void checkPiecesAreDifferent(List<Piece> pieces) throws IllegalPreferencesException;
 }

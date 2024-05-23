@@ -147,7 +147,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setInitialFileName("game.json");
         return fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
     }
 
@@ -156,7 +155,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
         fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setInitialFileName("game.json");
         return fileChooser.showOpenDialog(containerMenuBar.getScene().getWindow());
     }
 

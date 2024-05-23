@@ -67,7 +67,7 @@ public class GridController implements GridControllerInterface {
     @Override
     public List<Player> getPlayers() {
         if(gridModel.arePlayersNull())
-            this.gridModel.initializePlayers(this.preferencesModel.getDefaultPieces());
+            this.gridModel.initializePlayers(preferencesModel.getCurrentPieces());
         return gridModel.getPlayers();
     }
 
@@ -80,8 +80,8 @@ public class GridController implements GridControllerInterface {
     public void initializeNewStructureForNewGame() {
         this.gridModel.initializeNewStructureForNewGame();
 
-        List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
-        this.gridModel.initializePlayers(defaultPlayerPieces);
+        List<Piece> currentPieces = this.preferencesModel.getCurrentPieces();
+        this.gridModel.initializePlayers(currentPieces);
         this.gridModel.diceRollPerTurn();
         notifyEmptyGrid();
     }

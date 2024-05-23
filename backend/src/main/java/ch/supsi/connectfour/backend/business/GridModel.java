@@ -144,9 +144,9 @@ public class GridModel implements GridBusinessInterface {
     }
 
     @Override
-    public void initializePlayers(List<Piece> defaultPlayerPieces) {
-        player1 = new Player("Player1", defaultPlayerPieces.get(0));
-        player2 = new Player("Player2", defaultPlayerPieces.get(1));
+    public void initializePlayers(List<Piece> currentPieces) {
+        player1 = new Player("Player1", currentPieces.get(0));
+        player2 = new Player("Player2", currentPieces.get(1));
     }
 
     @Override
