@@ -170,9 +170,4 @@ public class PreferencesDispatcher implements Initializable, UpdateLanguageInter
 
     @Override
     public void changeSceneFx() {}
-
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return preferencesFxmlloader;
-    }
 }

@@ -44,8 +44,7 @@ public class AboutView implements Initializable, UpdateLanguageInterface {
     }
 
     @Override
-    public void changeSceneFx() {
-    }
+    public void changeSceneFx() {}
 
     public void showAboutInformation() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -82,11 +81,6 @@ public class AboutView implements Initializable, UpdateLanguageInterface {
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return fxmlLoaderAboutView;
     }
 
     @Override

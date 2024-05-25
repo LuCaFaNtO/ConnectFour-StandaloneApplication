@@ -41,11 +41,6 @@ public class InfoBarView implements Initializable, UpdateLanguageInterface, Upda
         infobar.setText(fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed) + plusTextUsed);
     }
 
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return fxmlLoaderInfoBarView;
-    }
-
     public void win(String playerName, String playerSymbol){
         oldKeyUsed = "InfoBar.win";
         plusTextUsed = " " + playerName + " " + playerSymbol;

@@ -14,27 +14,9 @@ import javafx.scene.shape.Circle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BoardView implements UpdateGridInterface, Initializable {
-    private final String fxmlLocation = "/gameboard.fxml";
-    private FXMLLoader fxmlLoaderBoardView;
-
+public class BoardView implements UpdateGridInterface {
     @FXML
     public GridPane grid;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        fxmlLoaderBoardView = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-    }
-
-    @Override
-    public void changeSceneFx() {
-
-    }
-
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return null;
-    }
 
     @Override
     public void updateGrid(Cell cell) {

@@ -42,7 +42,7 @@ public class SaveGameChoicePopUpDispatcher implements Initializable, UpdateLangu
 
     public void showSaveChoicePopUp(){
         try {
-            Parent root = new FXMLLoader(getFxmlLoader().getLocation(), getFxmlLoader().getResources()).load();
+            Parent root = new FXMLLoader(fxmlLoaderSaveGameChoice.getLocation(), fxmlLoaderSaveGameChoice.getResources()).load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
@@ -72,9 +72,4 @@ public class SaveGameChoicePopUpDispatcher implements Initializable, UpdateLangu
 
     @Override
     public void changeSceneFx() {}
-
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return fxmlLoaderSaveGameChoice;
-    }
 }

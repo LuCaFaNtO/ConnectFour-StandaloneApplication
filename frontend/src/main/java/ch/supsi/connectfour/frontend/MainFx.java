@@ -232,16 +232,6 @@ public class MainFx extends Application {
         primaryStage.show();
     }
 
-    public static void updateSceneMenuBarWithNewLanguage() {
-        try {
-            MenuBar menuBar = menuBarDispatcher.getFxmlLoader().load();
-            menuBarDispatcher = menuBarDispatcher.getFxmlLoader().getController();
-            mainBorderPane.setTop(menuBar);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void showGameBoard() {
         mainBorderPane.setCenter(gameBoardBorderPane);
     }

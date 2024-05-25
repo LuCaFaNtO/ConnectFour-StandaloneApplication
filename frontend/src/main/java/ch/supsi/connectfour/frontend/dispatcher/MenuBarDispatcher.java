@@ -193,29 +193,17 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
 
     @Override
     public void changeSceneFx() {
-        //Metodo automatico -> Problema che il load() (nel mainFx) crea nuovo MenuBarDispatcher,
-        //Quindi i campi @FXML che cambiano il disable non sono gli stessi di quelli presentati sulla schermata
-        //MainFx.updateSceneMenuBarWithNewLanguage();
-
-        //Metodo "manuale" senza fare il load ogni volta (funzionante)
         for (Menu menu : containerMenuBar.getMenus()) {
             setNewText(menu);
             for (MenuItem menuItem : menu.getItems())
                 if (!(menuItem instanceof SeparatorMenuItem))
                     setNewText(menuItem);
-
         }
-
     }
 
     private void setNewText(MenuItem menuItem) {
         String text = fxmlLoaderMenuBar.getResources().getString("MenuBar." + menuItem.getId());
         menuItem.setText(text);
-    }
-
-    @Override
-    public FXMLLoader getFxmlLoader() {
-        return fxmlLoaderMenuBar;
     }
 
     public void disableNewMenuItems() {
