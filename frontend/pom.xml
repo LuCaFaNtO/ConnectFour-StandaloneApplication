@@ -14,6 +14,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <developers>
+        <developer>
+            <id>mattia.cainarca</id>
+            <name>Mattia Cainarca</name>
+        </developer>
+        <developer>
+            <id>luca.fanto</id>
+            <name>Luca Fanto'</name>
+        </developer>
+        <developer>
+            <id>antonio.marroffino</id>
+            <name>Antonio Marroffino</name>
+        </developer>
+    </developers>
+
     <dependencies>
         <!-- SRC SCOPE  -->
         <dependency>
