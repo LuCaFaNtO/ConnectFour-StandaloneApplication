@@ -48,14 +48,14 @@ public class SavingGameModel implements SavingGameModelInterface, GridObserver {
     }
 
     @Override
-    public void loadGame() {
+    public boolean loadGame() {
         try {
             savingGameController.loadGame(currentGameSavingFile);
             alreadySaved = true;
+            return true;
         } catch (IllegalFIleException e) {
-            System.out.println("Error loading game: " + e.getMessage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 

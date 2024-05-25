@@ -26,6 +26,7 @@ import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -100,8 +101,8 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         File openFile = getOpenFile();
         if (openFile != null) {
             savingGameController.setNewSavingGameFile(openFile);
-            savingGameController.loadGame();
-            statusGameController.setStatusToGame();
+            if(savingGameController.loadGame())
+                statusGameController.setStatusToGame();
         }
     }
 

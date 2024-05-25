@@ -15,6 +15,8 @@ public class TranslationsModel implements TranslationsBusinessInterface {
 
     private TranslationsModel() {
         translationsDataAccess = TranslationsPropertiesDataAccess.getInstance();
+
+        setLocaleDefault();
         supportedLanguageKeys = translationsDataAccess.getSupportedLanguageKeys();
     }
 
@@ -32,8 +34,7 @@ public class TranslationsModel implements TranslationsBusinessInterface {
         return Collections.unmodifiableSet(supportedLanguageKeys);
     }
 
-    @Override
-    public void setLocaleDefault() {
+    private void setLocaleDefault() {
         Locale.setDefault(Locale.US);
     }
 

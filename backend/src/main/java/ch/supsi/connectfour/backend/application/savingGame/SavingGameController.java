@@ -42,7 +42,7 @@ public class SavingGameController implements SavingGameControllerInterface{
     }
 
     @Override
-    public void loadGame(File file) throws IllegalFIleException, IOException {
+    public void loadGame(File file) throws IllegalFIleException {
         gridModel.initializePlayers(preferencesModel.getCurrentPieces());
 
         Cell[][] grid = savingGameModel.loadGridGame(file, gridModel.getPlayers());

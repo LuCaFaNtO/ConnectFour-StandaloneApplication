@@ -4,7 +4,7 @@ import java.io.File;
 
 public interface SavingGameControllerInterface {
     void saveGame();
-    void loadGame();
+    boolean loadGame();
     void setNewSavingGameFile(File file);
     boolean savingGameFileExists();
     boolean isAlreadySave();

@@ -1,10 +1,12 @@
 package ch.supsi.connectfour.backend.dataaccess.savingGame;
 
+import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
 import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.backend.business.savingGame.SavingGameDataAccessInterface;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -23,7 +25,7 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
     }
 
     @Override
-    public void saveGameOnFile(File file, Cell[][] grid, boolean turn) throws IOException {
+    public void saveGameOnFile(File file, Cell[][] grid, boolean turn) throws IllegalFIleException {
         JSONObject gameStateJson = new JSONObject();
 
         JSONArray gridJsonArray = new JSONArray();
@@ -55,46 +57,55 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
         // Write the JSON object to the specified file
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(gameStateJson.toString(4));
+        } catch (IOException e) {
+            throw new IllegalFIleException("Error during save file");
         }
     }
 
     @Override
-    public boolean loadTurnFromFile(File file) throws IOException {
-        JSONObject gameStateJson = readJsonFromFile(file);
-        return gameStateJson.getBoolean("turn");
+    public boolean loadTurnFromFile(File file) throws IllegalFIleException {
+        try{
+            JSONObject gameStateJson = readJsonFromFile(file);
+            return gameStateJson.getBoolean("turn");
+        }catch (JSONException e) {
+            throw new IllegalFIleException("Error during loading turn from file");
+        }
     }
 
     @Override
-    public Cell[][] loadGridFromFile(File file, List<Player> players) throws IOException {
-        JSONObject gameStateJson = readJsonFromFile(file);
-        JSONArray gridJsonArray = gameStateJson.getJSONArray("grid");
-        Cell[][] grid = new Cell[gridJsonArray.length()][gridJsonArray.getJSONArray(0).length()];
+    public Cell[][] loadGridFromFile(File file, List<Player> players) throws IllegalFIleException {
+        try{
+            JSONObject gameStateJson = readJsonFromFile(file);
+            JSONArray gridJsonArray = gameStateJson.getJSONArray("grid");
+            Cell[][] grid = new Cell[gridJsonArray.length()][gridJsonArray.getJSONArray(0).length()];
 
-        for (int i = 0; i < gridJsonArray.length(); i++) {
-            JSONArray rowJsonArray = gridJsonArray.getJSONArray(i);
-            for (int j = 0; j < rowJsonArray.length(); j++) {
-                JSONObject cellJson = rowJsonArray.getJSONObject(j);
-                int row = cellJson.getInt("row");
-                int col = cellJson.getInt("col");
-                boolean fill = cellJson.getBoolean("fill");
-                JSONObject playerJson = cellJson.optJSONObject("player");
+            for (int i = 0; i < gridJsonArray.length(); i++) {
+                JSONArray rowJsonArray = gridJsonArray.getJSONArray(i);
+                for (int j = 0; j < rowJsonArray.length(); j++) {
+                    JSONObject cellJson = rowJsonArray.getJSONObject(j);
+                    int row = cellJson.getInt("row");
+                    int col = cellJson.getInt("col");
+                    boolean fill = cellJson.getBoolean("fill");
+                    JSONObject playerJson = cellJson.optJSONObject("player");
 
-                Player player = null;
-                if (playerJson != null) {
-                    String playerName = playerJson.getString("name");
-                    player = playerName.equals("Player1") ? players.get(0) : players.get(1);
+                    Player player = null;
+                    if (playerJson != null) {
+                        String playerName = playerJson.getString("name");
+                        player = playerName.equals("Player1") ? players.get(0) : players.get(1);
+                    }
+
+                    grid[i][j] = new Cell(row, col);
+                    grid[i][j].setFill(fill);
+                    grid[i][j].setPlayer(player);
                 }
-
-                grid[i][j] = new Cell(row, col);
-                grid[i][j].setFill(fill);
-                grid[i][j].setPlayer(player);
             }
+            return grid;
+        }catch (JSONException e){
+            throw new IllegalFIleException("Error: cannot find grid");
         }
-
-        return grid;
     }
 
-    private JSONObject readJsonFromFile(File file) throws IOException {
+    private JSONObject readJsonFromFile(File file) throws IllegalFIleException {
         try (FileReader fileReader = new FileReader(file)) {
             StringBuilder stringBuilder = new StringBuilder();
             int character;
@@ -102,6 +113,8 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                 stringBuilder.append((char) character);
             }
             return new JSONObject(stringBuilder.toString());
+        } catch (IOException e){
+            throw new IllegalFIleException("Error during loading from file");
         }
     }
 }
