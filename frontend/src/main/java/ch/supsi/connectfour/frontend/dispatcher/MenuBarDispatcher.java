@@ -49,6 +49,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     private static List<MenuItem> menuItemList;
 
     private KeyCombination ctrlS;
+    private KeyCombination ctrlShiftS;
 
     @FXML
     public MenuBar containerMenuBar;
@@ -63,7 +64,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public MenuItem saveasMenuItem;
     @FXML
     public MenuItem preferencesMenuItem;
-
 
     public MenuBarDispatcher() {
         this.aboutController = AboutController.getInstance();
@@ -85,6 +85,14 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
                 .addListener((observable, oldScene, newScene) -> {
                     if (newScene != null)
                         disableSaveShortcut(newScene);
+                });
+
+        ctrlShiftS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
+
+        containerMenuBar.sceneProperty()
+                .addListener((observable, oldScene, newScene) -> {
+                    if (newScene != null)
+                        disableSaveAsShortcut(newScene);
                 });
     }
 
@@ -108,7 +116,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public void saveGame() {
         if (!savingGameController.savingGameFileExists())
             saveGameAs();
-        else if(!savingGameController.isAlreadySave())
+        else if (!savingGameController.isAlreadySave())
             savingGameController.saveGame();
     }
 
@@ -249,14 +257,24 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         scene.getAccelerators().remove(ctrlS);
     }
 
+    private void enableSaveAsShortcut(Scene scene) {
+        scene.getAccelerators().put(ctrlShiftS, this::saveGameAs);
+    }
+
+    private void disableSaveAsShortcut(Scene scene) {
+        scene.getAccelerators().remove(ctrlShiftS);
+    }
+
     @Override
     public void updateViewStatusPreStart() {
         disableNewMenuItems();
         disableSaveMenuItems();
         disableSaveAsMenuItems();
         Scene scene = containerMenuBar.getScene();
-        if (scene != null)
+        if (scene != null) {
             disableSaveShortcut(containerMenuBar.getScene());
+            disableSaveAsShortcut(containerMenuBar.getScene());
+        }
         savingGameController.setNewSavingGameFile(null);
     }
 
@@ -264,6 +282,7 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
     public void updateViewStatusGame() {
         menuItemList.forEach(menuItem -> menuItem.setDisable(false));
         enableSaveShortcut(containerMenuBar.getScene());
+        enableSaveAsShortcut(containerMenuBar.getScene());
     }
 
     @Override
@@ -272,5 +291,6 @@ public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable
         disableSaveAsMenuItems();
         disablePreferencesMenuItems();
         disableSaveShortcut(containerMenuBar.getScene());
+        disableSaveAsShortcut(containerMenuBar.getScene());
     }
 }
