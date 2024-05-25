@@ -33,14 +33,14 @@ public class SavingGameModel implements SavingGameBusinessInterface {
     }
 
     @Override
-    public Cell[][] loadGridGame(File file, List<Player> players) throws IllegalFIleException, IOException {
-        if(file == null) throw new IllegalFIleException("ERROR: an error occurs during saving file");
+    public Cell[][] loadGridGame(File file, List<Player> players) throws IllegalFIleException{
+        if(file == null || !file.getName().contains(".json")) throw new IllegalFIleException("ERROR: an error occurs during loading grid from file");
         return savingGameDataAccess.loadGridFromFile(file, players);
     }
 
     @Override
-    public boolean loadTurnGame(File file) throws IllegalFIleException, IOException {
-        if(file == null) throw new IllegalFIleException("ERROR: an error occurs during saving file");
+    public boolean loadTurnGame(File file) throws IllegalFIleException{
+        if(file == null || !file.getName().contains(".json")) throw new IllegalFIleException("ERROR: an error occurs during loading turn from file");
         return savingGameDataAccess.loadTurnFromFile(file);
     }
 }

@@ -24,8 +24,8 @@ public class SavingGameController implements SavingGameControllerInterface {
     }
 
     @Override
-    public void loadGame() {
-        savingGameModel.loadGame();
+    public boolean loadGame() {
+        return savingGameModel.loadGame();
     }
 
     @Override

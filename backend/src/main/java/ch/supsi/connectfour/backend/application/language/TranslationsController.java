@@ -11,8 +11,6 @@ public class TranslationsController implements TranslationsControllerInterface {
 
     private TranslationsController() {
         translationsModel = TranslationsModel.getInstance();
-
-        translationsModel.setLocaleDefault();
     }
 
     public static TranslationsController getInstance() {

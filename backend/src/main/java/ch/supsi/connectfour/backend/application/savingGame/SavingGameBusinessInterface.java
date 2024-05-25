@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface SavingGameBusinessInterface {
     void saveGame(File file, Cell[][] grid, boolean turn) throws IllegalFIleException, IOException;
-    Cell[][] loadGridGame(File file, List<Player> players) throws IllegalFIleException, IOException;
-    boolean loadTurnGame(File file) throws IllegalFIleException, IOException;
+    Cell[][] loadGridGame(File file, List<Player> players) throws IllegalFIleException;
+    boolean loadTurnGame(File file) throws IllegalFIleException;
 }

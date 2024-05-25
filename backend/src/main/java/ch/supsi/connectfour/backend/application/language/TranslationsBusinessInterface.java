@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public interface TranslationsBusinessInterface {
-    void setLocaleDefault();
     ResourceBundle changeLanguage(String languageTag);
     String getTagFromKeyLanguage(String languageKey);
     Set<String> getSupportedLanguages();

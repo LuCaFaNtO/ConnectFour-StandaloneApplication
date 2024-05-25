@@ -6,7 +6,7 @@ import java.io.File;
 
 public interface SavingGameModelInterface {
     void saveGame();
-    void loadGame();
+    boolean loadGame();
     void setNewSavingGameFile(File file);
     boolean savingGameFileExists();
     boolean isAlreadySave();
