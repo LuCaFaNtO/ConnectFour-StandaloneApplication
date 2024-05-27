@@ -55,7 +55,7 @@ public class StatusGameModel implements StatusGameModelInterface {
                 gameStartCondition();
                 break;
             case END:
-                endStartCondition();
+                endCondition();
         }
     }
 
@@ -71,7 +71,7 @@ public class StatusGameModel implements StatusGameModelInterface {
         gridController.diceRollPerTurn();
     }
 
-    private void endStartCondition() {
+    private void endCondition() {
         for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusEnd();
     }

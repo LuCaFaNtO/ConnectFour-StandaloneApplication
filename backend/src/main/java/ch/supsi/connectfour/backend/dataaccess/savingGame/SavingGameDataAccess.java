@@ -18,7 +18,8 @@ import java.util.List;
 public class SavingGameDataAccess implements SavingGameDataAccessInterface {
     private static SavingGameDataAccess instance = null;
 
-    private SavingGameDataAccess() {}
+    private SavingGameDataAccess() {
+    }
 
     public static SavingGameDataAccess getInstance() {
         return instance == null ? instance = new SavingGameDataAccess() : instance;
@@ -38,13 +39,11 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                 cellJson.put("fill", cell.isFill());
 
                 Player player = cell.getPlayer();
-                if (player != null) {
-                    JSONObject playerJson = new JSONObject();
-                    playerJson.put("name", player.getName());
-                    cellJson.put("player", playerJson);
-                } else {
-                    cellJson.put("player", JSONObject.NULL);
-                }
+                if (player != null)
+                    cellJson.put("player", player.getName());
+                else
+                    cellJson.put("player", "");
+
 
                 rowJsonArray.put(cellJson);
             }
@@ -54,7 +53,6 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
         gameStateJson.put("grid", gridJsonArray);
         gameStateJson.put("turn", turn);
 
-        // Write the JSON object to the specified file
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(gameStateJson.toString(4));
         } catch (IOException e) {
@@ -64,17 +62,17 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
 
     @Override
     public boolean loadTurnFromFile(File file) throws IllegalFIleException {
-        try{
+        try {
             JSONObject gameStateJson = readJsonFromFile(file);
             return gameStateJson.getBoolean("turn");
-        }catch (JSONException e) {
-            throw new IllegalFIleException("Error during loading turn from file");
+        } catch (JSONException e) {
+            throw new IllegalFIleException("Error: cannot find turn");
         }
     }
 
     @Override
     public Cell[][] loadGridFromFile(File file, List<Player> players) throws IllegalFIleException {
-        try{
+        try {
             JSONObject gameStateJson = readJsonFromFile(file);
             JSONArray gridJsonArray = gameStateJson.getJSONArray("grid");
             Cell[][] grid = new Cell[gridJsonArray.length()][gridJsonArray.getJSONArray(0).length()];
@@ -86,13 +84,11 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                     int row = cellJson.getInt("row");
                     int col = cellJson.getInt("col");
                     boolean fill = cellJson.getBoolean("fill");
-                    JSONObject playerJson = cellJson.optJSONObject("player");
 
                     Player player = null;
-                    if (playerJson != null) {
-                        String playerName = playerJson.getString("name");
+                    String playerName = cellJson.getString("player");
+                    if (!playerName.isEmpty())
                         player = playerName.equals("Player1") ? players.get(0) : players.get(1);
-                    }
 
                     grid[i][j] = new Cell(row, col);
                     grid[i][j].setFill(fill);
@@ -100,7 +96,7 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                 }
             }
             return grid;
-        }catch (JSONException e){
+        } catch (JSONException e) {
             throw new IllegalFIleException("Error: cannot find grid");
         }
     }
@@ -113,7 +109,7 @@ public class SavingGameDataAccess implements SavingGameDataAccessInterface {
                 stringBuilder.append((char) character);
             }
             return new JSONObject(stringBuilder.toString());
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new IllegalFIleException("Error during loading from file");
         }
     }

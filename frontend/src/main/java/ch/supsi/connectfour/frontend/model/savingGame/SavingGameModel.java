@@ -10,6 +10,8 @@ import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
+import ch.supsi.connectfour.frontend.view.ErrorView;
+import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class SavingGameModel implements SavingGameModelInterface, GridObserver {
     private static SavingGameModel instance = null;
     private final SavingGameControllerInterface savingGameController;
     private final ObserverControllerInterface observerController;
+    private final ErrorViewInterface errorView;
     private File currentGameSavingFile;
     private boolean alreadySaved;
 
@@ -26,6 +29,7 @@ public class SavingGameModel implements SavingGameModelInterface, GridObserver {
     private SavingGameModel() {
         this.savingGameController = SavingGameController.getInstance();
         this.observerController = ObserverController.getInstance();
+        this.errorView = ErrorView.getInstance();
         this.alreadySaved = false;
 
         this.observerController.registerGridObserver(this);
@@ -40,10 +44,9 @@ public class SavingGameModel implements SavingGameModelInterface, GridObserver {
         try {
             savingGameController.saveGame(currentGameSavingFile);
             alreadySaved = true;
-        } catch (IllegalFIleException e) {
-            System.out.println("Error saving game: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("IOException");
+        } catch (IllegalFIleException | IOException e) {
+            currentGameSavingFile = null;
+            errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
         }
     }
 
@@ -54,7 +57,8 @@ public class SavingGameModel implements SavingGameModelInterface, GridObserver {
             alreadySaved = true;
             return true;
         } catch (IllegalFIleException e) {
-            System.out.println(e.getMessage());
+            currentGameSavingFile = null;
+            errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
             return false;
         }
     }

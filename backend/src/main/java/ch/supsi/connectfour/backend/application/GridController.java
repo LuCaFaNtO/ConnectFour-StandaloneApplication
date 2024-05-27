@@ -22,12 +22,6 @@ public class GridController implements GridControllerInterface {
         this.gridModel = GridModel.getInstance();
         this.preferencesModel = PreferencesModel.getInstance();
         this.observerController = ObserverController.getInstance();
-
-        /*List<Piece> defaultPlayerPieces = this.preferencesModel.getDefaultPieces();
-        this.gridModel.initializePlayers(defaultPlayerPieces);
-
-        //TODO: Creare una funzione new Game che inzializza elementi di gioco e fa questo notify
-        this.observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());*/
     }
 
     public static GridController getInstance() {
