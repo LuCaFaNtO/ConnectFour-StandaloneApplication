@@ -22,6 +22,7 @@ import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartView;
+import ch.supsi.connectfour.frontend.view.prestart.PreStartViewInterface;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -221,6 +222,8 @@ public class MainFx extends Application {
         gameBoardBorderPane.setTop(columnSelectors);
         gameBoardBorderPane.setCenter(board);
 
+        ((PreStartViewInterface) preStartView).addMainBorderPain(mainBorderPane);
+        ((PreStartViewInterface) preStartView).addGameBorderPain(gameBoardBorderPane);
         statusGameController.setStatusToPreStart();
 
         mainBorderPane.setBottom(infoBar);
@@ -244,10 +247,6 @@ public class MainFx extends Application {
 
     public static void showPreStartPage(AnchorPane preStartPage) {
         mainBorderPane.setCenter(preStartPage);
-    }
-
-    public static void quit() {
-        Platform.exit();
     }
 
     public static void main(String[] args) {

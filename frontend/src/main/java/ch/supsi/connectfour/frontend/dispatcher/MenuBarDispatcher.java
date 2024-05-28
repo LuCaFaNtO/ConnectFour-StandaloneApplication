@@ -10,6 +10,7 @@ import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageController
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -125,7 +126,7 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     public void quit() {
         if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
             savingGameController.showSaveGamePopUp();
-        MainFx.quit();
+        Platform.exit();
     }
 
     public void editPreferences() {

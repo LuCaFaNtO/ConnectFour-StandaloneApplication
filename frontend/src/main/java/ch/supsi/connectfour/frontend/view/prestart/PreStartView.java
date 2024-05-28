@@ -5,15 +5,19 @@ import ch.supsi.connectfour.frontend.dispatcher.PreStartDispatcher;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PreStartView implements UpdateStatusInterface {
+public class PreStartView implements PreStartViewInterface, UpdateStatusInterface {
     private static PreStartView instance = null;
     private final String fxmlLocation = "/prestart.fxml";
     private FXMLLoader preStartLoader;
+
+    private BorderPane mainBorderPane;
+    private BorderPane gameBorderPane;
 
     private PreStartView() {
         this.preStartLoader = new FXMLLoader(getClass().getResource(fxmlLocation), ResourceBundle.getBundle("i18n.labels"));
@@ -33,7 +37,7 @@ public class PreStartView implements UpdateStatusInterface {
                 return;
             }
             preStartPage = preStartLoader.load();
-            MainFx.showPreStartPage(preStartPage);
+            mainBorderPane.setCenter(preStartPage);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,11 +50,21 @@ public class PreStartView implements UpdateStatusInterface {
 
     @Override
     public void updateViewStatusGame() {
-        MainFx.showGameBoard();
+        mainBorderPane.setCenter(gameBorderPane);
     }
 
     @Override
     public void updateViewStatusEnd() {
         //non ha compiti durante il game
+    }
+
+    @Override
+    public void addMainBorderPain(BorderPane borderPane) {
+        this.mainBorderPane = borderPane;
+    }
+
+    @Override
+    public void addGameBorderPain(BorderPane borderPane) {
+        this.gameBorderPane = borderPane;
     }
 }
