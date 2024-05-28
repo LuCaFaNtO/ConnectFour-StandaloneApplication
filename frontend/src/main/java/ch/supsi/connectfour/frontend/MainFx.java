@@ -21,6 +21,7 @@ import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
+import ch.supsi.connectfour.frontend.view.menubar.MenuBarView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartViewInterface;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
@@ -47,7 +48,7 @@ public class MainFx extends Application {
     public static Parent board;
     public static BorderPane gameBoardBorderPane = new BorderPane();
 
-    private static UpdaterLanguageInterface menuBarDispatcher;
+    private static UpdateStatusInterface menuBarDispatcher;
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
     public static UpdateGridInterface boardView;
     private static UpdaterLanguageInterface infoBarView;
@@ -61,11 +62,11 @@ public class MainFx extends Application {
     private final InfoBarControllerInterface infoBarController;
     private static StatusGameControllerInterface statusGameController;
     private final ColumnControllerInterface columnController;
-    // private final SavingGameControllerInterface savingGameController;
 
     private final ColumnViewInterface columnView;
     private final UpdaterLanguageInterface savingGameView;
     private final UpdateStatusInterface preStartView;
+    private final UpdaterLanguageInterface menuBarView;
 
 
     public MainFx() throws InstantiationException {
@@ -77,9 +78,9 @@ public class MainFx extends Application {
         statusGameController = StatusGameController.getInstance();
         this.columnController = ColumnController.getInstance();
         this.columnView = ColumnView.getInstance();
-        //this.savingGameController = SavingGameController.getInstance();
         this.savingGameView = SavingView.getInstance();
         this.preStartView = PreStartView.getInstance();
+        this.menuBarView = MenuBarView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -156,8 +157,10 @@ public class MainFx extends Application {
             menuBar = menuBarLoader.load();
 
             menuBarDispatcher = menuBarLoader.getController();
-            languageController.addUpdaterLanguageList(menuBarDispatcher);
-            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarDispatcher);
+            languageController.addUpdaterLanguageList(menuBarView);
+            statusGameController.addUpdateViewByStatus(menuBarDispatcher);
+            ((MenuBarView) menuBarView).setContainerMenuBar(menuBar);
+            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

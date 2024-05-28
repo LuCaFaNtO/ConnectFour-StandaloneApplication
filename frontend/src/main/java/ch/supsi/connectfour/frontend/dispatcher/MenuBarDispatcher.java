@@ -4,6 +4,7 @@ import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
+import ch.supsi.connectfour.frontend.controller.menubar.MenuBarController;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
@@ -37,26 +38,19 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializable, UpdateStatusInterface {
+public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
+    private final MenuBarControllerInterface menuBarController;
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
     private final PreferencesControllerInterface preferencesController;
     private final StatusGameControllerInterface statusGameController;
     private final SavingGameControllerInterface savingGameController;
 
-    //-------
-    private final String fxmlLocation = "/menubar.fxml";
-    private FXMLLoader fxmlLoaderMenuBar;
-    private static List<MenuItem> menuItemList;
-    //-------
-
     private KeyCombination ctrlS;
     private KeyCombination ctrlShiftS;
 
     @FXML
     public MenuBar containerMenuBar;
-
-    //-------
     @FXML
     public Menu languagesMenu;
     @FXML
@@ -67,9 +61,9 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     public MenuItem saveasMenuItem;
     @FXML
     public MenuItem preferencesMenuItem;
-    //-------
 
     public MenuBarDispatcher() {
+        this.menuBarController = MenuBarController.getInstance();
         this.aboutController = AboutController.getInstance();
         this.languageController = LanguageController.getInstance();
         this.preferencesController = PreferencesController.getInstance();
@@ -79,9 +73,10 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
+        menuBarController.setNewMenuItem(newMenuItem);
+        menuBarController.setSaveMenuItem(saveMenuItem);
+        menuBarController.setSaveasMenuItem(saveasMenuItem);
         addSupportedLanguages();
-        menuItemList = List.of(newMenuItem, saveMenuItem, saveasMenuItem, preferencesMenuItem);
 
         ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
 
@@ -138,81 +133,16 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     }
 
     public void showHelp() {
-        try {
-            Desktop.getDesktop().browse(new URI(fxmlLoaderMenuBar.getResources().getString("Help.link")));
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        menuBarController.showHelp();
     }
 
     private void addSupportedLanguages() {
-        Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));
-
-        for (String languageName : availableLanguagesSet) {
-            MenuItem menuItem = new MenuItem(languageName);
-            menuItem.setId(languageName);
-            menuItem.setMnemonicParsing(false);
-            menuItem.setOnAction(this::changeLanguage);
-            menuItem.setText(fxmlLoaderMenuBar.getResources().getString("MenuBar." + languageName));
-            languagesMenu.getItems().add(menuItem);
-        }
+        menuBarController.addSupportedLanguages(this, languagesMenu);
     }
 
     public void changeLanguage(ActionEvent actionEvent) {
         String idLanguage = ((MenuItem) actionEvent.getSource()).getId();
         languageController.changeLanguage(idLanguage);
-    }
-
-    @Override
-    public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
-        fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-    }
-
-    @Override
-    public void changeSceneFx() {
-        for (Menu menu : containerMenuBar.getMenus()) {
-            setNewText(menu);
-            for (MenuItem menuItem : menu.getItems())
-                if (!(menuItem instanceof SeparatorMenuItem))
-                    setNewText(menuItem);
-        }
-    }
-
-    private void setNewText(MenuItem menuItem) {
-        String text = fxmlLoaderMenuBar.getResources().getString("MenuBar." + menuItem.getId());
-        menuItem.setText(text);
-    }
-
-    public void disableNewMenuItems() {
-        newMenuItem.setDisable(true);
-    }
-
-    public void enableNewMenuItems() {
-        newMenuItem.setDisable(false);
-    }
-
-    public void disableSaveMenuItems() {
-        saveMenuItem.setDisable(true);
-    }
-
-    public void enableSaveMenuItems() {
-        saveMenuItem.setDisable(false);
-    }
-
-    public void disableSaveAsMenuItems() {
-        saveasMenuItem.setDisable(true);
-    }
-
-    public void enableSaveAsMenuItems() {
-        saveasMenuItem.setDisable(false);
-    }
-
-    public void disablePreferencesMenuItems() {
-        preferencesMenuItem.setDisable(true);
-    }
-
-    public void enablePreferencesMenuItems() {
-        preferencesMenuItem.setDisable(false);
     }
 
     private void enableSaveShortcut(Scene scene) {
@@ -233,9 +163,6 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
 
     @Override
     public void updateViewStatusPreStart() {
-        disableNewMenuItems();
-        disableSaveMenuItems();
-        disableSaveAsMenuItems();
         Scene scene = containerMenuBar.getScene();
         if (scene != null) {
             disableSaveShortcut(containerMenuBar.getScene());
@@ -245,16 +172,12 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
 
     @Override
     public void updateViewStatusGame() {
-        menuItemList.forEach(menuItem -> menuItem.setDisable(false));
         enableSaveShortcut(containerMenuBar.getScene());
         enableSaveAsShortcut(containerMenuBar.getScene());
     }
 
     @Override
     public void updateViewStatusEnd() {
-        disableSaveMenuItems();
-        disableSaveAsMenuItems();
-        disablePreferencesMenuItems();
         disableSaveShortcut(containerMenuBar.getScene());
         disableSaveAsShortcut(containerMenuBar.getScene());
     }
