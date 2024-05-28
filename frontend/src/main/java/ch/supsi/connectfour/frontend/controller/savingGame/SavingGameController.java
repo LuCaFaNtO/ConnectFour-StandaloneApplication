@@ -9,6 +9,8 @@ import ch.supsi.connectfour.frontend.dispatcher.SavingGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.savingGame.SavingGameModel;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
+import ch.supsi.connectfour.frontend.view.saving.SavingView;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,12 +20,13 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
     private final SavingGameModelInterface savingGameModel;
     private final ObserverControllerInterface observerController;
     private final ErrorViewInterface errorView;
-    private SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher;
+    private final SavingGameViewInterface savingGameView;
 
     private SavingGameController() {
         this.savingGameModel = SavingGameModel.getInstance();
         this.observerController = ObserverController.getInstance();
         this.errorView = ErrorView.getInstance();
+        this.savingGameView = SavingView.getInstance();
 
         this.observerController.registerGridObserver(this);
     }
@@ -34,6 +37,22 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
 
     @Override
     public void saveGame() {
+        if (!savingGameModel.savingGameFileExists())
+            saveGameAs();
+        else if (!savingGameModel.isAlreadySave())
+            save();
+    }
+
+    @Override
+    public void saveGameAs() {
+        File saveGameFile = savingGameView.getSaveFile();
+        if (saveGameFile != null) {
+            savingGameModel.setNewSavingGameFile(saveGameFile);
+            save();
+        }
+    }
+
+    private void save() {
         try {
             savingGameModel.saveGame();
         } catch (IllegalFIleException | IOException e) {
@@ -59,28 +78,31 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
         savingGameModel.setNewSavingGameFile(file);
     }
 
-    @Override
-    public boolean savingGameFileExists() {
-        return savingGameModel.savingGameFileExists();
-    }
 
     @Override
     public boolean isAlreadySave() {
         return savingGameModel.isAlreadySave();
     }
 
-    @Override
-    public void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher) {
-        this.saveGameChoicePopUpDispatcher = saveGameChoicePopUpDispatcher;
-    }
 
     @Override
     public void showSaveGamePopUp() {
-        saveGameChoicePopUpDispatcher.showSaveChoicePopUp();
+        savingGameView.showSaveChoicePopUp();
+    }
+
+    @Override
+    public void closeSaveGamePopUp() {
+        savingGameView.closeStage();
     }
 
     @Override
     public void onGridUpdate() {
         savingGameModel.setAlreadySaved(false);
+    }
+
+    @Override
+    public void resetSavingConditions(){
+        savingGameModel.setAlreadySaved(false);
+        savingGameModel.setNewSavingGameFile(null);
     }
 }

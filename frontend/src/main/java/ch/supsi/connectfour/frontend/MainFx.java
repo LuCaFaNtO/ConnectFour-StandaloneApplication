@@ -9,7 +9,7 @@ import ch.supsi.connectfour.frontend.controller.column.ColumnControllerInterface
 import ch.supsi.connectfour.frontend.controller.column.ColumnViewInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
-import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
+import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.*;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
@@ -17,10 +17,11 @@ import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesCont
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
-import ch.supsi.connectfour.frontend.view.InfoBarView;
+import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
+import ch.supsi.connectfour.frontend.view.saving.SavingView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +51,6 @@ public class MainFx extends Application {
     private static UpdaterLanguageInterface infoBarView;
     private UpdaterLanguageInterface preferencesDispatcher;
     private static PreStartDispatcher preStartDispatcher;
-    private UpdaterLanguageInterface saveChoicePopUp;
 
     private final GameControllerInterface gameController;
     private static LanguageControllerInterface languageController;
@@ -58,10 +58,11 @@ public class MainFx extends Application {
     private final PreferencesControllerInterface preferencesController;
     private final InfoBarControllerInterface infoBarController;
     private static StatusGameControllerInterface statusGameController;
-    private SavingGameControllerInterface savingGameController;
     private final ColumnControllerInterface columnController;
+   // private final SavingGameControllerInterface savingGameController;
 
     private final ColumnViewInterface columnView;
+    private final UpdaterLanguageInterface savingGameView;
 
 
     public MainFx() throws InstantiationException {
@@ -70,10 +71,11 @@ public class MainFx extends Application {
         this.aboutController = AboutController.getInstance();
         this.preferencesController = PreferencesController.getInstance();
         this.infoBarController = InfoBarController.getInstance();
-        this.savingGameController = SavingGameController.getInstance();
         statusGameController = StatusGameController.getInstance();
         this.columnController = ColumnController.getInstance();
         this.columnView = ColumnView.getInstance();
+        //this.savingGameController = SavingGameController.getInstance();
+        this.savingGameView = SavingView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -145,9 +147,7 @@ public class MainFx extends Application {
             }
             FXMLLoader saveChoiceLoader = new FXMLLoader(fxmlSaveChoiceUrl, resourceBundle);
             saveChoiceLoader.load();
-            this.saveChoicePopUp = saveChoiceLoader.getController();
-            this.savingGameController.addSavingGamePopUp((SaveGameChoicePopUpDispatcher) saveChoicePopUp);
-            languageController.addUpdaterLanguageList(saveChoicePopUp);
+            languageController.addUpdaterLanguageList(savingGameView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -164,8 +164,7 @@ public class MainFx extends Application {
 
             menuBarDispatcher = menuBarLoader.getController();
             languageController.addUpdaterLanguageList(menuBarDispatcher);
-            statusGameController.addUpdateViewByStatus((UpdateStatusViewInterface) menuBarDispatcher);
-            ((SaveGameChoicePopUpDispatcher) saveChoicePopUp).addMenuBarDispatcher((MenuBarDispatcher) menuBarDispatcher);
+            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarDispatcher);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -216,14 +215,15 @@ public class MainFx extends Application {
             infoBar = infoBarLoader.load();
             this.infoBarView = infoBarLoader.getController();
             this.languageController.addUpdaterLanguageList(infoBarView);
-            this.infoBarController.addInfoBar((InfoBarView) infoBarView);
-            statusGameController.addUpdateViewByStatus((UpdateStatusViewInterface) infoBarView);
+            this.infoBarController.addInfoBar((InfoBar) infoBarView);
+            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) infoBarView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // BORDER PANE
         mainBorderPane = new BorderPane();
+
 
         mainBorderPane.setTop(menuBar);
         gameBoardBorderPane.setTop(columnSelectors);
@@ -242,6 +242,7 @@ public class MainFx extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+        ((SavingGameViewInterface) savingGameView).addMainBorderPain(mainBorderPane);
     }
 
     public static void showGameBoard() {

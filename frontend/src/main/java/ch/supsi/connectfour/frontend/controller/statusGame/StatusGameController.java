@@ -6,7 +6,7 @@ import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGame;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class StatusGameController implements StatusGameControllerInterface, FinishGameObserver {
     private static StatusGameController instance = null;
     private final StatusGameModelInterface statusGameModel;
-    private List<UpdateStatusViewInterface> updaterViewByChangeStatusList;
+    private List<UpdateStatusInterface> updaterViewByChangeStatusList;
     private final ObserverControllerInterface observerController;
 
     private StatusGameController() {
@@ -48,19 +48,19 @@ public class StatusGameController implements StatusGameControllerInterface, Fini
     }
 
     private void preStartCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusPreStart();
         statusGameModel.preStartCondition();
     }
 
     private void gameCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusGame();
         statusGameModel.gameCondition();
     }
 
     private void endCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusEnd();
     }
 
@@ -70,12 +70,12 @@ public class StatusGameController implements StatusGameControllerInterface, Fini
     }
 
     @Override
-    public void addUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
+    public void addUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus) {
         this.updaterViewByChangeStatusList.add(updaterViewByStatus);
     }
 
     @Override
-    public void removeUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
+    public void removeUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus) {
         if(updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
             updaterViewByChangeStatusList.remove(updaterViewByStatus);
     }

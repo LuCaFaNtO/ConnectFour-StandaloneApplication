@@ -4,10 +4,11 @@ import java.io.File;
 
 public interface SavingGameControllerInterface {
     void saveGame();
+    void saveGameAs();
     boolean loadGame();
     void setNewSavingGameFile(File file);
-    boolean savingGameFileExists();
     boolean isAlreadySave();
-    void addSavingGamePopUp(SaveGameChoicePopUpDispatcher saveGameChoicePopUpDispatcher);
     void showSaveGamePopUp();
+    void closeSaveGamePopUp();
+    void resetSavingConditions();
 }

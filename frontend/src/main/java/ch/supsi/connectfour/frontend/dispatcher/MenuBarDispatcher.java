@@ -9,7 +9,7 @@ import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +36,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializable, UpdateStatusViewInterface {
+public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializable, UpdateStatusInterface {
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
     private final PreferencesControllerInterface preferencesController;
@@ -99,6 +99,7 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     public void newGame() {
         if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
             savingGameController.showSaveGamePopUp();
+        savingGameController.resetSavingConditions();
         statusGameController.setStatusToPreStart();
     }
 
@@ -114,18 +115,11 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     }
 
     public void saveGame() {
-        if (!savingGameController.savingGameFileExists())
-            saveGameAs();
-        else if (!savingGameController.isAlreadySave())
-            savingGameController.saveGame();
+        savingGameController.saveGame();
     }
 
     public void saveGameAs() {
-        File saveGameFile = getSaveFile();
-        if (saveGameFile != null) {
-            savingGameController.setNewSavingGameFile(saveGameFile);
-            savingGameController.saveGame();
-        }
+        savingGameController.saveGameAs();
     }
 
     public void quit() {
@@ -148,14 +142,6 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private File getSaveFile() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        return fileChooser.showSaveDialog(containerMenuBar.getScene().getWindow());
     }
 
     private File getOpenFile() {
@@ -263,7 +249,6 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
             disableSaveShortcut(containerMenuBar.getScene());
             disableSaveAsShortcut(containerMenuBar.getScene());
         }
-        savingGameController.setNewSavingGameFile(null);
     }
 
     @Override

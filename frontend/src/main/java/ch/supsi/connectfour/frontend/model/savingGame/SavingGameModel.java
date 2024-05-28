@@ -10,6 +10,7 @@ import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 

@@ -5,11 +5,11 @@ import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.application.observer.SavingGameObserver;
 import ch.supsi.connectfour.backend.application.observer.TurnChangeObserverInterface;
-import ch.supsi.connectfour.frontend.view.InfoBarView;
+import ch.supsi.connectfour.frontend.view.InfoBar;
 
 public class InfoBarController implements InfoBarControllerInterface, FinishGameObserver, TurnChangeObserverInterface, SavingGameObserver {
     private static InfoBarController instance = null;
-    private InfoBarView infoBar;
+    private InfoBar infoBar;
     private final ObserverControllerInterface observerController;
 
     private InfoBarController() {
@@ -25,7 +25,7 @@ public class InfoBarController implements InfoBarControllerInterface, FinishGame
     }
 
     @Override
-    public void addInfoBar(InfoBarView infoBar) {
+    public void addInfoBar(InfoBar infoBar) {
         this.infoBar = infoBar;
     }
     @Override

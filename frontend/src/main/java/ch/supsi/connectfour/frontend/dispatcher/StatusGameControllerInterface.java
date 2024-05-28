@@ -1,12 +1,12 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 
 public interface StatusGameControllerInterface {
     void setStatusToPreStart();
     void setStatusToGame();
     void setStatusToEnd();
     boolean isInStateGame();
-    void addUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus);
-    void removeUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus);
+    void addUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus);
+    void removeUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus);
 }

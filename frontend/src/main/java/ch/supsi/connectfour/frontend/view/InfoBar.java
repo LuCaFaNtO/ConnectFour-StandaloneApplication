@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.view;
 
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InfoBarView implements Initializable, UpdaterLanguageInterface, UpdateStatusViewInterface {
+public class InfoBar implements Initializable, UpdaterLanguageInterface, UpdateStatusInterface {
     private final String fxmlLocation = "/infobar.fxml";
 
     @FXML
