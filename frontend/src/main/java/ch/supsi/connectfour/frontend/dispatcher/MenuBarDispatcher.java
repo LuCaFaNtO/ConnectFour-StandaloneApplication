@@ -44,19 +44,21 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     private final StatusGameControllerInterface statusGameController;
     private final SavingGameControllerInterface savingGameController;
 
+    //-------
     private final String fxmlLocation = "/menubar.fxml";
     private FXMLLoader fxmlLoaderMenuBar;
-
     private static List<MenuItem> menuItemList;
+    //-------
 
     private KeyCombination ctrlS;
     private KeyCombination ctrlShiftS;
 
     @FXML
     public MenuBar containerMenuBar;
+
+    //-------
     @FXML
     public Menu languagesMenu;
-
     @FXML
     public MenuItem newMenuItem;
     @FXML
@@ -65,6 +67,7 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     public MenuItem saveasMenuItem;
     @FXML
     public MenuItem preferencesMenuItem;
+    //-------
 
     public MenuBarDispatcher() {
         this.aboutController = AboutController.getInstance();
@@ -107,12 +110,9 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
     public void openGame() {
         if (statusGameController.isInStateGame() && !savingGameController.isAlreadySave())
             savingGameController.showSaveGamePopUp();
-        File openFile = getOpenFile();
-        if (openFile != null) {
-            savingGameController.setNewSavingGameFile(openFile);
-            if(savingGameController.loadGame())
-                statusGameController.setStatusToGame();
-        }
+
+        if (savingGameController.openGame())
+            statusGameController.setStatusToGame();
     }
 
     public void saveGame() {
@@ -144,15 +144,6 @@ public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializabl
             throw new RuntimeException(e);
         }
     }
-
-    private File getOpenFile() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        return fileChooser.showOpenDialog(containerMenuBar.getScene().getWindow());
-    }
-
 
     private void addSupportedLanguages() {
         Set<String> availableLanguagesSet = languageController.getSupportedLanguages().stream().sorted().collect(Collectors.toCollection(LinkedHashSet::new));

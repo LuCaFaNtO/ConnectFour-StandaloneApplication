@@ -62,7 +62,16 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
     }
 
     @Override
-    public boolean loadGame() {
+    public boolean openGame(){
+        File openFile = savingGameView.getOpenFile();
+        if (openFile != null) {
+            savingGameModel.setNewSavingGameFile(openFile);
+            return loadGame();
+        }
+        return false;
+    }
+
+    private boolean loadGame() {
         try {
             savingGameModel.loadGame();
             return true;

@@ -76,6 +76,15 @@ public class SavingView implements SavingGameViewInterface, UpdaterLanguageInter
     }
 
     @Override
+    public File getOpenFile() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        return fileChooser.showOpenDialog(mainBorderPain.getScene().getWindow());
+    }
+
+    @Override
     public void addMainBorderPain(BorderPane borderPane) {
         this.mainBorderPain = borderPane;
     }
