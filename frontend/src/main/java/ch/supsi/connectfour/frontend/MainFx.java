@@ -21,6 +21,7 @@ import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
+import ch.supsi.connectfour.frontend.view.prestart.PreStartView;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -59,10 +60,11 @@ public class MainFx extends Application {
     private final InfoBarControllerInterface infoBarController;
     private static StatusGameControllerInterface statusGameController;
     private final ColumnControllerInterface columnController;
-   // private final SavingGameControllerInterface savingGameController;
+    // private final SavingGameControllerInterface savingGameController;
 
     private final ColumnViewInterface columnView;
     private final UpdaterLanguageInterface savingGameView;
+    private final UpdateStatusInterface preStartView;
 
 
     public MainFx() throws InstantiationException {
@@ -76,6 +78,7 @@ public class MainFx extends Application {
         this.columnView = ColumnView.getInstance();
         //this.savingGameController = SavingGameController.getInstance();
         this.savingGameView = SavingView.getInstance();
+        this.preStartView = PreStartView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -111,18 +114,7 @@ public class MainFx extends Application {
         }
 
         //PRESTART DISPATCHER
-        try {
-            URL fxmlPreStartDispatcher = getClass().getResource("/prestart.fxml");
-            if (fxmlPreStartDispatcher == null) {
-                return;
-            }
-            FXMLLoader preStartLoader = new FXMLLoader(fxmlPreStartDispatcher, resourceBundle);
-            preStartLoader.load();
-            preStartDispatcher = preStartLoader.getController();
-            statusGameController.addUpdateViewByStatus(preStartDispatcher);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        statusGameController.addUpdateViewByStatus(preStartView);
 
         // ABOUT
         try {
@@ -242,6 +234,7 @@ public class MainFx extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
         ((SavingGameViewInterface) savingGameView).addMainBorderPain(mainBorderPane);
     }
 
@@ -249,11 +242,11 @@ public class MainFx extends Application {
         mainBorderPane.setCenter(gameBoardBorderPane);
     }
 
-    public static void showPreStartPage(AnchorPane preStartPage){
+    public static void showPreStartPage(AnchorPane preStartPage) {
         mainBorderPane.setCenter(preStartPage);
     }
 
-    public static void quit(){
+    public static void quit() {
         Platform.exit();
     }
 
