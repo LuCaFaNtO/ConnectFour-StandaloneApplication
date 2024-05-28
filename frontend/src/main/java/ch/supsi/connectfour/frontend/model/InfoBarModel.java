@@ -15,10 +15,8 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver, 
     private static InfoBarModel instance = null;
     private InfoBarView infoBar;
     private final ObserverControllerInterface observerController;
-    private final StatusGameModelInterface statusGameModel;
 
     private InfoBarModel() {
-        this.statusGameModel = StatusGameModel.getInstance();
         this.observerController = ObserverController.getInstance();
 
         this.observerController.registerFinishGameObserver(this);
@@ -38,18 +36,13 @@ public class InfoBarModel implements InfoBarModelInterface, FinishGameObserver, 
     @Override
     public void win(String playerName, String playerSymbol) {
         infoBar.win(playerName, playerSymbol);
-        setEndStatus();
     }
 
     @Override
     public void gridFull() {
         infoBar.gridFull();
-        setEndStatus();
     }
 
-    private void setEndStatus(){
-        statusGameModel.setStatusGame(StatusGame.END);
-    }
 
     @Override
     public void changeTurn(String playerName, String playerSymbol) {

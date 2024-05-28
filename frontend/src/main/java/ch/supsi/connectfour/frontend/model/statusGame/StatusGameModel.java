@@ -10,11 +10,11 @@ import java.util.List;
 public class StatusGameModel implements StatusGameModelInterface {
     private static StatusGameModel instance = null;
     private StatusGame statusGame;
-    private List<UpdateStatusViewInterface> updaterViewByChangeStatusList;
+
     private GridControllerInterface gridController;
 
     private StatusGameModel() {
-        this.updaterViewByChangeStatusList = new ArrayList<>();
+
         this.gridController = GridController.getInstance();
     }
 
@@ -25,8 +25,6 @@ public class StatusGameModel implements StatusGameModelInterface {
     @Override
     public void setStatusGame(StatusGame statusGame) {
         this.statusGame = statusGame;
-        onChangeStatusUpdate();
-
     }
 
     @Override
@@ -35,44 +33,12 @@ public class StatusGameModel implements StatusGameModelInterface {
     }
 
     @Override
-    public void addUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
-        this.updaterViewByChangeStatusList.add(updaterViewByStatus);
-    }
-
-    @Override
-    public void removeUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
-        if(updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
-            updaterViewByChangeStatusList.remove(updaterViewByStatus);
-    }
-
-    @Override
-    public void onChangeStatusUpdate(){
-        switch(statusGame){
-            case PRESTART:
-                preStartCondition();
-                break;
-            case GAME:
-                gameStartCondition();
-                break;
-            case END:
-                endCondition();
-        }
-    }
-
-    private void preStartCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
-            updaterView.updateViewStatusPreStart();
+    public void preStartCondition() {
         gridController.initializeNewStructureForNewGame();
     }
 
-    private void gameStartCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
-            updaterView.updateViewStatusGame();
+    @Override
+    public void gameCondition() {
         gridController.diceRollPerTurn();
-    }
-
-    private void endCondition() {
-        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
-            updaterView.updateViewStatusEnd();
     }
 }

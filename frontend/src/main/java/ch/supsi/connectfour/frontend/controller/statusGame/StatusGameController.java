@@ -1,16 +1,28 @@
 package ch.supsi.connectfour.frontend.controller.statusGame;
 
+import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
+import ch.supsi.connectfour.backend.application.observer.FinishGameObserver;
+import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGame;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 
-public class StatusGameController implements StatusGameControllerInterface {
+import java.util.ArrayList;
+import java.util.List;
+
+public class StatusGameController implements StatusGameControllerInterface, FinishGameObserver {
     private static StatusGameController instance = null;
     private final StatusGameModelInterface statusGameModel;
+    private List<UpdateStatusViewInterface> updaterViewByChangeStatusList;
+    private final ObserverControllerInterface observerController;
 
     private StatusGameController() {
+        this.updaterViewByChangeStatusList = new ArrayList<>();
         this.statusGameModel = StatusGameModel.getInstance();
+
+        this.observerController = ObserverController.getInstance();
+        this.observerController.registerFinishGameObserver(this);
     }
 
     public static StatusGameController getInstance() {
@@ -20,16 +32,36 @@ public class StatusGameController implements StatusGameControllerInterface {
     @Override
     public void setStatusToPreStart() {
         statusGameModel.setStatusGame(StatusGame.PRESTART);
+        preStartCondition();
     }
 
     @Override
     public void setStatusToGame() {
         statusGameModel.setStatusGame(StatusGame.GAME);
+        gameCondition();
     }
 
     @Override
     public void setStatusToEnd() {
         statusGameModel.setStatusGame(StatusGame.END);
+        endCondition();
+    }
+
+    private void preStartCondition() {
+        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+            updaterView.updateViewStatusPreStart();
+        statusGameModel.preStartCondition();
+    }
+
+    private void gameCondition() {
+        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+            updaterView.updateViewStatusGame();
+        statusGameModel.gameCondition();
+    }
+
+    private void endCondition() {
+        for(UpdateStatusViewInterface updaterView : updaterViewByChangeStatusList)
+            updaterView.updateViewStatusEnd();
     }
 
     @Override
@@ -39,11 +71,22 @@ public class StatusGameController implements StatusGameControllerInterface {
 
     @Override
     public void addUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
-        statusGameModel.addUpdateViewByStatus(updaterViewByStatus);
+        this.updaterViewByChangeStatusList.add(updaterViewByStatus);
     }
 
     @Override
     public void removeUpdateViewByStatus(UpdateStatusViewInterface updaterViewByStatus) {
-        statusGameModel.removeUpdateViewByStatus(updaterViewByStatus);
+        if(updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
+            updaterViewByChangeStatusList.remove(updaterViewByStatus);
+    }
+
+    @Override
+    public void win(String playerName, String playerSymbol) {
+        setStatusToEnd();
+    }
+
+    @Override
+    public void gridFull() {
+        setStatusToEnd();
     }
 }

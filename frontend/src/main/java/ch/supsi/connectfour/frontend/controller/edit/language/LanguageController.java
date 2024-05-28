@@ -47,7 +47,7 @@ public class LanguageController implements LanguageControllerInterface {
         for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.changeSceneFx();
 
-        statusGameModel.onChangeStatusUpdate();
+        //statusGameModel.onChangeStatusUpdate();
     }
 
     @Override
