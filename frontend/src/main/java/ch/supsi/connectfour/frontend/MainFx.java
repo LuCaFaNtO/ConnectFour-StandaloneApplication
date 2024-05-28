@@ -4,6 +4,9 @@ import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.InfoBarController;
 import ch.supsi.connectfour.frontend.controller.InfoBarControllerInterface;
+import ch.supsi.connectfour.frontend.controller.column.ColumnController;
+import ch.supsi.connectfour.frontend.controller.column.ColumnControllerInterface;
+import ch.supsi.connectfour.frontend.controller.column.ColumnViewInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
@@ -17,6 +20,7 @@ import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterfac
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBarView;
+import ch.supsi.connectfour.frontend.view.column.ColumnView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +30,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,6 +59,9 @@ public class MainFx extends Application {
     private final InfoBarControllerInterface infoBarController;
     private static StatusGameControllerInterface statusGameController;
     private SavingGameControllerInterface savingGameController;
+    private final ColumnControllerInterface columnController;
+
+    private final ColumnViewInterface columnView;
 
 
     public MainFx() throws InstantiationException {
@@ -64,6 +72,8 @@ public class MainFx extends Application {
         this.infoBarController = InfoBarController.getInstance();
         this.savingGameController = SavingGameController.getInstance();
         statusGameController = StatusGameController.getInstance();
+        this.columnController = ColumnController.getInstance();
+        this.columnView = ColumnView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -171,7 +181,8 @@ public class MainFx extends Application {
             FXMLLoader columnSelectorsLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             columnSelectors = columnSelectorsLoader.load();
             this.columnsSelectorDispatcher = columnSelectorsLoader.getController();
-            this.gameController.addDisableColumn(this.columnsSelectorDispatcher);
+            this.columnController.addColumnView(columnView);
+            this.columnView.addColumnButtonGridPane((GridPane) columnSelectors);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

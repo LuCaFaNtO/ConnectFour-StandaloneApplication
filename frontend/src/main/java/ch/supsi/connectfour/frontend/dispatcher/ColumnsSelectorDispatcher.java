@@ -10,36 +10,10 @@ import javafx.scene.layout.GridPane;
 
 
 public class ColumnsSelectorDispatcher {
-    @FXML
-    public GridPane gridPane;
-
     private final GameControllerInterface gameController = GameController.getInstance();
 
     public void insertPiece(ActionEvent actionEvent) {
         Node node = (Node) actionEvent.getSource();
         gameController.insertPiece(GridPane.getColumnIndex(node.getParent()));
-    }
-
-    public void disableColumnButton(final int column) {
-        AnchorPane anchorPane = gridPane.getChildren().stream()
-                .filter(node -> GridPane.getColumnIndex(node) == column)
-                .map(node -> (AnchorPane) node)
-                .findFirst()
-                .orElseThrow();
-
-        Button button = (Button) anchorPane.getChildren().get(0);
-        button.setDisable(true);
-        button.setText("✖");
-    }
-    public void enableColumnButton(final int column) {
-        AnchorPane anchorPane = gridPane.getChildren().stream()
-                .filter(node -> GridPane.getColumnIndex(node) == column)
-                .map(node -> (AnchorPane) node)
-                .findFirst()
-                .orElseThrow();
-
-        Button button = (Button) anchorPane.getChildren().get(0);
-        button.setDisable(false);
-        button.setText("▼");
     }
 }

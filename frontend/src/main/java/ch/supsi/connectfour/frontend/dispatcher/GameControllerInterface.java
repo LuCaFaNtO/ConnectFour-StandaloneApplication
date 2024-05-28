@@ -5,5 +5,4 @@ import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 public interface GameControllerInterface {
     void insertPiece(final int column);
     void addUpdaterGrid(UpdateGridInterface boardView);
-    void addDisableColumn(ColumnsSelectorDispatcher columnsSelectorDispatcher);
 }
