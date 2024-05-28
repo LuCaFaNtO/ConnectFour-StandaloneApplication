@@ -8,7 +8,7 @@ import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +26,6 @@ import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -37,7 +36,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MenuBarDispatcher implements UpdateLanguageInterface, Initializable, UpdateStatusViewInterface {
+public class MenuBarDispatcher implements UpdaterLanguageInterface, Initializable, UpdateStatusViewInterface {
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;
     private final PreferencesControllerInterface preferencesController;

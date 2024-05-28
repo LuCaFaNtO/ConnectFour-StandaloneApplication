@@ -1,17 +1,16 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InfoBarView implements Initializable, UpdateLanguageInterface, UpdateStatusViewInterface {
+public class InfoBarView implements Initializable, UpdaterLanguageInterface, UpdateStatusViewInterface {
     private final String fxmlLocation = "/infobar.fxml";
 
     @FXML

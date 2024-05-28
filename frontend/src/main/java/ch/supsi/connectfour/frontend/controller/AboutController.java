@@ -1,16 +1,13 @@
 package ch.supsi.connectfour.frontend.controller;
 
 import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
-import ch.supsi.connectfour.frontend.model.AboutModel;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.view.AboutView;
 
 public class AboutController implements AboutControllerInterface {
-
     private static AboutController instance = null;
-    private final AboutModelInterface aboutModel;
+    private AboutView aboutView;
 
     private AboutController() {
-        aboutModel = AboutModel.getInstance();
     }
 
     public static AboutController getInstance() {
@@ -19,11 +16,11 @@ public class AboutController implements AboutControllerInterface {
 
     @Override
     public void showAbout() {
-        aboutModel.showAbout();
+        aboutView.showAboutInformation();
     }
 
     @Override
-    public void addAboutView(UpdateLanguageInterface aboutView) {
-        aboutModel.addAboutView(aboutView);
+    public void addAboutView(AboutView aboutView) {
+        this.aboutView = aboutView;
     }
 }

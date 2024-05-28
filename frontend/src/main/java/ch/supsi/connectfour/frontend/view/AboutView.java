@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,12 +19,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AboutView implements Initializable, UpdateLanguageInterface {
+public class AboutView implements Initializable, UpdaterLanguageInterface {
     private final String fxmlLocation = "/aboutWindow.fxml";
     private FXMLLoader fxmlLoaderAboutView;
     private Model model;

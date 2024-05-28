@@ -3,7 +3,7 @@ package ch.supsi.connectfour.frontend.dispatcher.edit.preferences;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PreferencesDispatcher implements Initializable, UpdateLanguageInterface {
+public class PreferencesDispatcher implements Initializable, UpdaterLanguageInterface {
 
     private final PreferencesControllerInterface preferencesController;
     private final String fxmlLocation = "/preferences.fxml";

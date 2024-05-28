@@ -1,8 +1,6 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
-import javafx.event.ActionEvent;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SaveGameChoicePopUpDispatcher implements Initializable, UpdateLanguageInterface {
+public class SaveGameChoicePopUpDispatcher implements Initializable, UpdaterLanguageInterface {
     private final String fxmlLocation = "/saveGamePopUp.fxml";
     private FXMLLoader fxmlLoaderSaveGameChoice;
     private static MenuBarDispatcher menuBarDispatcher;

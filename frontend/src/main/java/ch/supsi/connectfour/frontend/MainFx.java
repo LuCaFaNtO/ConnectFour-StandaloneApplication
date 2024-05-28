@@ -13,8 +13,9 @@ import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageController
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusViewInterface;
+import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBarView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -38,13 +39,13 @@ public class MainFx extends Application {
     public static Parent board;
     public static BorderPane gameBoardBorderPane = new BorderPane();
 
-    private static UpdateLanguageInterface menuBarDispatcher;
+    private static UpdaterLanguageInterface menuBarDispatcher;
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
     public static UpdateGridInterface boardView;
-    private static UpdateLanguageInterface infoBarView;
-    private UpdateLanguageInterface preferencesDispatcher;
+    private static UpdaterLanguageInterface infoBarView;
+    private UpdaterLanguageInterface preferencesDispatcher;
     private static PreStartDispatcher preStartDispatcher;
-    private UpdateLanguageInterface saveChoicePopUp;
+    private UpdaterLanguageInterface saveChoicePopUp;
 
     private final GameControllerInterface gameController;
     private static LanguageControllerInterface languageController;
@@ -119,8 +120,8 @@ public class MainFx extends Application {
             }
             FXMLLoader aboutLoader = new FXMLLoader(fxmlAboutUrl, resourceBundle);
             aboutLoader.load();
-            UpdateLanguageInterface aboutView = aboutLoader.getController();
-            this.aboutController.addAboutView(aboutView);
+            UpdaterLanguageInterface aboutView = aboutLoader.getController();
+            this.aboutController.addAboutView((AboutView) aboutView);
             languageController.addUpdaterLanguageList(aboutView);
         } catch (IOException e) {
             throw new RuntimeException(e);

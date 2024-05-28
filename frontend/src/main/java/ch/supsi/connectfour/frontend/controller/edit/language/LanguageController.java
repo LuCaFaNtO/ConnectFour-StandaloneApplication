@@ -3,7 +3,7 @@ package ch.supsi.connectfour.frontend.controller.edit.language;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.LanguageModel;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class LanguageController implements LanguageControllerInterface {
     private static LanguageController instance = null;
     private LanguageModelInterface languageModel;
     private final StatusGameModelInterface statusGameModel;
-    private List<UpdateLanguageInterface> updaterLanguageList = new ArrayList<>();
+    private List<UpdaterLanguageInterface> updaterLanguageList = new ArrayList<>();
 
     private LanguageController() {
         this.languageModel = LanguageModel.getInstance();
@@ -26,13 +26,13 @@ public class LanguageController implements LanguageControllerInterface {
     }
 
     @Override
-    public void addUpdaterLanguageList(UpdateLanguageInterface updaterLanguage) {
+    public void addUpdaterLanguageList(UpdaterLanguageInterface updaterLanguage) {
         if (updaterLanguage != null && !updaterLanguageList.contains(updaterLanguage))
             updaterLanguageList.add(updaterLanguage);
     }
 
     @Override
-    public void removeUpdaterLanguageList(UpdateLanguageInterface updaterLanguage) {
+    public void removeUpdaterLanguageList(UpdaterLanguageInterface updaterLanguage) {
         if(updaterLanguage != null && updaterLanguageList.contains(updaterLanguage))
             updaterLanguageList.remove(updaterLanguage);
     }
@@ -41,10 +41,10 @@ public class LanguageController implements LanguageControllerInterface {
     public void changeLanguage(final String language) {
         languageModel.changeLanguage(language);
 
-        for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
+        for (UpdaterLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.updateFxmlLoaderWithNewLanguage(languageModel.getCurrentResourceBundle());
 
-        for (UpdateLanguageInterface updaterLanguage : updaterLanguageList)
+        for (UpdaterLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.changeSceneFx();
 
         //statusGameModel.onChangeStatusUpdate();

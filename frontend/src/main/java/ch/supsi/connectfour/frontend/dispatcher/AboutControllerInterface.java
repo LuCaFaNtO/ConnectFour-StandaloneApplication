@@ -1,8 +1,8 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.model.edit.language.UpdateLanguageInterface;
+import ch.supsi.connectfour.frontend.view.AboutView;
 
 public interface AboutControllerInterface {
     void showAbout();
-    void addAboutView(UpdateLanguageInterface aboutView);
+    void addAboutView(AboutView updaterLanguageInterface);
 }
