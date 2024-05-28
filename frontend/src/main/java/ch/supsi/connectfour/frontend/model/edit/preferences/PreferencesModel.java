@@ -20,22 +20,14 @@ import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 import java.util.List;
 import java.util.Set;
 
-public class PreferencesModel implements PreferencesModelInterface, UpdatePreferencesObserver {
+public class PreferencesModel implements PreferencesModelInterface {
     private static PreferencesModel instance = null;
     private final PreferencesControllerInterface preferencesController;
     private final GridControllerInterface gridController;
-    private final ErrorViewInterface errorView;
-    private final ObserverControllerInterface observerController;
-    private UpdateGridInterface updateGrid;
-    private PreferencesDispatcher preferencesDispatcher;
 
     private PreferencesModel() {
         this.preferencesController = PreferencesController.getInstance();
         this.gridController = GridController.getInstance();
-        this.errorView = ErrorView.getInstance();
-        this.observerController = ObserverController.getInstance();
-
-        this.observerController.registerUpdaterPreferencesObserver(this);
     }
 
     public static PreferencesModel getInstance() {
@@ -58,37 +50,7 @@ public class PreferencesModel implements PreferencesModelInterface, UpdatePrefer
     }
 
     @Override
-    public void setNewPreferences(List<Piece> pieces) {
-        try {
-            preferencesController.setNewPreferences(pieces);
-            preferencesDispatcher.exit();
-        } catch (IllegalPreferencesException e) {
-            errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
-        }
-    }
-
-    @Override
-    public void addUpdaterGrid(UpdateGridInterface updateGrid) {
-        this.updateGrid = updateGrid;
-    }
-
-    @Override
-    public void addPreferencesDispatcher(PreferencesDispatcher preferencesDispatcher) {
-        this.preferencesDispatcher = preferencesDispatcher;
-    }
-
-    @Override
-    public void showPreferencesPage() {
-        preferencesDispatcher.showPreferencesPage();
-    }
-
-    @Override
-    public void updateGridWithNewPreferences(Cell[][] grid) {
-        updateGrid.updateGridWithNewPreferences(grid);
-    }
-
-    @Override
-    public void updateEmptyGrid(int col, int row) {
-        updateGrid.updateEmptyGrid(col, row);
+    public void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException{
+        preferencesController.setNewPreferences(pieces);
     }
 }
