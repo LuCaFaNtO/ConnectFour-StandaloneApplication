@@ -10,11 +10,9 @@ import java.util.List;
 public class StatusGameModel implements StatusGameModelInterface {
     private static StatusGameModel instance = null;
     private StatusGame statusGame;
-
-    private GridControllerInterface gridController;
+    private final GridControllerInterface gridController;
 
     private StatusGameModel() {
-
         this.gridController = GridController.getInstance();
     }
 

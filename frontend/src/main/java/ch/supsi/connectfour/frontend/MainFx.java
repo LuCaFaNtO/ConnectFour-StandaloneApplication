@@ -9,6 +9,7 @@ import ch.supsi.connectfour.frontend.controller.column.ColumnControllerInterface
 import ch.supsi.connectfour.frontend.controller.column.ColumnViewInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
+import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesViewInterface;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.*;
@@ -22,6 +23,7 @@ import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
 import ch.supsi.connectfour.frontend.view.menubar.MenuBarView;
+import ch.supsi.connectfour.frontend.view.preferences.PreferencesView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartViewInterface;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
@@ -50,9 +52,7 @@ public class MainFx extends Application {
 
     private static UpdateStatusInterface menuBarDispatcher;
     private ColumnsSelectorDispatcher columnsSelectorDispatcher;
-    public static UpdateGridInterface boardView;
-    private static UpdaterLanguageInterface infoBarView;
-    private UpdaterLanguageInterface preferencesDispatcher;
+    private PreferencesDispatcher preferencesDispatcher;
     private static PreStartDispatcher preStartDispatcher;
 
     private final GameControllerInterface gameController;
@@ -67,6 +67,9 @@ public class MainFx extends Application {
     private final UpdaterLanguageInterface savingGameView;
     private final UpdateStatusInterface preStartView;
     private final UpdaterLanguageInterface menuBarView;
+    public static UpdateGridInterface boardView;
+    private static UpdaterLanguageInterface infoBarView;
+    private final PreferencesViewInterface preferencesView;
 
 
     public MainFx() throws InstantiationException {
@@ -81,6 +84,7 @@ public class MainFx extends Application {
         this.savingGameView = SavingView.getInstance();
         this.preStartView = PreStartView.getInstance();
         this.menuBarView = MenuBarView.getInstance();
+        this.preferencesView = PreferencesView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -109,8 +113,8 @@ public class MainFx extends Application {
             FXMLLoader preferencesLoader = new FXMLLoader(fxmlPreferencesDispatcher, resourceBundle);
             preferencesLoader.load();
             preferencesDispatcher = preferencesLoader.getController();
-            this.preferencesController.addPreferencesView((PreferencesDispatcher) preferencesDispatcher);
-            this.languageController.addUpdaterLanguageList(preferencesDispatcher);
+            this.preferencesController.addPreferencesView(preferencesView);
+            languageController.addUpdaterLanguageList((UpdaterLanguageInterface) preferencesView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -159,8 +163,8 @@ public class MainFx extends Application {
             menuBarDispatcher = menuBarLoader.getController();
             languageController.addUpdaterLanguageList(menuBarView);
             statusGameController.addUpdateViewByStatus(menuBarDispatcher);
-            ((MenuBarView) menuBarView).setContainerMenuBar(menuBar);
             statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarView);
+            ((MenuBarView) menuBarView).setContainerMenuBar(menuBar);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

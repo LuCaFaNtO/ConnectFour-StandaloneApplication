@@ -26,13 +26,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PreferencesDispatcher implements Initializable, UpdaterLanguageInterface {
+public class PreferencesDispatcher implements Initializable {
 
     private final PreferencesControllerInterface preferencesController;
     private final String fxmlLocation = "/preferences.fxml";
-    private FXMLLoader preferencesFxmlloader;
-
-    Stage currentStage;
 
     @FXML
     public Circle circlePlayer1;
@@ -64,8 +61,6 @@ public class PreferencesDispatcher implements Initializable, UpdaterLanguageInte
         setPreviewOfPlayers();
         addSupportedColors();
         addSupportedSymbols();
-        preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-        this.currentStage = null;
     }
 
     public void savePreferences() {
@@ -76,40 +71,23 @@ public class PreferencesDispatcher implements Initializable, UpdaterLanguageInte
     }
 
     public void exit() {
-        if(currentStage == null)
-            currentStage = (Stage) closeButton.getScene().getWindow();
-        currentStage.close();
+        preferencesController.exit(closeButton);
     }
 
     private void addSupportedColors() {
         List<Rectangle> rectangles = colorsContainerPane1.getChildren().stream().map(c -> (Rectangle) c).toList();
-        fillRectangles(rectangles);
+        preferencesController.fillRectangles(rectangles);
 
         rectangles = colorsContainerPane2.getChildren().stream().map(c -> (Rectangle) c).toList();
-        fillRectangles(rectangles);
-    }
-
-    private void fillRectangles(List<Rectangle> rectangles) {
-        List<String> supportedColors = preferencesController.getSupportedColors().stream().toList();
-        for (int i = 0; i < rectangles.size(); i++) {
-            rectangles.get(i).setFill(Color.valueOf(supportedColors.get(i)));
-        }
+        preferencesController.fillRectangles(rectangles);
     }
 
     private void addSupportedSymbols() {
         List<AnchorPane> anchorPanes = symbolContainerPane1.getChildren().stream().map(c -> (AnchorPane) c).toList();
-        writeSymbols(anchorPanes);
+        preferencesController.writeSymbols(anchorPanes);
 
         anchorPanes = symbolContainerPane2.getChildren().stream().map(c -> (AnchorPane) c).toList();
-        writeSymbols(anchorPanes);
-    }
-
-    private void writeSymbols(List<AnchorPane> anchorPanes) {
-        List<String> supportedSymbols = preferencesController.getSupportedSymbols().stream().toList();
-        for(int i = 0; i < anchorPanes.size(); i++) {
-            Label label = (Label) anchorPanes.get(i).getChildren().get(0);
-            label.setText(supportedSymbols.get(i));
-        }
+        preferencesController.writeSymbols(anchorPanes);
     }
 
     private void setPreviewOfPlayers() {
@@ -145,29 +123,4 @@ public class PreferencesDispatcher implements Initializable, UpdaterLanguageInte
         else
             symbolPlayer2.setText(label.getText());
     }
-
-    public void showPreferencesPage(){
-        try {
-            if(preferencesFxmlloader.getRoot() != null)
-                preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), preferencesFxmlloader.getResources());
-            Parent preferencesDispatcher = preferencesFxmlloader.load();
-            Scene scene = new Scene(preferencesDispatcher);
-            currentStage = new Stage();
-            currentStage.initModality(Modality.APPLICATION_MODAL);
-            currentStage.setScene(scene);
-            currentStage.setResizable(false);
-            currentStage.initStyle(StageStyle.UNDECORATED);
-            currentStage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
-        preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-    }
-
-    @Override
-    public void changeSceneFx() {}
 }

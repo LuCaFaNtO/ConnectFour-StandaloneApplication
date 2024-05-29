@@ -14,6 +14,10 @@ import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.preferences.PreferencesModel;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
+import ch.supsi.connectfour.frontend.view.preferences.PreferencesView;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 import java.util.Set;
@@ -25,28 +29,20 @@ public class PreferencesController implements PreferencesControllerInterface, Up
 
     private final ErrorViewInterface errorView;
     private UpdateGridInterface updateGrid;
-    private PreferencesDispatcher preferencesDispatcher;
+    //private PreferencesDispatcher preferencesDispatcher;
+    private PreferencesViewInterface preferencesView;
 
     private PreferencesController() {
         this.preferencesModel = PreferencesModel.getInstance();
         this.observerController = ObserverController.getInstance();
         this.errorView = ErrorView.getInstance();
+        this.preferencesView = PreferencesView.getInstance();
 
         this.observerController.registerUpdaterPreferencesObserver(this);
     }
 
     public static PreferencesController getInstance() {
         return instance == null ? instance = new PreferencesController() : instance;
-    }
-
-    @Override
-    public Set<String> getSupportedColors() {
-        return preferencesModel.getSupportedColors();
-    }
-
-    @Override
-    public Set<String> getSupportedSymbols() {
-        return preferencesModel.getSupportedSymbols();
     }
 
     @Override
@@ -58,7 +54,7 @@ public class PreferencesController implements PreferencesControllerInterface, Up
     public void setNewPreferences(List<Piece> pieces) {
         try {
             preferencesModel.setNewPreferences(pieces);
-            preferencesDispatcher.exit();
+            preferencesView.exit(null);
         } catch (IllegalPreferencesException e) {
             errorView.showPopUpError(e.getClass().getSimpleName(), e.getMessage());
         }
@@ -70,13 +66,30 @@ public class PreferencesController implements PreferencesControllerInterface, Up
     }
 
     @Override
-    public void addPreferencesView(PreferencesDispatcher preferencesDispatcher) {
-        this.preferencesDispatcher = preferencesDispatcher;
+    public void addPreferencesView(PreferencesViewInterface preferencesView) {
+        this.preferencesView = preferencesView;
     }
 
     @Override
     public void showPreferencesPage() {
-        preferencesDispatcher.showPreferencesPage();
+        preferencesView.showPreferencesPage();
+    }
+
+    @Override
+    public void fillRectangles(List<Rectangle> rectangles) {
+        List<String> supportedColors = preferencesModel.getSupportedColors().stream().toList();
+        preferencesView.fillRectangles(rectangles, supportedColors);
+    }
+
+    @Override
+    public void writeSymbols(List<AnchorPane> anchorPanes) {
+        List<String> supportedSymbols = preferencesModel.getSupportedSymbols().stream().toList();
+        preferencesView.writeSymbols(anchorPanes, supportedSymbols);
+    }
+
+    @Override
+    public void exit(Button closeButton) {
+        preferencesView.exit(closeButton);
     }
 
     @Override

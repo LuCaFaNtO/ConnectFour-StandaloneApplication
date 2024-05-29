@@ -26,7 +26,7 @@ public class SavingGameModel implements SavingGameModelInterface {
     private SavingGameModel() {
         this.savingGameController = SavingGameController.getInstance();
         this.alreadySaved = false;
-
+        this.currentGameSavingFile = null;
     }
 
     public static SavingGameModel getInstance() {

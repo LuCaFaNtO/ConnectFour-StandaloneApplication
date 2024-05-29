@@ -30,8 +30,6 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
     private FXMLLoader fxmlLoaderMenuBar;
     //-------
 
-    MenuBarDispatcher menuBarDispatcher;
-
     //-------
     private MenuBar containerMenuBar;
     private MenuItem newMenuItem;
@@ -49,7 +47,6 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
 
     @Override
     public void addSupportedLanguages(MenuBarDispatcher menuBarDispatcher, Set<String> availableLanguagesSet, Menu languagesMenu) {
-        this.menuBarDispatcher = menuBarDispatcher;
         for (String languageName : availableLanguagesSet) {
             MenuItem menuItem = new MenuItem(languageName);
             menuItem.setId(languageName);
