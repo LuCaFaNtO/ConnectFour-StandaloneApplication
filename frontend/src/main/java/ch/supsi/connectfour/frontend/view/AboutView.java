@@ -51,7 +51,7 @@ public class AboutView implements Initializable, UpdaterLanguageInterface {
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/connect-four.png"))));
         alert.setTitle("Connect4 - About");
-        alert.setHeaderText("Version and Artifact Id of Connect4");
+        alert.setHeaderText(fxmlLoaderAboutView.getResources().getString("AboutWindow.info"));
         alert.setContentText(getVersion() + "\n" + getArtifactId() + "\n" + getBuiltDate() + "\n" + getDevelopersName());
         alert.showAndWait();
     }
