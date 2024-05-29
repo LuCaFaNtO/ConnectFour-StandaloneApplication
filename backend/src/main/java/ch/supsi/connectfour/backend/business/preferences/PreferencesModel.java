@@ -64,7 +64,7 @@ public class PreferencesModel implements PreferencesBusinessInterface {
         String color2 = pieces.get(1).getColor();
         String symbol2 = pieces.get(1).getSymbol();
 
-        if(color1.equals(color2) && symbol1.equals(symbol2))
+        if (color1.equals(color2) && symbol1.equals(symbol2))
             throw new IllegalPreferencesException("Pieces cannot be equal. \nChange almost one color or symbol");
     }
 }

@@ -40,19 +40,19 @@ public class InfoBar implements Initializable, UpdaterLanguageInterface, UpdateS
         infobar.setText(fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed) + plusTextUsed);
     }
 
-    public void win(String playerName, String playerSymbol){
+    public void win(String playerName, String playerSymbol) {
         oldKeyUsed = "InfoBar.win";
         plusTextUsed = " " + playerName + " " + playerSymbol;
         changeSceneFx();
     }
 
-    public void gridFull(){
+    public void gridFull() {
         oldKeyUsed = "InfoBar.gridFull";
         plusTextUsed = "";
         changeSceneFx();
     }
 
-    public void showTurn(String playerName, String playerSymbol){
+    public void showTurn(String playerName, String playerSymbol) {
         oldKeyUsed = "InfoBar.turn";
         plusTextUsed = " " + playerName + " " + playerSymbol;
         changeSceneFx();
@@ -66,12 +66,14 @@ public class InfoBar implements Initializable, UpdaterLanguageInterface, UpdateS
     }
 
     @Override
-    public void updateViewStatusGame() {}
+    public void updateViewStatusGame() {
+    }
 
     @Override
-    public void updateViewStatusEnd() {}
+    public void updateViewStatusEnd() {
+    }
 
-    public void showSaveGame(){
+    public void showSaveGame() {
         plusTextUsed += " - " + fxmlLoaderInfoBarView.getResources().getString("InfoBar.save");
         changeSceneFx();
     }

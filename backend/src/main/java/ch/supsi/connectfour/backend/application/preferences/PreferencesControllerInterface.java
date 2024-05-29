@@ -8,6 +8,8 @@ import java.util.Set;
 
 public interface PreferencesControllerInterface {
     Set<String> getSupportedColors();
+
     Set<String> getSupportedSymbols();
+
     void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException;
 }

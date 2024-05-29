@@ -38,7 +38,8 @@ public class SavingView implements SavingGameViewInterface, UpdaterLanguageInter
     }
 
     @Override
-    public void changeSceneFx() {}
+    public void changeSceneFx() {
+    }
 
     @Override
     public void showSaveChoicePopUp() {

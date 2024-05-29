@@ -21,7 +21,7 @@ public class TranslationsModel implements TranslationsBusinessInterface {
     }
 
     public static TranslationsModel getInstance() {
-        return instance == null? instance = new TranslationsModel() : instance;
+        return instance == null ? instance = new TranslationsModel() : instance;
     }
 
     @Override

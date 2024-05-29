@@ -26,23 +26,21 @@ public class PreferencesDispatcher implements Initializable {
     @FXML
     public Circle circlePlayer1;
     @FXML
-    private Pane colorsContainerPane1;
-    @FXML
     public Pane symbolContainerPane1;
     @FXML
     public Label symbolPlayer1;
-
     @FXML
     public Circle circlePlayer2;
-    @FXML
-    private Pane colorsContainerPane2;
     @FXML
     public Pane symbolContainerPane2;
     @FXML
     public Label symbolPlayer2;
-
     @FXML
     public Button closeButton;
+    @FXML
+    private Pane colorsContainerPane1;
+    @FXML
+    private Pane colorsContainerPane2;
 
     public PreferencesDispatcher() {
         preferencesController = PreferencesController.getInstance();
@@ -100,7 +98,7 @@ public class PreferencesDispatcher implements Initializable {
         Color color = (Color) rectangle.getFill();
         String idColorsPane = rectangle.getParent().getId();
 
-        if(idColorsPane.charAt(idColorsPane.length() - 1) == '1')
+        if (idColorsPane.charAt(idColorsPane.length() - 1) == '1')
             circlePlayer1.setFill(color);
         else
             circlePlayer2.setFill(color);
@@ -110,7 +108,7 @@ public class PreferencesDispatcher implements Initializable {
         Label label = (Label) mouseEvent.getSource();
         String idSymbolPane = label.getParent().getParent().getId();
 
-        if(idSymbolPane.charAt(idSymbolPane.length() - 1) == '1')
+        if (idSymbolPane.charAt(idSymbolPane.length() - 1) == '1')
             symbolPlayer1.setText(label.getText());
         else
             symbolPlayer2.setText(label.getText());

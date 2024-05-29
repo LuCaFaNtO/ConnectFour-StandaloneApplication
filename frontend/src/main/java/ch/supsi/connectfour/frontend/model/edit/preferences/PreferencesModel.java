@@ -42,7 +42,7 @@ public class PreferencesModel implements PreferencesModelInterface {
     }
 
     @Override
-    public void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException{
+    public void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException {
         preferencesController.setNewPreferences(pieces);
     }
 }

@@ -9,11 +9,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PreferencesDataAccess implements PreferencesDataAccessInterface {
+    private static final String supportedColorsPath = "/supported-colors.properties";
+    private static final String supportedSymbolsPath = "/supported-symbols.properties";
     private static PreferencesDataAccess instance = null;
     private final Properties colorsProperties;
-    private static final String supportedColorsPath = "/supported-colors.properties";
     private final Properties symbolsProperties;
-    private static final String supportedSymbolsPath = "/supported-symbols.properties";
 
     private PreferencesDataAccess() {
         this.colorsProperties = getColorsProperties();

@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class GridModel implements GridBusinessInterface {
     private static GridModel gridModel = null;
-    private int lastRowInserted;
     private final Grid grid;
+    private int lastRowInserted;
     private Player player1;
     private Player player2;
     private boolean turn; //false -> player1     true -> player2
@@ -115,7 +115,7 @@ public class GridModel implements GridBusinessInterface {
             } else
                 break;
         }
-        for (int col = column + 1, row = lastRowInserted + 1; col < Grid.NUM_COLS  && row < Grid.NUM_ROWS; col++, row++) {
+        for (int col = column + 1, row = lastRowInserted + 1; col < Grid.NUM_COLS && row < Grid.NUM_ROWS; col++, row++) {
             Player player = grid.getCell(row, col).getPlayer();
             if (player != null && player.equals(currentPlayer)) {
                 cont++;

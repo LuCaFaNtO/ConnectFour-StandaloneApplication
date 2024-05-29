@@ -12,8 +12,8 @@ import java.util.Set;
 
 public class LanguageController implements LanguageControllerInterface {
     private static LanguageController instance = null;
-    private LanguageModelInterface languageModel;
     private final StatusGameModelInterface statusGameModel;
+    private LanguageModelInterface languageModel;
     private List<UpdaterLanguageInterface> updaterLanguageList = new ArrayList<>();
 
     private LanguageController() {
@@ -33,7 +33,7 @@ public class LanguageController implements LanguageControllerInterface {
 
     @Override
     public void removeUpdaterLanguageList(UpdaterLanguageInterface updaterLanguage) {
-        if(updaterLanguage != null && updaterLanguageList.contains(updaterLanguage))
+        if (updaterLanguage != null && updaterLanguageList.contains(updaterLanguage))
             updaterLanguageList.remove(updaterLanguage);
     }
 

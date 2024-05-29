@@ -21,9 +21,8 @@ import java.util.ResourceBundle;
 public class PreferencesView implements PreferencesViewInterface, UpdaterLanguageInterface {
     private static PreferencesView instance = null;
     private final String fxmlLocation = "/preferences.fxml";
-    private FXMLLoader preferencesFxmlloader;
-
     Stage currentStage;
+    private FXMLLoader preferencesFxmlloader;
 
     private PreferencesView() {
         this.preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), ResourceBundle.getBundle("i18n.labels"));
@@ -43,16 +42,16 @@ public class PreferencesView implements PreferencesViewInterface, UpdaterLanguag
 
     @Override
     public void writeSymbols(List<AnchorPane> anchorPanes, List<String> supportedSymbols) {
-        for(int i = 0; i < anchorPanes.size(); i++) {
+        for (int i = 0; i < anchorPanes.size(); i++) {
             Label label = (Label) anchorPanes.get(i).getChildren().get(0);
             label.setText(supportedSymbols.get(i));
         }
     }
 
     @Override
-    public void showPreferencesPage(){
+    public void showPreferencesPage() {
         try {
-            if(preferencesFxmlloader.getRoot() != null)
+            if (preferencesFxmlloader.getRoot() != null)
                 preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), preferencesFxmlloader.getResources());
             Parent preferencesDispatcher = preferencesFxmlloader.load();
             Scene scene = new Scene(preferencesDispatcher);
@@ -69,7 +68,7 @@ public class PreferencesView implements PreferencesViewInterface, UpdaterLanguag
 
     @Override
     public void exit(Button closeButton) {
-        if(currentStage == null)
+        if (currentStage == null)
             currentStage = (Stage) closeButton.getScene().getWindow();
         currentStage.close();
     }
@@ -80,5 +79,6 @@ public class PreferencesView implements PreferencesViewInterface, UpdaterLanguag
     }
 
     @Override
-    public void changeSceneFx() {}
+    public void changeSceneFx() {
+    }
 }

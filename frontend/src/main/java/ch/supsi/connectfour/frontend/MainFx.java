@@ -48,27 +48,25 @@ public class MainFx extends Application {
     public static BorderPane mainBorderPane;
     public static Parent board;
     public static BorderPane gameBoardBorderPane = new BorderPane();
-
+    public static UpdateGridInterface boardView;
     private static UpdateStatusInterface menuBarDispatcher;
-    private ColumnsSelectorDispatcher columnsSelectorDispatcher;
-    private PreferencesDispatcher preferencesDispatcher;
     private static PreStartDispatcher preStartDispatcher;
-
-    private final GameControllerInterface gameController;
     private static LanguageControllerInterface languageController;
+    private static StatusGameControllerInterface statusGameController;
+    private static UpdaterLanguageInterface infoBarView;
+    private final GameControllerInterface gameController;
     private final AboutControllerInterface aboutController;
     private final PreferencesControllerInterface preferencesController;
     private final InfoBarControllerInterface infoBarController;
-    private static StatusGameControllerInterface statusGameController;
     private final ColumnControllerInterface columnController;
 
     private final ColumnViewInterface columnView;
     private final UpdaterLanguageInterface savingGameView;
     private final UpdateStatusInterface preStartView;
     private final UpdaterLanguageInterface menuBarView;
-    public static UpdateGridInterface boardView;
-    private static UpdaterLanguageInterface infoBarView;
     private final PreferencesViewInterface preferencesView;
+    private ColumnsSelectorDispatcher columnsSelectorDispatcher;
+    private PreferencesDispatcher preferencesDispatcher;
 
 
     public MainFx() throws InstantiationException {
@@ -85,6 +83,18 @@ public class MainFx extends Application {
         this.menuBarView = MenuBarView.getInstance();
         this.preferencesView = PreferencesView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
+    }
+
+    public static void showGameBoard() {
+        mainBorderPane.setCenter(gameBoardBorderPane);
+    }
+
+    public static void showPreStartPage(AnchorPane preStartPage) {
+        mainBorderPane.setCenter(preStartPage);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
@@ -245,17 +255,5 @@ public class MainFx extends Application {
         primaryStage.show();
 
         ((SavingGameViewInterface) savingGameView).addMainBorderPain(mainBorderPane);
-    }
-
-    public static void showGameBoard() {
-        mainBorderPane.setCenter(gameBoardBorderPane);
-    }
-
-    public static void showPreStartPage(AnchorPane preStartPage) {
-        mainBorderPane.setCenter(preStartPage);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

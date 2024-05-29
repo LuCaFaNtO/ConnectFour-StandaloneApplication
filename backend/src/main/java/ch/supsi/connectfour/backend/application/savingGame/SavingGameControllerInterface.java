@@ -7,5 +7,6 @@ import java.io.IOException;
 
 public interface SavingGameControllerInterface {
     void saveGame(File file) throws IllegalFIleException, IOException;
+
     void loadGame(File file) throws IllegalFIleException;
 }

@@ -14,7 +14,7 @@ public class TranslationsController implements TranslationsControllerInterface {
     }
 
     public static TranslationsController getInstance() {
-        return instance == null? instance = new TranslationsController() : instance;
+        return instance == null ? instance = new TranslationsController() : instance;
     }
 
     public ResourceBundle changeLanguage(String languageKey) {

@@ -9,7 +9,10 @@ import java.util.Set;
 
 public interface PreferencesModelInterface {
     Set<String> getSupportedColors();
+
     Set<String> getSupportedSymbols();
+
     List<Player> getPlayers();
+
     void setNewPreferences(List<Piece> pieces) throws IllegalPreferencesException;
 }

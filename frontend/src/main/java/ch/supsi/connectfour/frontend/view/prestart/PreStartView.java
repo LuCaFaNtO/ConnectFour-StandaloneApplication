@@ -22,13 +22,13 @@ public class PreStartView implements PreStartViewInterface, UpdateStatusInterfac
     }
 
     public static PreStartView getInstance() {
-        return instance == null? instance = new PreStartView():instance;
+        return instance == null ? instance = new PreStartView() : instance;
     }
 
-    private void showPreStartPage(){
+    private void showPreStartPage() {
         AnchorPane preStartPage;
         try {
-            if(preStartLoader.getRoot() != null)
+            if (preStartLoader.getRoot() != null)
                 preStartLoader = new FXMLLoader(getClass().getResource(fxmlLocation), preStartLoader.getResources());
             URL fxmlUrl = getClass().getResource(fxmlLocation);
             if (fxmlUrl == null) {

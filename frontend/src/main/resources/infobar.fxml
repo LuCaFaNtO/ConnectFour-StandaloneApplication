@@ -4,11 +4,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="ch.supsi.connectfour.frontend.view.InfoBar">
+<Pane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21"
+      fx:controller="ch.supsi.connectfour.frontend.view.InfoBar">
 
     <TextFlow>
-        <padding><Insets bottom="5" left="11" right="11" top="5" /></padding>
-        <Text fx:id="infobar" text="%InfoBar.infobar" />
+        <padding>
+            <Insets bottom="5" left="11" right="11" top="5"/>
+        </padding>
+        <Text fx:id="infobar" text="%InfoBar.infobar"/>
     </TextFlow>
 
 </Pane>

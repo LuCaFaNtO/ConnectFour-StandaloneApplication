@@ -13,12 +13,12 @@ public class Cell {
         this.player = null;
     }
 
-    public void setFill(boolean fill) {
-        this.fill = fill;
-    }
-
     public boolean isFill() {
         return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
     }
 
     public int getRow() {
@@ -29,11 +29,11 @@ public class Cell {
         return col;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

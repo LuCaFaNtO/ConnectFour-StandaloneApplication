@@ -9,7 +9,8 @@ public class ColumnView implements ColumnViewInterface {
     private static ColumnView instance = null;
     public GridPane gridPane;
 
-    private ColumnView() {}
+    private ColumnView() {
+    }
 
     public static ColumnView getInstance() {
         return instance == null ? instance = new ColumnView() : instance;

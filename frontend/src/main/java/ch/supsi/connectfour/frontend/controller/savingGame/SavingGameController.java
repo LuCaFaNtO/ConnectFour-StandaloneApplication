@@ -60,7 +60,7 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
     }
 
     @Override
-    public boolean openGame(){
+    public boolean openGame() {
         File openFile = savingGameView.getOpenFile();
         if (openFile != null) {
             savingGameModel.setNewSavingGameFile(openFile);
@@ -108,7 +108,7 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
     }
 
     @Override
-    public void resetSavingConditions(){
+    public void resetSavingConditions() {
         savingGameModel.setAlreadySaved(false);
         savingGameModel.setNewSavingGameFile(null);
     }

@@ -6,8 +6,8 @@ import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterf
 
 public class StatusGameModel implements StatusGameModelInterface {
     private static StatusGameModel instance = null;
-    private StatusGame statusGame;
     private final GridControllerInterface gridController;
+    private StatusGame statusGame;
 
     private StatusGameModel() {
         this.gridController = GridController.getInstance();

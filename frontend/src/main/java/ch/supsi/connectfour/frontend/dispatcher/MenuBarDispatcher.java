@@ -31,10 +31,6 @@ public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
     private final PreferencesControllerInterface preferencesController;
     private final StatusGameControllerInterface statusGameController;
     private final SavingGameControllerInterface savingGameController;
-
-    private KeyCombination ctrlS;
-    private KeyCombination ctrlShiftS;
-
     @FXML
     public MenuBar containerMenuBar;
     @FXML
@@ -47,6 +43,8 @@ public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
     public MenuItem saveasMenuItem;
     @FXML
     public MenuItem preferencesMenuItem;
+    private KeyCombination ctrlS;
+    private KeyCombination ctrlShiftS;
 
     public MenuBarDispatcher() {
         this.menuBarController = MenuBarController.getInstance();

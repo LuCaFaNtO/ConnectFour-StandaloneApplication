@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface SavingGameDataAccessInterface {
     void saveGameOnFile(File file, Cell[][] grid, boolean turn) throws IllegalFIleException;
+
     boolean loadTurnFromFile(File file) throws IllegalFIleException;
+
     Cell[][] loadGridFromFile(File file, List<Player> players) throws IllegalFIleException;
 }

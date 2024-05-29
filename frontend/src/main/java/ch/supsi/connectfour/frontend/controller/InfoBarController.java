@@ -9,8 +9,8 @@ import ch.supsi.connectfour.frontend.view.InfoBar;
 
 public class InfoBarController implements InfoBarControllerInterface, FinishGameObserver, TurnChangeObserverInterface, SavingGameObserver {
     private static InfoBarController instance = null;
-    private InfoBar infoBar;
     private final ObserverControllerInterface observerController;
+    private InfoBar infoBar;
 
     private InfoBarController() {
         this.observerController = ObserverController.getInstance();
@@ -28,6 +28,7 @@ public class InfoBarController implements InfoBarControllerInterface, FinishGame
     public void addInfoBar(InfoBar infoBar) {
         this.infoBar = infoBar;
     }
+
     @Override
     public void win(String playerName, String playerSymbol) {
         infoBar.win(playerName, playerSymbol);

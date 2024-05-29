@@ -6,6 +6,8 @@ import java.util.Set;
 
 public interface TranslationsDataAccessInterface {
     String getTagFromKeyLanguage(String languageKey);
+
     ResourceBundle getTranslations(Locale locale);
+
     Set<String> getSupportedLanguageKeys();
 }

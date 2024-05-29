@@ -14,8 +14,8 @@ import java.util.List;
 public class StatusGameController implements StatusGameControllerInterface, FinishGameObserver {
     private static StatusGameController instance = null;
     private final StatusGameModelInterface statusGameModel;
-    private List<UpdateStatusInterface> updaterViewByChangeStatusList;
     private final ObserverControllerInterface observerController;
+    private List<UpdateStatusInterface> updaterViewByChangeStatusList;
 
     private StatusGameController() {
         this.updaterViewByChangeStatusList = new ArrayList<>();
@@ -48,19 +48,19 @@ public class StatusGameController implements StatusGameControllerInterface, Fini
     }
 
     private void preStartCondition() {
-        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
+        for (UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusPreStart();
         statusGameModel.preStartCondition();
     }
 
     private void gameCondition() {
-        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
+        for (UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusGame();
         statusGameModel.gameCondition();
     }
 
     private void endCondition() {
-        for(UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
+        for (UpdateStatusInterface updaterView : updaterViewByChangeStatusList)
             updaterView.updateViewStatusEnd();
     }
 
@@ -76,7 +76,7 @@ public class StatusGameController implements StatusGameControllerInterface, Fini
 
     @Override
     public void removeUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus) {
-        if(updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
+        if (updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
             updaterViewByChangeStatusList.remove(updaterViewByStatus);
     }
 

@@ -122,7 +122,7 @@ public class ObserverController implements ObserverControllerInterface {
 
     @Override
     public void notifyChangeTurn(String playerName, String playerSymbol) {
-        for(TurnChangeObserverInterface turnChangeObserver : turnChangeObservers)
+        for (TurnChangeObserverInterface turnChangeObserver : turnChangeObservers)
             turnChangeObserver.changeTurn(playerName, playerSymbol);
     }
 
@@ -134,7 +134,7 @@ public class ObserverController implements ObserverControllerInterface {
 
     @Override
     public void notifySaveGame() {
-        for(SavingGameObserver savingGameObserver : savingGameObservers)
+        for (SavingGameObserver savingGameObserver : savingGameObservers)
             savingGameObserver.onGameSaved();
     }
 }

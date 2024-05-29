@@ -43,7 +43,8 @@ public class AboutView implements Initializable, UpdaterLanguageInterface {
     }
 
     @Override
-    public void changeSceneFx() {}
+    public void changeSceneFx() {
+    }
 
     public void showAboutInformation() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

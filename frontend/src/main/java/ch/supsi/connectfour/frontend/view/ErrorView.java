@@ -4,17 +4,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class ErrorView implements ErrorViewInterface{
+public class ErrorView implements ErrorViewInterface {
     private static ErrorView instance = null;
 
-    private ErrorView() {}
+    private ErrorView() {
+    }
 
     public static ErrorView getInstance() {
-        return instance == null? instance = new ErrorView() : instance;
+        return instance == null ? instance = new ErrorView() : instance;
     }
 
     @Override
-    public void showPopUpError(String exceptionName,String error) {
+    public void showPopUpError(String exceptionName, String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));

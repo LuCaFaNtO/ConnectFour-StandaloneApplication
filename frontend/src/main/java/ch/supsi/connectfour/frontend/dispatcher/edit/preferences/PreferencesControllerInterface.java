@@ -12,12 +12,18 @@ import java.util.List;
 
 public interface PreferencesControllerInterface {
     List<Player> getPlayers();
+
     void setNewPreferences(List<Piece> pieces);
+
     void addUpdaterGrid(UpdateGridInterface updateGrid);
+
     void addPreferencesView(PreferencesViewInterface preferencesView);
+
     void showPreferencesPage();
 
     void fillRectangles(List<Rectangle> rectangles);
+
     void writeSymbols(List<AnchorPane> anchorPanes);
+
     void exit(Button closeButton);
 }

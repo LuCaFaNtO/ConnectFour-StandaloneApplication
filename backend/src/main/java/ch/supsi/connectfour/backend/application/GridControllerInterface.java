@@ -13,8 +13,10 @@ public interface GridControllerInterface {
     Cell getCell();
 
     List<Player> getPlayers();
+
     Cell[][] getGrid();
 
     void initializeNewStructureForNewGame();
+
     void diceRollPerTurn();
 }

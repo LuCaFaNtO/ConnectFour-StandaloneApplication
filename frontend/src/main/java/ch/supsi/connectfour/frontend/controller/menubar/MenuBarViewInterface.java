@@ -9,9 +9,14 @@ import java.util.Set;
 
 public interface MenuBarViewInterface {
     void addSupportedLanguages(MenuBarDispatcher menuBarDispatcher, Set<String> availableLanguagesSet, Menu languagesMenu);
+
     void setNewMenuItem(MenuItem menuItem);
+
     void setSaveMenuItem(MenuItem menuItem);
+
     void setSaveasMenuItem(MenuItem menuItem);
+
     void setContainerMenuBar(MenuBar containerMenuBar);
+
     void showHelp();
 }

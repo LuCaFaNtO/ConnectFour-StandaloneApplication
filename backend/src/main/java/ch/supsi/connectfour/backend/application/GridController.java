@@ -40,9 +40,9 @@ public class GridController implements GridControllerInterface {
             observerController.notifyWin(gridModel.getWinner().getName(), gridModel.getWinner().getPiece().getSymbol());
             for (int i = 0; i < gridModel.getNumberOfGridsColumn(); i++)
                 observerController.notifyDisableColumnObserver(i);
-        } else if (gridModel.isGridFull()){
+        } else if (gridModel.isGridFull()) {
             observerController.notifyGridFull();
-        } else{
+        } else {
             gridModel.changeTurn();
             observerController.notifyChangeTurn(gridModel.getCurrentPlayer().getName(), gridModel.getCurrentPlayer().getPiece().getSymbol());
         }
@@ -60,7 +60,7 @@ public class GridController implements GridControllerInterface {
 
     @Override
     public List<Player> getPlayers() {
-        if(gridModel.arePlayersNull())
+        if (gridModel.arePlayersNull())
             this.gridModel.initializePlayers(preferencesModel.getCurrentPieces());
         return gridModel.getPlayers();
     }
