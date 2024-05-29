@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InfoBar implements Initializable, UpdaterLanguageInterface, UpdateStatusInterface {
+public class InfoBar extends UpdateStatusAbstract implements Initializable, UpdaterLanguageInterface {
     private final String fxmlLocation = "/infobar.fxml";
 
     @FXML
@@ -36,45 +36,37 @@ public class InfoBar implements Initializable, UpdaterLanguageInterface, UpdateS
     }
 
     @Override
-    public void changeSceneFx() {
+    public void changeImmediatelySceneFx() {
         infobar.setText(fxmlLoaderInfoBarView.getResources().getString(oldKeyUsed) + plusTextUsed);
     }
 
     public void win(String playerName, String playerSymbol) {
         oldKeyUsed = "InfoBar.win";
         plusTextUsed = " " + playerName + " " + playerSymbol;
-        changeSceneFx();
+        changeImmediatelySceneFx();
     }
 
     public void gridFull() {
         oldKeyUsed = "InfoBar.gridFull";
         plusTextUsed = "";
-        changeSceneFx();
+        changeImmediatelySceneFx();
     }
 
     public void showTurn(String playerName, String playerSymbol) {
         oldKeyUsed = "InfoBar.turn";
         plusTextUsed = " " + playerName + " " + playerSymbol;
-        changeSceneFx();
+        changeImmediatelySceneFx();
     }
 
     @Override
     public void updateViewStatusPreStart() {
         oldKeyUsed = "InfoBar.infobar";
         plusTextUsed = "";
-        changeSceneFx();
-    }
-
-    @Override
-    public void updateViewStatusGame() {
-    }
-
-    @Override
-    public void updateViewStatusEnd() {
+        changeImmediatelySceneFx();
     }
 
     public void showSaveGame() {
         plusTextUsed += " - " + fxmlLoaderInfoBarView.getResources().getString("InfoBar.save");
-        changeSceneFx();
+        changeImmediatelySceneFx();
     }
 }

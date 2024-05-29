@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.view.saving;
 
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdateLanguageAbstract;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SavingView implements SavingGameViewInterface, UpdaterLanguageInterface {
+public class SavingView extends UpdateLanguageAbstract implements SavingGameViewInterface {
     private static SavingView instance = null;
     private final String fxmlLocation = "/saveGamePopUp.fxml";
     private FXMLLoader fxmlLoaderSaveGameChoice;
@@ -36,10 +36,6 @@ public class SavingView implements SavingGameViewInterface, UpdaterLanguageInter
     @Override
     public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
         fxmlLoaderSaveGameChoice = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-    }
-
-    @Override
-    public void changeSceneFx() {
     }
 
     @Override

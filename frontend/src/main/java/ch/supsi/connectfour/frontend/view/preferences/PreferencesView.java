@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.view.preferences;
 
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdateLanguageAbstract;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesViewInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PreferencesView implements PreferencesViewInterface, UpdaterLanguageInterface {
+public class PreferencesView extends UpdateLanguageAbstract implements PreferencesViewInterface {
     private static PreferencesView instance = null;
     private final String fxmlLocation = "/preferences.fxml";
     Stage currentStage;
@@ -76,9 +76,5 @@ public class PreferencesView implements PreferencesViewInterface, UpdaterLanguag
     @Override
     public void updateFxmlLoaderWithNewLanguage(ResourceBundle resourceBundle) {
         preferencesFxmlloader = new FXMLLoader(getClass().getResource(fxmlLocation), resourceBundle);
-    }
-
-    @Override
-    public void changeSceneFx() {
     }
 }

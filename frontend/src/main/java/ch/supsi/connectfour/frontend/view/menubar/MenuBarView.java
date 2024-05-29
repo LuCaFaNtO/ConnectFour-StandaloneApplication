@@ -2,8 +2,8 @@ package ch.supsi.connectfour.frontend.view.menubar;
 
 import ch.supsi.connectfour.frontend.controller.menubar.MenuBarViewInterface;
 import ch.supsi.connectfour.frontend.dispatcher.MenuBarDispatcher;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface, UpdaterLanguageInterface {
+public class MenuBarView extends UpdateStatusAbstract implements MenuBarViewInterface, UpdaterLanguageInterface {
     private static MenuBarView instance = null;
 
     private final String fxmlLocation = "/menubar.fxml";
@@ -127,7 +127,7 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
     }
 
     @Override
-    public void changeSceneFx() {
+    public void changeImmediatelySceneFx() {
         for (Menu menu : containerMenuBar.getMenus()) {
             setNewText(menu);
             for (MenuItem menuItem : menu.getItems())

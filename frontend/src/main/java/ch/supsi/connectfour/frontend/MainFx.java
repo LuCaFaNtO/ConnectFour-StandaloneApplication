@@ -18,7 +18,7 @@ import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
@@ -49,9 +49,9 @@ public class MainFx extends Application {
     public static BorderPane mainBorderPane;
     public static Parent board;
     public static BorderPane gameBoardBorderPane = new BorderPane();
-    public static UpdateGridInterface boardView;
-    private static LanguageControllerInterface languageController;
-    private static StatusGameControllerInterface statusGameController;
+
+    private final LanguageControllerInterface languageController;
+    private final StatusGameControllerInterface statusGameController;
     private final GameControllerInterface gameController;
     private final AboutControllerInterface aboutController;
     private final PreferencesControllerInterface preferencesController;
@@ -63,14 +63,15 @@ public class MainFx extends Application {
     private final UpdateStatusInterface preStartView;
     private final UpdaterLanguageInterface menuBarView;
     private final PreferencesViewInterface preferencesView;
+    public static UpdateGridInterface boardView;
 
     public MainFx() {
-        languageController = LanguageController.getInstance();
+        this.languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
         this.aboutController = AboutController.getInstance();
         this.preferencesController = PreferencesController.getInstance();
         this.infoBarController = InfoBarController.getInstance();
-        statusGameController = StatusGameController.getInstance();
+        this.statusGameController = StatusGameController.getInstance();
         this.columnController = ColumnController.getInstance();
         this.columnView = ColumnView.getInstance();
         this.savingGameView = SavingView.getInstance();
@@ -109,7 +110,7 @@ public class MainFx extends Application {
             FXMLLoader preferencesLoader = new FXMLLoader(fxmlPreferencesDispatcher, resourceBundle);
             preferencesLoader.load();
             this.preferencesController.addPreferencesView(preferencesView);
-            languageController.addUpdaterLanguageList((UpdaterLanguageInterface) preferencesView);
+            this.languageController.addUpdaterLanguageList((UpdaterLanguageInterface) preferencesView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -127,7 +128,7 @@ public class MainFx extends Application {
             aboutLoader.load();
             UpdaterLanguageInterface aboutView = aboutLoader.getController();
             this.aboutController.addAboutView((AboutView) aboutView);
-            languageController.addUpdaterLanguageList(aboutView);
+            this.languageController.addUpdaterLanguageList(aboutView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -140,7 +141,7 @@ public class MainFx extends Application {
             }
             FXMLLoader saveChoiceLoader = new FXMLLoader(fxmlSaveChoiceUrl, resourceBundle);
             saveChoiceLoader.load();
-            languageController.addUpdaterLanguageList(savingGameView);
+            this.languageController.addUpdaterLanguageList(savingGameView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -156,9 +157,9 @@ public class MainFx extends Application {
             menuBar = menuBarLoader.load();
 
             UpdateStatusInterface menuBarDispatcher = menuBarLoader.getController();
-            languageController.addUpdaterLanguageList(menuBarView);
-            statusGameController.addUpdateViewByStatus(menuBarDispatcher);
-            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarView);
+            this.languageController.addUpdaterLanguageList(menuBarView);
+            this.statusGameController.addUpdateViewByStatus(menuBarDispatcher);
+            this.statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarView);
             ((MenuBarView) menuBarView).setContainerMenuBar(menuBar);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -208,9 +209,9 @@ public class MainFx extends Application {
             FXMLLoader infoBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             infoBar = infoBarLoader.load();
             UpdaterLanguageInterface infoBarView = infoBarLoader.getController();
-            languageController.addUpdaterLanguageList(infoBarView);
+            this.languageController.addUpdaterLanguageList(infoBarView);
             this.infoBarController.addInfoBar((InfoBar) infoBarView);
-            statusGameController.addUpdateViewByStatus((UpdateStatusInterface) infoBarView);
+            this.statusGameController.addUpdateViewByStatus((UpdateStatusInterface) infoBarView);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

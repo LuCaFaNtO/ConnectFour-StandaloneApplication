@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view.prestart;
 
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PreStartView implements PreStartViewInterface, UpdateStatusInterface {
+public class PreStartView extends UpdateStatusAbstract implements PreStartViewInterface {
     private static PreStartView instance = null;
     private final String fxmlLocation = "/prestart.fxml";
     private FXMLLoader preStartLoader;
@@ -49,11 +49,6 @@ public class PreStartView implements PreStartViewInterface, UpdateStatusInterfac
     @Override
     public void updateViewStatusGame() {
         mainBorderPane.setCenter(gameBorderPane);
-    }
-
-    @Override
-    public void updateViewStatusEnd() {
-        //non ha compiti durante il game
     }
 
     @Override

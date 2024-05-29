@@ -8,7 +8,7 @@ import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ import javafx.scene.input.KeyCombination;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
+public class MenuBarDispatcher extends UpdateStatusAbstract implements Initializable {
     private final MenuBarControllerInterface menuBarController;
     private final AboutControllerInterface aboutController;
     private final LanguageControllerInterface languageController;

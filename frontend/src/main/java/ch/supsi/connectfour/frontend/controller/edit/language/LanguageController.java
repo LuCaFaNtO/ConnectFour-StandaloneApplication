@@ -2,7 +2,6 @@ package ch.supsi.connectfour.frontend.controller.edit.language;
 
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.LanguageModel;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class LanguageController implements LanguageControllerInterface {
             updaterLanguage.updateFxmlLoaderWithNewLanguage(languageModel.getCurrentResourceBundle());
 
         for (UpdaterLanguageInterface updaterLanguage : updaterLanguageList)
-            updaterLanguage.changeSceneFx();
+            updaterLanguage.changeImmediatelySceneFx();
     }
 
 }

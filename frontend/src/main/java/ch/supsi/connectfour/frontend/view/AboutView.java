@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.view;
 
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdateLanguageAbstract;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AboutView implements Initializable, UpdaterLanguageInterface {
+public class AboutView extends UpdateLanguageAbstract implements Initializable {
     private final String fxmlLocation = "/aboutWindow.fxml";
     private FXMLLoader fxmlLoaderAboutView;
     private Model model;
@@ -40,10 +40,6 @@ public class AboutView implements Initializable, UpdaterLanguageInterface {
         } catch (XmlPullParserException | IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public void changeSceneFx() {
     }
 
     public void showAboutInformation() {
