@@ -1,8 +1,8 @@
 package ch.supsi.connectfour.backend.business.domain;
 
 public class Cell {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private boolean fill;
     private Player player;
 

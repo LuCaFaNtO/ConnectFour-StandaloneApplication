@@ -14,7 +14,7 @@ public interface MenuBarViewInterface {
 
     void setSaveMenuItem(MenuItem menuItem);
 
-    void setSaveasMenuItem(MenuItem menuItem);
+    void setSaveAsMenuItem(MenuItem menuItem);
 
     void setContainerMenuBar(MenuBar containerMenuBar);
 

@@ -10,7 +10,7 @@ public interface MenuBarControllerInterface {
 
     void setSaveMenuItem(MenuItem menuItem);
 
-    void setSaveasMenuItem(MenuItem menuItem);
+    void setSaveAsMenuItem(MenuItem menuItem);
 
     void showHelp();
 }

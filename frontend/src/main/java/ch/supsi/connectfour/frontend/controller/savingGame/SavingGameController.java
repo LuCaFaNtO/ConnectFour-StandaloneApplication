@@ -16,17 +16,16 @@ import java.io.IOException;
 public class SavingGameController implements SavingGameControllerInterface, GridObserver {
     private static SavingGameController instance = null;
     private final SavingGameModelInterface savingGameModel;
-    private final ObserverControllerInterface observerController;
     private final ErrorViewInterface errorView;
     private final SavingGameViewInterface savingGameView;
 
     private SavingGameController() {
         this.savingGameModel = SavingGameModel.getInstance();
-        this.observerController = ObserverController.getInstance();
+        ObserverControllerInterface observerController = ObserverController.getInstance();
         this.errorView = ErrorView.getInstance();
         this.savingGameView = SavingView.getInstance();
 
-        this.observerController.registerGridObserver(this);
+        observerController.registerGridObserver(this);
     }
 
     public static SavingGameController getInstance() {
@@ -81,16 +80,9 @@ public class SavingGameController implements SavingGameControllerInterface, Grid
     }
 
     @Override
-    public void setNewSavingGameFile(File file) {
-        savingGameModel.setNewSavingGameFile(file);
-    }
-
-
-    @Override
     public boolean isAlreadySave() {
         return savingGameModel.isAlreadySave();
     }
-
 
     @Override
     public void showSaveGamePopUp() {

@@ -8,7 +8,6 @@ public interface ObserverControllerInterface {
 
     void removeGridObserver(GridObserver observer);
 
-    //TODO: Stessa cosa sistemare interfaccia
     void registerColumnObserver(ColumnObserver observer);
 
     void removeColumnObserver(ColumnObserver observer);

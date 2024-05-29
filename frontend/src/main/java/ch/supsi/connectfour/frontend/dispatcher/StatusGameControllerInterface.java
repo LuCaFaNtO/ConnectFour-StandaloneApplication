@@ -13,5 +13,4 @@ public interface StatusGameControllerInterface {
 
     void addUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus);
 
-    void removeUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus);
 }

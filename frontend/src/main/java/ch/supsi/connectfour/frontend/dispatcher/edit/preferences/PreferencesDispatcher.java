@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 public class PreferencesDispatcher implements Initializable {
 
     private final PreferencesControllerInterface preferencesController;
-    private final String fxmlLocation = "/preferences.fxml";
 
     @FXML
     public Circle circlePlayer1;

@@ -12,12 +12,11 @@ import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 public class GameController implements GameControllerInterface, GridObserver {
     private static GameController gameController = null;
     private final GameModelInterface gameModel;
-    private final ObserverControllerInterface observerController;
     private UpdateGridInterface boardView;
 
     protected GameController() {
         gameModel = GameModel.getInstance();
-        observerController = ObserverController.getInstance();
+        ObserverControllerInterface observerController = ObserverController.getInstance();
 
         observerController.registerGridObserver(this);
 

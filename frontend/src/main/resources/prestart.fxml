@@ -6,12 +6,10 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="387.2" prefWidth="414.4"
             style="-fx-background-color: lightgray;" xmlns="http://javafx.com/javafx/21"
             fx:controller="ch.supsi.connectfour.frontend.dispatcher.PreStartDispatcher">
-    <children>
-        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="140.0" mnemonicParsing="false"
-                onMouseClicked="#startNewGame" prefHeight="106.0" prefWidth="222.0" text="START">
-            <font>
-                <Font name="System Bold" size="48.0"/>
-            </font>
-        </Button>
-    </children>
+    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="140.0" mnemonicParsing="false"
+            onMouseClicked="#startNewGame" prefHeight="106.0" prefWidth="222.0" text="START">
+        <font>
+            <Font name="System Bold" size="48.0"/>
+        </font>
+    </Button>
 </AnchorPane>

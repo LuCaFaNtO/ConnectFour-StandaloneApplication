@@ -48,13 +48,11 @@ public class PreferencesDataAccess implements PreferencesDataAccessInterface {
 
     @Override
     public Set<String> getSupportedColorsValues() {
-        Set<String> supportedColorsValues = colorsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
-        return supportedColorsValues;
+        return colorsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
     }
 
     @Override
     public Set<String> getSupportedSymbols() {
-        Set<String> supportedSymbols = symbolsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
-        return supportedSymbols;
+        return symbolsProperties.values().stream().map(String::valueOf).collect(Collectors.toSet());
     }
 }

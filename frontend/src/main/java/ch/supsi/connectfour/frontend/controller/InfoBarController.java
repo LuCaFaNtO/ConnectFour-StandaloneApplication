@@ -9,15 +9,14 @@ import ch.supsi.connectfour.frontend.view.InfoBar;
 
 public class InfoBarController implements InfoBarControllerInterface, FinishGameObserver, TurnChangeObserverInterface, SavingGameObserver {
     private static InfoBarController instance = null;
-    private final ObserverControllerInterface observerController;
     private InfoBar infoBar;
 
     private InfoBarController() {
-        this.observerController = ObserverController.getInstance();
+        ObserverControllerInterface observerController = ObserverController.getInstance();
 
-        this.observerController.registerFinishGameObserver(this);
-        this.observerController.registerTurnChangeObserver(this);
-        this.observerController.registerSavingGameObserver(this);
+        observerController.registerFinishGameObserver(this);
+        observerController.registerTurnChangeObserver(this);
+        observerController.registerSavingGameObserver(this);
     }
 
     public static InfoBarController getInstance() {

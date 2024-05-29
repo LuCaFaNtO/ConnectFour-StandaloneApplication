@@ -44,8 +44,8 @@ public class MenuBarController implements MenuBarControllerInterface {
     }
 
     @Override
-    public void setSaveasMenuItem(MenuItem menuItem) {
-        menuBarView.setSaveasMenuItem(menuItem);
+    public void setSaveAsMenuItem(MenuItem menuItem) {
+        menuBarView.setSaveAsMenuItem(menuItem);
     }
 
     @Override

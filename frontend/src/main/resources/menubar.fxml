@@ -8,7 +8,7 @@
         <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#openGame" text="%MenuBar.openMenuItem"/>
         <SeparatorMenuItem mnemonicParsing="false"/>
         <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveGame" text="%MenuBar.saveMenuItem"/>
-        <MenuItem fx:id="saveasMenuItem" mnemonicParsing="false" onAction="#saveGameAs" text="%MenuBar.saveasMenuItem"/>
+        <MenuItem fx:id="saveAsMenuItem" mnemonicParsing="false" onAction="#saveGameAs" text="%MenuBar.saveAsMenuItem"/>
         <SeparatorMenuItem mnemonicParsing="false"/>
         <MenuItem fx:id="quitMenuItem" mnemonicParsing="false" onAction="#quit" text="%MenuBar.quitMenuItem"/>
     </Menu>

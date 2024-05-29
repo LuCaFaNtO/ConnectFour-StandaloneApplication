@@ -12,10 +12,11 @@ import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesCont
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesViewInterface;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
-import ch.supsi.connectfour.frontend.dispatcher.*;
+import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
+import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
@@ -33,13 +34,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainFx extends Application {
@@ -49,11 +50,8 @@ public class MainFx extends Application {
     public static Parent board;
     public static BorderPane gameBoardBorderPane = new BorderPane();
     public static UpdateGridInterface boardView;
-    private static UpdateStatusInterface menuBarDispatcher;
-    private static PreStartDispatcher preStartDispatcher;
     private static LanguageControllerInterface languageController;
     private static StatusGameControllerInterface statusGameController;
-    private static UpdaterLanguageInterface infoBarView;
     private final GameControllerInterface gameController;
     private final AboutControllerInterface aboutController;
     private final PreferencesControllerInterface preferencesController;
@@ -65,11 +63,8 @@ public class MainFx extends Application {
     private final UpdateStatusInterface preStartView;
     private final UpdaterLanguageInterface menuBarView;
     private final PreferencesViewInterface preferencesView;
-    private ColumnsSelectorDispatcher columnsSelectorDispatcher;
-    private PreferencesDispatcher preferencesDispatcher;
 
-
-    public MainFx() throws InstantiationException {
+    public MainFx() {
         languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
         this.aboutController = AboutController.getInstance();
@@ -83,14 +78,6 @@ public class MainFx extends Application {
         this.menuBarView = MenuBarView.getInstance();
         this.preferencesView = PreferencesView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
-    }
-
-    public static void showGameBoard() {
-        mainBorderPane.setCenter(gameBoardBorderPane);
-    }
-
-    public static void showPreStartPage(AnchorPane preStartPage) {
-        mainBorderPane.setCenter(preStartPage);
     }
 
     public static void main(String[] args) {
@@ -121,7 +108,6 @@ public class MainFx extends Application {
             }
             FXMLLoader preferencesLoader = new FXMLLoader(fxmlPreferencesDispatcher, resourceBundle);
             preferencesLoader.load();
-            preferencesDispatcher = preferencesLoader.getController();
             this.preferencesController.addPreferencesView(preferencesView);
             languageController.addUpdaterLanguageList((UpdaterLanguageInterface) preferencesView);
         } catch (IOException e) {
@@ -169,7 +155,7 @@ public class MainFx extends Application {
             FXMLLoader menuBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             menuBar = menuBarLoader.load();
 
-            menuBarDispatcher = menuBarLoader.getController();
+            UpdateStatusInterface menuBarDispatcher = menuBarLoader.getController();
             languageController.addUpdaterLanguageList(menuBarView);
             statusGameController.addUpdateViewByStatus(menuBarDispatcher);
             statusGameController.addUpdateViewByStatus((UpdateStatusInterface) menuBarView);
@@ -188,7 +174,6 @@ public class MainFx extends Application {
 
             FXMLLoader columnSelectorsLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             columnSelectors = columnSelectorsLoader.load();
-            this.columnsSelectorDispatcher = columnSelectorsLoader.getController();
             this.columnController.addColumnView(columnView);
             this.columnView.addColumnButtonGridPane((GridPane) columnSelectors);
         } catch (IOException e) {
@@ -222,8 +207,8 @@ public class MainFx extends Application {
 
             FXMLLoader infoBarLoader = new FXMLLoader(fxmlUrl, resourceBundle);
             infoBar = infoBarLoader.load();
-            this.infoBarView = infoBarLoader.getController();
-            this.languageController.addUpdaterLanguageList(infoBarView);
+            UpdaterLanguageInterface infoBarView = infoBarLoader.getController();
+            languageController.addUpdaterLanguageList(infoBarView);
             this.infoBarController.addInfoBar((InfoBar) infoBarView);
             statusGameController.addUpdateViewByStatus((UpdateStatusInterface) infoBarView);
         } catch (IOException e) {
@@ -248,7 +233,7 @@ public class MainFx extends Application {
         Scene scene = new Scene(mainBorderPane);
 
         // PRIMARY STAGE
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/connect-four.png"))));
         primaryStage.setTitle(MainFx.APP_TITLE);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

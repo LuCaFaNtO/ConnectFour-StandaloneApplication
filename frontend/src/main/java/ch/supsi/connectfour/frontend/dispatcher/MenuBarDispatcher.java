@@ -40,7 +40,7 @@ public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
     @FXML
     public MenuItem saveMenuItem;
     @FXML
-    public MenuItem saveasMenuItem;
+    public MenuItem saveAsMenuItem;
     @FXML
     public MenuItem preferencesMenuItem;
     private KeyCombination ctrlS;
@@ -59,7 +59,7 @@ public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         menuBarController.setNewMenuItem(newMenuItem);
         menuBarController.setSaveMenuItem(saveMenuItem);
-        menuBarController.setSaveasMenuItem(saveasMenuItem);
+        menuBarController.setSaveAsMenuItem(saveAsMenuItem);
         addSupportedLanguages();
 
         ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);

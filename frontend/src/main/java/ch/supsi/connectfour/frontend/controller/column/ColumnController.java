@@ -7,13 +7,11 @@ import ch.supsi.connectfour.frontend.view.column.ColumnView;
 
 public class ColumnController implements ColumnControllerInterface, ColumnObserver {
     private static ColumnController instance = null;
-    private final ObserverControllerInterface observerController;
     private ColumnViewInterface columnView;
 
     private ColumnController() {
         this.columnView = ColumnView.getInstance();
-        observerController = ObserverController.getInstance();
-
+        ObserverControllerInterface observerController = ObserverController.getInstance();
         observerController.registerColumnObserver(this);
     }
 

@@ -22,20 +22,18 @@ import java.util.List;
 public class PreferencesController implements PreferencesControllerInterface, UpdatePreferencesObserver {
     private static PreferencesController instance = null;
     private final PreferencesModelInterface preferencesModel;
-    private final ObserverControllerInterface observerController;
 
     private final ErrorViewInterface errorView;
     private UpdateGridInterface updateGrid;
-    //private PreferencesDispatcher preferencesDispatcher;
     private PreferencesViewInterface preferencesView;
 
     private PreferencesController() {
         this.preferencesModel = PreferencesModel.getInstance();
-        this.observerController = ObserverController.getInstance();
+        ObserverControllerInterface observerController = ObserverController.getInstance();
         this.errorView = ErrorView.getInstance();
         this.preferencesView = PreferencesView.getInstance();
 
-        this.observerController.registerUpdaterPreferencesObserver(this);
+        observerController.registerUpdaterPreferencesObserver(this);
     }
 
     public static PreferencesController getInstance() {

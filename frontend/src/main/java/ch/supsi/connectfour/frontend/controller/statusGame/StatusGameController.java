@@ -14,15 +14,14 @@ import java.util.List;
 public class StatusGameController implements StatusGameControllerInterface, FinishGameObserver {
     private static StatusGameController instance = null;
     private final StatusGameModelInterface statusGameModel;
-    private final ObserverControllerInterface observerController;
-    private List<UpdateStatusInterface> updaterViewByChangeStatusList;
+    private final List<UpdateStatusInterface> updaterViewByChangeStatusList;
 
     private StatusGameController() {
         this.updaterViewByChangeStatusList = new ArrayList<>();
         this.statusGameModel = StatusGameModel.getInstance();
 
-        this.observerController = ObserverController.getInstance();
-        this.observerController.registerFinishGameObserver(this);
+        ObserverControllerInterface observerController = ObserverController.getInstance();
+        observerController.registerFinishGameObserver(this);
     }
 
     public static StatusGameController getInstance() {
@@ -72,12 +71,6 @@ public class StatusGameController implements StatusGameControllerInterface, Fini
     @Override
     public void addUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus) {
         this.updaterViewByChangeStatusList.add(updaterViewByStatus);
-    }
-
-    @Override
-    public void removeUpdateViewByStatus(UpdateStatusInterface updaterViewByStatus) {
-        if (updaterViewByStatus != null && updaterViewByChangeStatusList.contains(updaterViewByStatus))
-            updaterViewByChangeStatusList.remove(updaterViewByStatus);
     }
 
     @Override

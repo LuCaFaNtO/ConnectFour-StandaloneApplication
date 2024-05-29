@@ -22,14 +22,11 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
 
     private final String fxmlLocation = "/menubar.fxml";
     private FXMLLoader fxmlLoaderMenuBar;
-    //-------
 
-    //-------
     private MenuBar containerMenuBar;
     private MenuItem newMenuItem;
     private MenuItem saveMenuItem;
-    private MenuItem saveasMenuItem;
-    //-------
+    private MenuItem saveAsMenuItem;
 
     private MenuBarView() {
         this.fxmlLoaderMenuBar = new FXMLLoader(getClass().getResource(fxmlLocation), ResourceBundle.getBundle("i18n.labels"));
@@ -62,8 +59,8 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
     }
 
     @Override
-    public void setSaveasMenuItem(MenuItem menuItem) {
-        this.saveasMenuItem = menuItem;
+    public void setSaveAsMenuItem(MenuItem menuItem) {
+        this.saveAsMenuItem = menuItem;
     }
 
     @Override
@@ -97,11 +94,11 @@ public class MenuBarView implements MenuBarViewInterface, UpdateStatusInterface,
     }
 
     public void disableSaveAsMenuItems() {
-        saveasMenuItem.setDisable(true);
+        saveAsMenuItem.setDisable(true);
     }
 
     public void enableSaveAsMenuItems() {
-        saveasMenuItem.setDisable(false);
+        saveAsMenuItem.setDisable(false);
     }
 
     @Override

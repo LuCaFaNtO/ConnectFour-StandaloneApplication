@@ -11,13 +11,12 @@ import java.util.Set;
 
 public class PreferencesModel implements PreferencesBusinessInterface {
     private static PreferencesModel instance = null;
-    private final PreferencesDataAccessInterface preferencesDataAccess;
     private final Set<String> supportedColors;
     private final Set<String> supportedSymbols;
     private List<Piece> currentPreferencesPieces;
 
     private PreferencesModel() {
-        this.preferencesDataAccess = PreferencesDataAccess.getInstance();
+        PreferencesDataAccessInterface preferencesDataAccess = PreferencesDataAccess.getInstance();
 
         this.supportedColors = preferencesDataAccess.getSupportedColorsValues();
         this.supportedSymbols = preferencesDataAccess.getSupportedSymbols();

@@ -14,6 +14,7 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SavingView implements SavingGameViewInterface, UpdaterLanguageInterface {
@@ -47,7 +48,7 @@ public class SavingView implements SavingGameViewInterface, UpdaterLanguageInter
             containerPopUpSave = new FXMLLoader(fxmlLoaderSaveGameChoice.getLocation(), fxmlLoaderSaveGameChoice.getResources()).load();
             Scene scene = new Scene(containerPopUpSave);
             Stage stage = new Stage();
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/connect-four.png")));
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/connect-four.png"))));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);

@@ -1,24 +1,19 @@
 package ch.supsi.connectfour.frontend.controller.edit.language;
 
-import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.LanguageModel;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LanguageController implements LanguageControllerInterface {
     private static LanguageController instance = null;
-    private final StatusGameModelInterface statusGameModel;
-    private LanguageModelInterface languageModel;
-    private List<UpdaterLanguageInterface> updaterLanguageList = new ArrayList<>();
+    private final LanguageModelInterface languageModel;
+    private final List<UpdaterLanguageInterface> updaterLanguageList = new ArrayList<>();
 
     private LanguageController() {
         this.languageModel = LanguageModel.getInstance();
-        this.statusGameModel = StatusGameModel.getInstance();
     }
 
     public static LanguageController getInstance() {
@@ -32,12 +27,6 @@ public class LanguageController implements LanguageControllerInterface {
     }
 
     @Override
-    public void removeUpdaterLanguageList(UpdaterLanguageInterface updaterLanguage) {
-        if (updaterLanguage != null && updaterLanguageList.contains(updaterLanguage))
-            updaterLanguageList.remove(updaterLanguage);
-    }
-
-    @Override
     public void changeLanguage(final String language) {
         languageModel.changeLanguage(language);
 
@@ -46,12 +35,6 @@ public class LanguageController implements LanguageControllerInterface {
 
         for (UpdaterLanguageInterface updaterLanguage : updaterLanguageList)
             updaterLanguage.changeSceneFx();
-
-        //statusGameModel.onChangeStatusUpdate();
     }
 
-    @Override
-    public Set<String> getSupportedLanguages() {
-        return languageModel.getSupportedLanguages();
-    }
 }
