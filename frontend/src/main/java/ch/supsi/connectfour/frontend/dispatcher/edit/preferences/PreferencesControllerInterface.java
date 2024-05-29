@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
-import java.util.Set;
 
 public interface PreferencesControllerInterface {
     List<Player> getPlayers();

@@ -7,14 +7,13 @@ import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.backend.application.preferences.PreferencesBusinessInterface;
 import ch.supsi.connectfour.backend.business.GridModel;
 import ch.supsi.connectfour.backend.business.domain.Cell;
-import ch.supsi.connectfour.backend.business.domain.Grid;
 import ch.supsi.connectfour.backend.business.preferences.PreferencesModel;
 import ch.supsi.connectfour.backend.business.savingGame.SavingGameModel;
 
 import java.io.File;
 import java.io.IOException;
 
-public class SavingGameController implements SavingGameControllerInterface{
+public class SavingGameController implements SavingGameControllerInterface {
     private static SavingGameController instance = null;
     private final SavingGameBusinessInterface savingGameModel;
     private final GridBusinessInterface gridModel;

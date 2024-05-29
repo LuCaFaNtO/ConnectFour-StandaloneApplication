@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.MainFx;
 import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
@@ -9,34 +8,21 @@ import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.stage.FileChooser;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MenuBarDispatcher implements Initializable, UpdateStatusInterface {
     private final MenuBarControllerInterface menuBarController;

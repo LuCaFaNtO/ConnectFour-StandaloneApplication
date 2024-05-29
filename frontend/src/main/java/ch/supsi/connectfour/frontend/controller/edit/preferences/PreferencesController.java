@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend.controller.edit.preferences;
 
-import ch.supsi.connectfour.backend.application.GridControllerInterface;
 import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalPreferencesException;
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
@@ -9,7 +8,6 @@ import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.model.edit.preferences.PreferencesModel;
 import ch.supsi.connectfour.frontend.view.ErrorView;
@@ -20,7 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
-import java.util.Set;
 
 public class PreferencesController implements PreferencesControllerInterface, UpdatePreferencesObserver {
     private static PreferencesController instance = null;

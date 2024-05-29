@@ -2,20 +2,12 @@ package ch.supsi.connectfour.frontend.model.edit.preferences;
 
 import ch.supsi.connectfour.backend.application.GridController;
 import ch.supsi.connectfour.backend.application.GridControllerInterface;
-import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalPreferencesException;
-import ch.supsi.connectfour.backend.application.observer.ObserverController;
-import ch.supsi.connectfour.backend.application.observer.UpdatePreferencesObserver;
 import ch.supsi.connectfour.backend.application.preferences.PreferencesController;
 import ch.supsi.connectfour.backend.application.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.backend.business.domain.Cell;
 import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesModelInterface;
-import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesDispatcher;
-import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
-import ch.supsi.connectfour.frontend.view.ErrorView;
-import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 
 import java.util.List;
 import java.util.Set;

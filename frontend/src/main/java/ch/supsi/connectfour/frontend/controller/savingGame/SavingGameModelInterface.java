@@ -1,7 +1,6 @@
 package ch.supsi.connectfour.frontend.controller.savingGame;
 
 import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
-import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 
 import java.io.File;
 import java.io.IOException;

@@ -4,9 +4,6 @@ import ch.supsi.connectfour.backend.application.GridController;
 import ch.supsi.connectfour.backend.application.GridControllerInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameModelInterface;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StatusGameModel implements StatusGameModelInterface {
     private static StatusGameModel instance = null;
     private StatusGame statusGame;

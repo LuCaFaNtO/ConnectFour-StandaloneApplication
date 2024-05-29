@@ -17,7 +17,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class PreferencesView implements PreferencesViewInterface, UpdaterLanguageInterface {
     private static PreferencesView instance = null;

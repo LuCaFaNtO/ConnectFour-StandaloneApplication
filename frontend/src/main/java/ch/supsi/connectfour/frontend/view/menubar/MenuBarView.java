@@ -4,22 +4,16 @@ import ch.supsi.connectfour.frontend.controller.menubar.MenuBarViewInterface;
 import ch.supsi.connectfour.frontend.dispatcher.MenuBarDispatcher;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 

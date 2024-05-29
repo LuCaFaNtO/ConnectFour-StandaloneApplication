@@ -1,7 +1,6 @@
 package ch.supsi.connectfour.frontend.view.column;
 
 import ch.supsi.connectfour.frontend.controller.column.ColumnViewInterface;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;

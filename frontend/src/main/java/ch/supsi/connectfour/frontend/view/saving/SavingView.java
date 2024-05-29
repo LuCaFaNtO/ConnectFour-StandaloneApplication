@@ -1,11 +1,8 @@
 package ch.supsi.connectfour.frontend.view.saving;
 
-import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
 import ch.supsi.connectfour.frontend.model.edit.language.UpdaterLanguageInterface;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -17,7 +14,6 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SavingView implements SavingGameViewInterface, UpdaterLanguageInterface {

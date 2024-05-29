@@ -4,13 +4,11 @@ import ch.supsi.connectfour.backend.application.ObserverControllerInterface;
 import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
 import ch.supsi.connectfour.backend.application.observer.GridObserver;
 import ch.supsi.connectfour.backend.application.observer.ObserverController;
-import ch.supsi.connectfour.frontend.dispatcher.SaveGameChoicePopUpDispatcher;
 import ch.supsi.connectfour.frontend.dispatcher.SavingGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.savingGame.SavingGameModel;
 import ch.supsi.connectfour.frontend.view.ErrorView;
 import ch.supsi.connectfour.frontend.view.ErrorViewInterface;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;

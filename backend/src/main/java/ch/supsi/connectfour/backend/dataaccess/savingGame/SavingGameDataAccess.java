@@ -2,7 +2,6 @@ package ch.supsi.connectfour.backend.dataaccess.savingGame;
 
 import ch.supsi.connectfour.backend.application.exceptions.IllegalFIleException;
 import ch.supsi.connectfour.backend.business.domain.Cell;
-import ch.supsi.connectfour.backend.business.domain.Piece;
 import ch.supsi.connectfour.backend.business.domain.Player;
 import ch.supsi.connectfour.backend.business.savingGame.SavingGameDataAccessInterface;
 import org.json.JSONArray;

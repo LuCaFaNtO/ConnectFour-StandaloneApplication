@@ -28,7 +28,6 @@ import ch.supsi.connectfour.frontend.view.prestart.PreStartView;
 import ch.supsi.connectfour.frontend.view.prestart.PreStartViewInterface;
 import ch.supsi.connectfour.frontend.view.saving.SavingView;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

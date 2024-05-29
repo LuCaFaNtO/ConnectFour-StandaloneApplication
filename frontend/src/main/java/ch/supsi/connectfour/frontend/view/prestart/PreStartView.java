@@ -1,7 +1,5 @@
 package ch.supsi.connectfour.frontend.view.prestart;
 
-import ch.supsi.connectfour.frontend.MainFx;
-import ch.supsi.connectfour.frontend.dispatcher.PreStartDispatcher;
 import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
