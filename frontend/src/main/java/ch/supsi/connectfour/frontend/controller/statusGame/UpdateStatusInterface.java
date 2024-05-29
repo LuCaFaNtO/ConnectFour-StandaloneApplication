@@ -1,4 +1,4 @@
-package ch.supsi.connectfour.frontend.model.statusGame;
+package ch.supsi.connectfour.frontend.controller.statusGame;
 
 public interface UpdateStatusInterface {
     void updateViewStatusPreStart();

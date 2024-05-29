@@ -8,7 +8,7 @@ import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameController;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
+import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusAbstract;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,7 +1,7 @@
 package ch.supsi.connectfour.frontend.view;
 
 import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
+import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusAbstract;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

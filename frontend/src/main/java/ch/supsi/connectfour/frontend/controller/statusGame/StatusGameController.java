@@ -6,7 +6,6 @@ import ch.supsi.connectfour.backend.application.observer.ObserverController;
 import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGame;
 import ch.supsi.connectfour.frontend.model.statusGame.StatusGameModel;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -19,7 +19,7 @@ import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageController
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusInterface;
+import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;

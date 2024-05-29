@@ -3,7 +3,7 @@ package ch.supsi.connectfour.frontend.view.menubar;
 import ch.supsi.connectfour.frontend.controller.menubar.MenuBarViewInterface;
 import ch.supsi.connectfour.frontend.dispatcher.MenuBarDispatcher;
 import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.model.statusGame.UpdateStatusAbstract;
+import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusAbstract;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
