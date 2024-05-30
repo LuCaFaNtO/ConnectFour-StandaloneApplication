@@ -7,27 +7,16 @@
     <groupId>ch.supsi.connectfour</groupId>
     <artifactId>frontend</artifactId>
     <version>1.0.1</version>
+    <name>Connect4</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <devs>Mattia Cainarca - Luca Fanto' - Antonio Marroffino</devs>
     </properties>
-
-    <developers>
-        <developer>
-            <id>mattia.cainarca</id>
-            <name>Mattia Cainarca</name>
-        </developer>
-        <developer>
-            <id>luca.fanto</id>
-            <name>Luca Fanto'</name>
-        </developer>
-        <developer>
-            <id>antonio.marroffino</id>
-            <name>Antonio Marroffino</name>
-        </developer>
-    </developers>
 
     <dependencies>
         <!-- SRC SCOPE  -->
@@ -57,7 +46,9 @@
                 <includes>
                     <include>*.fxml</include>
                     <include>images/*</include>
+                    <include>*.properties</include>
                 </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
 

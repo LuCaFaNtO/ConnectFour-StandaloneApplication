@@ -1,6 +1,6 @@
 package ch.supsi.connectfour.frontend.dispatcher;
 
-import ch.supsi.connectfour.frontend.controller.AboutController;
+import ch.supsi.connectfour.frontend.controller.about.AboutController;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.controller.menubar.MenuBarController;
@@ -113,7 +113,7 @@ public class MenuBarDispatcher extends UpdateStatusAbstract implements Initializ
     }
 
     public void showAbout() {
-        aboutController.showAbout();
+        aboutController.showAboutInformation();
     }
 
     public void showHelp() {

@@ -1,6 +1,5 @@
 package ch.supsi.connectfour.frontend;
 
-import ch.supsi.connectfour.frontend.controller.AboutController;
 import ch.supsi.connectfour.frontend.controller.GameController;
 import ch.supsi.connectfour.frontend.controller.InfoBarController;
 import ch.supsi.connectfour.frontend.controller.InfoBarControllerInterface;
@@ -8,20 +7,19 @@ import ch.supsi.connectfour.frontend.controller.column.ColumnController;
 import ch.supsi.connectfour.frontend.controller.column.ColumnControllerInterface;
 import ch.supsi.connectfour.frontend.controller.column.ColumnViewInterface;
 import ch.supsi.connectfour.frontend.controller.edit.language.LanguageController;
+import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesController;
 import ch.supsi.connectfour.frontend.controller.edit.preferences.PreferencesViewInterface;
 import ch.supsi.connectfour.frontend.controller.savingGame.SavingGameViewInterface;
 import ch.supsi.connectfour.frontend.controller.statusGame.StatusGameController;
-import ch.supsi.connectfour.frontend.dispatcher.AboutControllerInterface;
+import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusInterface;
 import ch.supsi.connectfour.frontend.dispatcher.GameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.StatusGameControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.language.LanguageControllerInterface;
 import ch.supsi.connectfour.frontend.dispatcher.edit.preferences.PreferencesControllerInterface;
 import ch.supsi.connectfour.frontend.model.UpdateGridInterface;
-import ch.supsi.connectfour.frontend.controller.edit.language.UpdaterLanguageInterface;
-import ch.supsi.connectfour.frontend.controller.statusGame.UpdateStatusInterface;
-import ch.supsi.connectfour.frontend.view.AboutView;
 import ch.supsi.connectfour.frontend.view.InfoBar;
+import ch.supsi.connectfour.frontend.view.about.AboutView;
 import ch.supsi.connectfour.frontend.view.column.ColumnView;
 import ch.supsi.connectfour.frontend.view.menubar.MenuBarView;
 import ch.supsi.connectfour.frontend.view.preferences.PreferencesView;
@@ -53,7 +51,6 @@ public class MainFx extends Application {
     private final LanguageControllerInterface languageController;
     private final StatusGameControllerInterface statusGameController;
     private final GameControllerInterface gameController;
-    private final AboutControllerInterface aboutController;
     private final PreferencesControllerInterface preferencesController;
     private final InfoBarControllerInterface infoBarController;
     private final ColumnControllerInterface columnController;
@@ -64,11 +61,11 @@ public class MainFx extends Application {
     private final UpdaterLanguageInterface menuBarView;
     private final PreferencesViewInterface preferencesView;
     public static UpdateGridInterface boardView;
+    private final UpdaterLanguageInterface aboutView;
 
     public MainFx() {
         this.languageController = LanguageController.getInstance();
         this.gameController = GameController.getInstance();
-        this.aboutController = AboutController.getInstance();
         this.preferencesController = PreferencesController.getInstance();
         this.infoBarController = InfoBarController.getInstance();
         this.statusGameController = StatusGameController.getInstance();
@@ -78,6 +75,7 @@ public class MainFx extends Application {
         this.preStartView = PreStartView.getInstance();
         this.menuBarView = MenuBarView.getInstance();
         this.preferencesView = PreferencesView.getInstance();
+        this.aboutView = AboutView.getInstance();
         resourceBundle = ResourceBundle.getBundle("i18n.labels");
     }
 
@@ -119,19 +117,7 @@ public class MainFx extends Application {
         statusGameController.addUpdateViewByStatus(preStartView);
 
         // ABOUT
-        try {
-            URL fxmlAboutUrl = getClass().getResource("/aboutWindow.fxml");
-            if (fxmlAboutUrl == null) {
-                return;
-            }
-            FXMLLoader aboutLoader = new FXMLLoader(fxmlAboutUrl, resourceBundle);
-            aboutLoader.load();
-            UpdaterLanguageInterface aboutView = aboutLoader.getController();
-            this.aboutController.addAboutView((AboutView) aboutView);
-            this.languageController.addUpdaterLanguageList(aboutView);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.languageController.addUpdaterLanguageList(aboutView);
 
         // SAVEPOPUPCHOICE
         try {
