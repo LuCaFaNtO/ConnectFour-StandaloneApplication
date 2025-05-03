@@ -106,3 +106,9 @@ This project aimed to apply software engineering principles, including:
 **Antonio Marroffino**
 - GitHub: [github.com/antoniomarroffino](https://github.com/antoniomarroffino)
 - LinkedIn: [linkedin.com/in/antonio-marroffino](https://www.linkedin.com/in/antoniomarroffino)
+
+---
+
+## 📜 License
+
+This project was developed for educational purposes as part of the Bachelor's degree in Computer Engineering at SUPSI.
