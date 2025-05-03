@@ -103,5 +103,6 @@ This project aimed to apply software engineering principles, including:
 
 ## 👤 Author
 
-Antonio Marroffino  
-[GitHub Profile](https://github.com/antoniomarroffino)
+**Antonio Marroffino**
+- GitHub: [github.com/antoniomarroffino](https://github.com/antoniomarroffino)
+- LinkedIn: [linkedin.com/in/antonio-marroffino](https://www.linkedin.com/in/antoniomarroffino)
