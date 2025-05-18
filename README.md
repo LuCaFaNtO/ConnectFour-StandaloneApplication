@@ -107,6 +107,10 @@ This project aimed to apply software engineering principles, including:
 - GitHub: [github.com/antoniomarroffino](https://github.com/antoniomarroffino)
 - LinkedIn: [linkedin.com/in/antonio-marroffino](https://www.linkedin.com/in/antoniomarroffino)
 
+**Luca Fantò**
+- GitHub: [github.com/lucafanto](https://github.com/LuCaFaNtO)
+- LinkedIn: [linkedin.com/in/lucafanto](https://www.linkedin.com/in/luca-fant%C3%B2-14197232a/)
+
 ---
 
 ## 📜 License
